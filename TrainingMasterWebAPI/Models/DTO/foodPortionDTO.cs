@@ -5,7 +5,7 @@ using System.Web;
 
 namespace TrainingMasterWebAPI.Models.DTO
 {
-    public class foodPortionDTO
+    public class FoodPortionDTO
     {
         public int FPID { get; set; }
         public int quantity { get; set; }

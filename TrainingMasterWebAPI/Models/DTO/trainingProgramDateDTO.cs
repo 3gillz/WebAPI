@@ -7,5 +7,9 @@ namespace TrainingMasterWebAPI.Models.DTO
 {
     public class trainingProgramDateDTO
     {
+        public int TDID { get; set; }
+        public int customer_CID { get; set; }
+        public int trainingProgram_TPID { get; set; }
+        public DateTime date { get; set; }
     }
 }

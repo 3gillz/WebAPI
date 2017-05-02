@@ -5,7 +5,7 @@ using System.Web;
 
 namespace TrainingMasterWebAPI.Models.DTO
 {
-    public class trainingProgramDTO
+    public class TrainingProgramDTO
     {
       
               public int TPID { get; set; }
