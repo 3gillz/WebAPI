@@ -241,6 +241,11 @@
     <Compile Include="Controllers\FoodPortionController.cs" />
     <Compile Include="Controllers\FoodProgramController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TrainingProductSaleController.cs" />
+    <Compile Include="Controllers\TrainingProgramController.cs" />
+    <Compile Include="Controllers\TrainingProgramDateController.cs" />
+    <Compile Include="Controllers\TrainingSaleController.cs" />
+    <Compile Include="Controllers\ZipcodesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -366,6 +371,11 @@
     <Compile Include="Queries\FoodItemQueries.cs" />
     <Compile Include="Queries\FoodPortionQueries.cs" />
     <Compile Include="Queries\FoodProgramQueries.cs" />
+    <Compile Include="Queries\TrainingProductSaleQueries.cs" />
+    <Compile Include="Queries\TrainingProgramDateQueries.cs" />
+    <Compile Include="Queries\TrainingProgramQueries.cs" />
+    <Compile Include="Queries\TrainingSaleQueries.cs" />
+    <Compile Include="Queries\ZipcodesQueries.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
