@@ -228,8 +228,13 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FoodProgramController.cs" />
+    <Compile Include="Controllers\FoodProgramDateController.cs" />
+    <Compile Include="Controllers\GoalsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\MeasurmentCMController.cs" />
+    <Compile Include="Controllers\MeasurmentMMController.cs" />
+    <Compile Include="Controllers\PaymentMethodController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -345,6 +350,11 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
+    <Compile Include="Queries\FoodProgramDateQueries.cs" />
+    <Compile Include="Queries\FoodProgramQueries.cs" />
+    <Compile Include="Queries\MeasurmentCMQueries.cs" />
+    <Compile Include="Queries\MeasurmentMMQueries.cs" />
+    <Compile Include="Queries\PaymentMethodQueries.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -424,7 +434,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Queries\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
