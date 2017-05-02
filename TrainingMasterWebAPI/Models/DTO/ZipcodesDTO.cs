@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace TrainingMasterWebAPI.Models.DTO
+{
+    public class ZipcodesDTO
+    {
+        public int ZIP { get; set; }
+        public string place { get; set; }
+    }
+}
