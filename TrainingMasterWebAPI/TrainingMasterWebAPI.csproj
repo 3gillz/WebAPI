@@ -228,6 +228,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+<<<<<<< HEAD
     <Compile Include="Controllers\FoodProgramController.cs" />
     <Compile Include="Controllers\FoodProgramDateController.cs" />
     <Compile Include="Controllers\GoalsController.cs" />
@@ -235,6 +236,14 @@
     <Compile Include="Controllers\MeasurmentCMController.cs" />
     <Compile Include="Controllers\MeasurmentMMController.cs" />
     <Compile Include="Controllers\PaymentMethodController.cs" />
+=======
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\ExerciseController.cs" />
+    <Compile Include="Controllers\FoodItemController.cs" />
+    <Compile Include="Controllers\FoodPortionController.cs" />
+    <Compile Include="Controllers\FoodProgramController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+>>>>>>> df1ee0d4a0f01fc63f6a2d6a1f994448815b9755
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -350,11 +359,19 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
+<<<<<<< HEAD
     <Compile Include="Queries\FoodProgramDateQueries.cs" />
     <Compile Include="Queries\FoodProgramQueries.cs" />
     <Compile Include="Queries\MeasurmentCMQueries.cs" />
     <Compile Include="Queries\MeasurmentMMQueries.cs" />
     <Compile Include="Queries\PaymentMethodQueries.cs" />
+=======
+    <Compile Include="Queries\CustomerQueries.cs" />
+    <Compile Include="Queries\ExerciseQueries.cs" />
+    <Compile Include="Queries\FoodItemQueries.cs" />
+    <Compile Include="Queries\FoodPortionQueries.cs" />
+    <Compile Include="Queries\FoodProgramQueries.cs" />
+>>>>>>> df1ee0d4a0f01fc63f6a2d6a1f994448815b9755
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
