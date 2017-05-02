@@ -236,7 +236,30 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\DTO\CustomerDTO.cs" />
+    <Compile Include="Models\DTO\ExerciseDTO.cs" />
+    <Compile Include="Models\DTO\FoodItemDTO.cs" />
+    <Compile Include="Models\DTO\foodPortionDTO.cs" />
+    <Compile Include="Models\DTO\FoodProgramDate.cs" />
+    <Compile Include="Models\DTO\foodProgramDTO.cs" />
+    <Compile Include="Models\DTO\TrainerDTO.cs" />
+    <Compile Include="Models\DTO\TrainingDTO.cs" />
+    <Compile Include="Models\EF\AspNetRoles.cs">
+      <DependentUpon>TrainingEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EF\AspNetUserClaims.cs">
+      <DependentUpon>TrainingEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EF\AspNetUserLogins.cs">
+      <DependentUpon>TrainingEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EF\AspNetUsers.cs">
+      <DependentUpon>TrainingEF.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EF\customer.cs">
+      <DependentUpon>TrainingEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EF\C__MigrationHistory.cs">
       <DependentUpon>TrainingEF.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EF\exercise.cs">
@@ -390,6 +413,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Queries\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
