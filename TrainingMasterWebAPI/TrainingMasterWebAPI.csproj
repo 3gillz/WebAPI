@@ -364,6 +364,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Queries\FoodProgramDateQueries.cs" />
+    <Compile Include="Queries\GoalsQueries.cs" />
     <Compile Include="Queries\MeasurmentCMQueries.cs" />
     <Compile Include="Queries\MeasurmentMMQueries.cs" />
     <Compile Include="Queries\PaymentMethodQueries.cs" />
@@ -372,9 +373,13 @@
     <Compile Include="Queries\FoodItemQueries.cs" />
     <Compile Include="Queries\FoodPortionQueries.cs" />
     <Compile Include="Queries\FoodProgramQueries.cs" />
+    <Compile Include="Queries\ProductQueries.cs" />
+    <Compile Include="Queries\ProgressImageQueries.cs" />
+    <Compile Include="Queries\TrainerQueries.cs" />
     <Compile Include="Queries\TrainingProductSaleQueries.cs" />
     <Compile Include="Queries\TrainingProgramDateQueries.cs" />
     <Compile Include="Queries\TrainingProgramQueries.cs" />
+    <Compile Include="Queries\TrainingQueries.cs" />
     <Compile Include="Queries\TrainingSaleQueries.cs" />
     <Compile Include="Queries\ZipcodesQueries.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -456,7 +461,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\FoodProgram\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

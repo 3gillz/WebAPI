@@ -10,10 +10,10 @@ namespace TrainingMasterWebAPI.Controllers
 {
     public class ExerciseController : ApiController
     {
-        readonly private ExerciseQueries cq;
+        readonly private ExerciseQueries eq;
         public ExerciseController()
         {
-            cq = new ExerciseQueries();
+            eq = new ExerciseQueries();
         }
     }
 }
