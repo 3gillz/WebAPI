@@ -25,6 +25,11 @@ namespace TrainingMasterWebAPI.Models.EF
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<customer> customer { get; set; }
         public virtual DbSet<exercise> exercise { get; set; }
         public virtual DbSet<foodItem> foodItem { get; set; }
@@ -44,10 +49,5 @@ namespace TrainingMasterWebAPI.Models.EF
         public virtual DbSet<trainingSale> trainingSale { get; set; }
         public virtual DbSet<trainingSaleProduct> trainingSaleProduct { get; set; }
         public virtual DbSet<zipcodes> zipcodes { get; set; }
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
-        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
-        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
-        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
     }
 }
