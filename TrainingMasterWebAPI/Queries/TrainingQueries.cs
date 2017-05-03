@@ -5,7 +5,7 @@ using System.Web;
 
 namespace TrainingMasterWebAPI.Queries
 {
-	public class FoodProgramQueries
-	{
-	}
+    public class TrainingQueries
+    {
+    }
 }
