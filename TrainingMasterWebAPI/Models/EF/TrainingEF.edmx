@@ -66,12 +66,15 @@
           <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="customer_CID" Type="int" />
+          <Property Name="trainer_TRID" Type="int" />
         </EntityType>
         <EntityType Name="customer">
           <Key>
             <PropertyRef Name="CID" />
           </Key>
           <Property Name="CID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="varchar(max)" />
           <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="phone" Type="varchar" MaxLength="15" />
@@ -289,7 +292,31 @@
           <Property Name="ZIP" Type="int" Nullable="false" />
           <Property Name="place" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
-        <Association Name="FK__customer__traine__3D5E1FD2">
+        <Association Name="FK__AspNetUse__custo__0E6E26BF">
+          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="CID" />
+            </Principal>
+            <Dependent Role="AspNetUsers">
+              <PropertyRef Name="customer_CID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AspNetUse__train__02FC7413">
+          <End Role="trainer" Type="Self.trainer" Multiplicity="0..1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="trainer">
+              <PropertyRef Name="TRID" />
+            </Principal>
+            <Dependent Role="AspNetUsers">
+              <PropertyRef Name="trainer_TRID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__customer__traine__0D7A0286">
           <End Role="trainer" Type="Self.trainer" Multiplicity="0..1" />
           <End Role="customer" Type="Self.customer" Multiplicity="*" />
           <ReferentialConstraint>
@@ -301,7 +328,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__customer__zipcod__3C69FB99">
+        <Association Name="FK__customer__zipcod__0C85DE4D">
           <End Role="zipcodes" Type="Self.zipcodes" Multiplicity="0..1" />
           <End Role="customer" Type="Self.customer" Multiplicity="*" />
           <ReferentialConstraint>
@@ -337,7 +364,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__foodProgr__custo__619B8048">
+        <Association Name="FK__foodProgr__custo__0A9D95DB">
           <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
           <End Role="foodProgramDate" Type="Self.foodProgramDate" Multiplicity="*" />
           <ReferentialConstraint>
@@ -385,7 +412,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__goals__customer___403A8C7D">
+        <Association Name="FK__goals__customer___05D8E0BE">
           <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
           <End Role="goals" Type="Self.goals" Multiplicity="*" />
           <ReferentialConstraint>
@@ -397,7 +424,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__measureme__custo__4F7CD00D">
+        <Association Name="FK__measureme__custo__07C12930">
           <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
           <End Role="measurementCM" Type="Self.measurementCM" Multiplicity="*" />
           <ReferentialConstraint>
@@ -409,7 +436,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__measureMM__custo__52593CB8">
+        <Association Name="FK__measureMM__custo__08B54D69">
           <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
           <End Role="measureMM" Type="Self.measureMM" Multiplicity="*" />
           <ReferentialConstraint>
@@ -433,7 +460,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__progressI__custo__5535A963">
+        <Association Name="FK__progressI__custo__09A971A2">
           <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
           <End Role="progressImage" Type="Self.progressImage" Multiplicity="*" />
           <ReferentialConstraint>
@@ -457,7 +484,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__trainingP__custo__6E01572D">
+        <Association Name="FK__trainingP__custo__0B91BA14">
           <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
           <End Role="trainingProgramDate" Type="Self.trainingProgramDate" Multiplicity="*" />
           <ReferentialConstraint>
@@ -505,7 +532,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__trainingS__custo__47DBAE45">
+        <Association Name="FK__trainingS__custo__06CD04F7">
           <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
           <End Role="trainingSale" Type="Self.trainingSale" Multiplicity="*" />
           <ReferentialConstraint>
@@ -647,11 +674,19 @@
           <EntitySet Name="trainingSale" EntityType="Self.trainingSale" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="trainingSaleProduct" EntityType="Self.trainingSaleProduct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="zipcodes" EntityType="Self.zipcodes" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__customer__traine__3D5E1FD2" Association="Self.FK__customer__traine__3D5E1FD2">
+          <AssociationSet Name="FK__AspNetUse__custo__0E6E26BF" Association="Self.FK__AspNetUse__custo__0E6E26BF">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AspNetUse__train__02FC7413" Association="Self.FK__AspNetUse__train__02FC7413">
+            <End Role="trainer" EntitySet="trainer" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__customer__traine__0D7A0286" Association="Self.FK__customer__traine__0D7A0286">
             <End Role="trainer" EntitySet="trainer" />
             <End Role="customer" EntitySet="customer" />
           </AssociationSet>
-          <AssociationSet Name="FK__customer__zipcod__3C69FB99" Association="Self.FK__customer__zipcod__3C69FB99">
+          <AssociationSet Name="FK__customer__zipcod__0C85DE4D" Association="Self.FK__customer__zipcod__0C85DE4D">
             <End Role="zipcodes" EntitySet="zipcodes" />
             <End Role="customer" EntitySet="customer" />
           </AssociationSet>
@@ -663,7 +698,7 @@
             <End Role="foodItem" EntitySet="foodItem" />
             <End Role="foodPortion" EntitySet="foodPortion" />
           </AssociationSet>
-          <AssociationSet Name="FK__foodProgr__custo__619B8048" Association="Self.FK__foodProgr__custo__619B8048">
+          <AssociationSet Name="FK__foodProgr__custo__0A9D95DB" Association="Self.FK__foodProgr__custo__0A9D95DB">
             <End Role="customer" EntitySet="customer" />
             <End Role="foodProgramDate" EntitySet="foodProgramDate" />
           </AssociationSet>
@@ -679,15 +714,15 @@
             <End Role="trainer" EntitySet="trainer" />
             <End Role="foodProgram" EntitySet="foodProgram" />
           </AssociationSet>
-          <AssociationSet Name="FK__goals__customer___403A8C7D" Association="Self.FK__goals__customer___403A8C7D">
+          <AssociationSet Name="FK__goals__customer___05D8E0BE" Association="Self.FK__goals__customer___05D8E0BE">
             <End Role="customer" EntitySet="customer" />
             <End Role="goals" EntitySet="goals" />
           </AssociationSet>
-          <AssociationSet Name="FK__measureme__custo__4F7CD00D" Association="Self.FK__measureme__custo__4F7CD00D">
+          <AssociationSet Name="FK__measureme__custo__07C12930" Association="Self.FK__measureme__custo__07C12930">
             <End Role="customer" EntitySet="customer" />
             <End Role="measurementCM" EntitySet="measurementCM" />
           </AssociationSet>
-          <AssociationSet Name="FK__measureMM__custo__52593CB8" Association="Self.FK__measureMM__custo__52593CB8">
+          <AssociationSet Name="FK__measureMM__custo__08B54D69" Association="Self.FK__measureMM__custo__08B54D69">
             <End Role="customer" EntitySet="customer" />
             <End Role="measureMM" EntitySet="measureMM" />
           </AssociationSet>
@@ -695,7 +730,7 @@
             <End Role="trainer" EntitySet="trainer" />
             <End Role="product" EntitySet="product" />
           </AssociationSet>
-          <AssociationSet Name="FK__progressI__custo__5535A963" Association="Self.FK__progressI__custo__5535A963">
+          <AssociationSet Name="FK__progressI__custo__09A971A2" Association="Self.FK__progressI__custo__09A971A2">
             <End Role="customer" EntitySet="customer" />
             <End Role="progressImage" EntitySet="progressImage" />
           </AssociationSet>
@@ -703,7 +738,7 @@
             <End Role="exercise" EntitySet="exercise" />
             <End Role="training" EntitySet="training" />
           </AssociationSet>
-          <AssociationSet Name="FK__trainingP__custo__6E01572D" Association="Self.FK__trainingP__custo__6E01572D">
+          <AssociationSet Name="FK__trainingP__custo__0B91BA14" Association="Self.FK__trainingP__custo__0B91BA14">
             <End Role="customer" EntitySet="customer" />
             <End Role="trainingProgramDate" EntitySet="trainingProgramDate" />
           </AssociationSet>
@@ -719,7 +754,7 @@
             <End Role="trainingProgram" EntitySet="trainingProgram" />
             <End Role="trainingProgramDate" EntitySet="trainingProgramDate" />
           </AssociationSet>
-          <AssociationSet Name="FK__trainingS__custo__47DBAE45" Association="Self.FK__trainingS__custo__47DBAE45">
+          <AssociationSet Name="FK__trainingS__custo__06CD04F7" Association="Self.FK__trainingS__custo__06CD04F7">
             <End Role="customer" EntitySet="customer" />
             <End Role="trainingSale" EntitySet="trainingSale" />
           </AssociationSet>
@@ -760,667 +795,31 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TrainingMasterDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="customer">
-          <Key>
-            <PropertyRef Name="CID" />
-          </Key>
-          <Property Name="CID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="gender" Type="Int16" Nullable="false" />
-          <Property Name="kennitala" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="country" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="foodPref" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="injury" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="allergy" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="zipcodes_ZIP" Type="Int32" />
-          <Property Name="profileImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="height" Type="Int32" Nullable="false" />
-          <Property Name="trainer_TRID" Type="Int32" />
-          <Property Name="hidden" Type="Boolean" />
-          <NavigationProperty Name="trainer" Relationship="Self.FK__customer__traine__3D5E1FD2" FromRole="customer" ToRole="trainer" />
-          <NavigationProperty Name="zipcodes" Relationship="Self.FK__customer__zipcod__3C69FB99" FromRole="customer" ToRole="zipcodes" />
-          <NavigationProperty Name="foodProgramDate" Relationship="Self.FK__foodProgr__custo__619B8048" FromRole="customer" ToRole="foodProgramDate" />
-          <NavigationProperty Name="goals" Relationship="Self.FK__goals__customer___403A8C7D" FromRole="customer" ToRole="goals" />
-          <NavigationProperty Name="measurementCM" Relationship="Self.FK__measureme__custo__4F7CD00D" FromRole="customer" ToRole="measurementCM" />
-          <NavigationProperty Name="measureMM" Relationship="Self.FK__measureMM__custo__52593CB8" FromRole="customer" ToRole="measureMM" />
-          <NavigationProperty Name="progressImage" Relationship="Self.FK__progressI__custo__5535A963" FromRole="customer" ToRole="progressImage" />
-          <NavigationProperty Name="trainingProgramDate" Relationship="Self.FK__trainingP__custo__6E01572D" FromRole="customer" ToRole="trainingProgramDate" />
-          <NavigationProperty Name="trainingSale" Relationship="Self.FK__trainingS__custo__47DBAE45" FromRole="customer" ToRole="trainingSale" />
-        </EntityType>
-        <EntityType Name="exercise">
-          <Key>
-            <PropertyRef Name="EID" />
-          </Key>
-          <Property Name="EID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="link" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="training" Relationship="Self.FK__training__exerci__6754599E" FromRole="exercise" ToRole="training" />
-        </EntityType>
-        <EntityType Name="foodItem">
-          <Key>
-            <PropertyRef Name="FIID" />
-          </Key>
-          <Property Name="FIID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="kcal" Type="Int32" Nullable="false" />
-          <Property Name="fat" Type="Decimal" Precision="9" Scale="5" Nullable="false" />
-          <Property Name="saturatedFat" Type="Decimal" Precision="9" Scale="5" Nullable="false" />
-          <Property Name="unsaturatedFat" Type="Decimal" Precision="9" Scale="5" Nullable="false" />
-          <Property Name="colestrol" Type="Decimal" Precision="9" Scale="5" Nullable="false" />
-          <Property Name="carbohydrate" Type="Decimal" Precision="9" Scale="5" Nullable="false" />
-          <Property Name="addedSugar" Type="Decimal" Precision="9" Scale="5" Nullable="false" />
-          <Property Name="fiber" Type="Decimal" Precision="9" Scale="5" Nullable="false" />
-          <Property Name="water" Type="Decimal" Precision="9" Scale="5" Nullable="false" />
-          <Property Name="protein" Type="Decimal" Precision="9" Scale="5" Nullable="false" />
-          <Property Name="suppliment" Type="Boolean" />
-          <Property Name="trainer_TRID" Type="Int32" />
-          <NavigationProperty Name="trainer" Relationship="Self.FK__foodItem__traine__5812160E" FromRole="foodItem" ToRole="trainer" />
-          <NavigationProperty Name="foodPortion" Relationship="Self.FK__foodPorti__foodI__5AEE82B9" FromRole="foodItem" ToRole="foodPortion" />
-        </EntityType>
-        <EntityType Name="foodPortion">
-          <Key>
-            <PropertyRef Name="FPID" />
-          </Key>
-          <Property Name="FPID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="quantity" Type="Int32" Nullable="false" />
-          <Property Name="weekday" Type="Int16" Nullable="false" />
-          <Property Name="timeOfDay" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="foodItem_FIID" Type="Int32" />
-          <NavigationProperty Name="foodItem" Relationship="Self.FK__foodPorti__foodI__5AEE82B9" FromRole="foodPortion" ToRole="foodItem" />
-          <NavigationProperty Name="foodProgram" Relationship="Self.FK__foodProgr__foodP__5DCAEF64" FromRole="foodPortion" ToRole="foodProgram" />
-        </EntityType>
-        <EntityType Name="foodProgram">
-          <Key>
-            <PropertyRef Name="FPMID" />
-          </Key>
-          <Property Name="FPMID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="foodPortion_FPID" Type="Int32" />
-          <Property Name="trainer_TRID" Type="Int32" />
-          <NavigationProperty Name="foodPortion" Relationship="Self.FK__foodProgr__foodP__5DCAEF64" FromRole="foodProgram" ToRole="foodPortion" />
-          <NavigationProperty Name="foodProgramDate" Relationship="Self.FK__foodProgr__foodP__628FA481" FromRole="foodProgram" ToRole="foodProgramDate" />
-          <NavigationProperty Name="trainer" Relationship="Self.FK__foodProgr__train__5EBF139D" FromRole="foodProgram" ToRole="trainer" />
-        </EntityType>
-        <EntityType Name="foodProgramDate">
-          <Key>
-            <PropertyRef Name="FPDID" />
-          </Key>
-          <Property Name="FPDID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="customer_CID" Type="Int32" />
-          <Property Name="foodProgram_FPMID" Type="Int32" />
-          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="customer" Relationship="Self.FK__foodProgr__custo__619B8048" FromRole="foodProgramDate" ToRole="customer" />
-          <NavigationProperty Name="foodProgram" Relationship="Self.FK__foodProgr__foodP__628FA481" FromRole="foodProgramDate" ToRole="foodProgram" />
-        </EntityType>
-        <EntityType Name="goals">
-          <Key>
-            <PropertyRef Name="GID" />
-          </Key>
-          <Property Name="GID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="customer_CID" Type="Int32" />
-          <Property Name="kg" Type="Decimal" Precision="9" Scale="5" />
-          <Property Name="percentage" Type="Decimal" Precision="9" Scale="5" />
-          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="diameter" Type="Decimal" Precision="9" Scale="5" />
-          <Property Name="startDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="dueDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="customer" Relationship="Self.FK__goals__customer___403A8C7D" FromRole="goals" ToRole="customer" />
-        </EntityType>
-        <EntityType Name="measurementCM">
-          <Key>
-            <PropertyRef Name="MCMID" />
-          </Key>
-          <Property Name="MCMID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="customer_CID" Type="Int32" />
-          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="butt" Type="Decimal" Precision="9" Scale="5" />
-          <Property Name="waist" Type="Decimal" Precision="9" Scale="5" />
-          <Property Name="hip" Type="Decimal" Precision="9" Scale="5" />
-          <Property Name="thigh" Type="Decimal" Precision="9" Scale="5" />
-          <Property Name="armLoose" Type="Decimal" Precision="9" Scale="5" />
-          <Property Name="armFlexed" Type="Decimal" Precision="9" Scale="5" />
-          <Property Name="shoulders" Type="Decimal" Precision="9" Scale="5" />
-          <Property Name="performedByTrainer" Type="Boolean" />
-          <NavigationProperty Name="customer" Relationship="Self.FK__measureme__custo__4F7CD00D" FromRole="measurementCM" ToRole="customer" />
-        </EntityType>
-        <EntityType Name="measureMM">
-          <Key>
-            <PropertyRef Name="MMMID" />
-          </Key>
-          <Property Name="MMMID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="customer_CID" Type="Int32" />
-          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="chest" Type="Decimal" Precision="9" Scale="5" />
-          <Property Name="abdominal" Type="Decimal" Precision="9" Scale="5" />
-          <Property Name="thigh" Type="Decimal" Precision="9" Scale="5" />
-          <Property Name="tricep" Type="Decimal" Precision="9" Scale="5" />
-          <Property Name="subscapular" Type="Decimal" Precision="9" Scale="5" />
-          <Property Name="suprailiac" Type="Decimal" Precision="9" Scale="5" />
-          <Property Name="axilliary" Type="Decimal" Precision="9" Scale="5" />
-          <Property Name="bmi" Type="Decimal" Precision="9" Scale="5" />
-          <Property Name="lbm" Type="Decimal" Precision="9" Scale="5" />
-          <Property Name="fatPercentage" Type="Decimal" Precision="9" Scale="5" />
-          <Property Name="kg" Type="Decimal" Precision="9" Scale="5" />
-          <NavigationProperty Name="customer" Relationship="Self.FK__measureMM__custo__52593CB8" FromRole="measureMM" ToRole="customer" />
-        </EntityType>
-        <EntityType Name="paymentMethod">
-          <Key>
-            <PropertyRef Name="PMID" />
-          </Key>
-          <Property Name="PMID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="trainingSale" Relationship="Self.FK__trainingS__payme__49C3F6B7" FromRole="paymentMethod" ToRole="trainingSale" />
-        </EntityType>
-        <EntityType Name="product">
-          <Key>
-            <PropertyRef Name="PID" />
-          </Key>
-          <Property Name="PID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="durationInDays" Type="Int32" Nullable="false" />
-          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="trainer_TRID" Type="Int32" />
-          <Property Name="hidden" Type="Boolean" />
-          <NavigationProperty Name="trainer" Relationship="Self.FK__product__trainer__4316F928" FromRole="product" ToRole="trainer" />
-          <NavigationProperty Name="trainingSaleProduct" Relationship="Self.FK__trainingS__produ__70DDC3D8" FromRole="product" ToRole="trainingSaleProduct" />
-        </EntityType>
-        <EntityType Name="progressImage">
-          <Key>
-            <PropertyRef Name="PIID" />
-          </Key>
-          <Property Name="PIID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="customer_CID" Type="Int32" />
-          <NavigationProperty Name="customer" Relationship="Self.FK__progressI__custo__5535A963" FromRole="progressImage" ToRole="customer" />
-        </EntityType>
-        <EntityType Name="trainer">
-          <Key>
-            <PropertyRef Name="TRID" />
-          </Key>
-          <Property Name="TRID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="kennitala" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="gender" Type="Int16" Nullable="false" />
-          <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="location" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="hidden" Type="Boolean" />
-          <NavigationProperty Name="customer" Relationship="Self.FK__customer__traine__3D5E1FD2" FromRole="trainer" ToRole="customer" />
-          <NavigationProperty Name="foodItem" Relationship="Self.FK__foodItem__traine__5812160E" FromRole="trainer" ToRole="foodItem" />
-          <NavigationProperty Name="foodProgram" Relationship="Self.FK__foodProgr__train__5EBF139D" FromRole="trainer" ToRole="foodProgram" />
-          <NavigationProperty Name="product" Relationship="Self.FK__product__trainer__4316F928" FromRole="trainer" ToRole="product" />
-          <NavigationProperty Name="trainingProgram" Relationship="Self.FK__trainingP__train__6B24EA82" FromRole="trainer" ToRole="trainingProgram" />
-          <NavigationProperty Name="trainingSale" Relationship="Self.FK__trainingS__train__48CFD27E" FromRole="trainer" ToRole="trainingSale" />
-        </EntityType>
-        <EntityType Name="training">
-          <Key>
-            <PropertyRef Name="TID" />
-          </Key>
-          <Property Name="TID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="numberOfSets" Type="Int32" />
-          <Property Name="numberOfReps" Type="Int32" />
-          <Property Name="exercise_EID" Type="Int32" />
-          <Property Name="durationMin" Type="Int32" />
-          <Property Name="restBetweenMin" Type="Int32" />
-          <Property Name="weekday" Type="Int16" Nullable="false" />
-          <Property Name="timeOfday" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="exercise" Relationship="Self.FK__training__exerci__6754599E" FromRole="training" ToRole="exercise" />
-          <NavigationProperty Name="trainingProgram" Relationship="Self.FK__trainingP__train__6A30C649" FromRole="training" ToRole="trainingProgram" />
-        </EntityType>
-        <EntityType Name="trainingProgram">
-          <Key>
-            <PropertyRef Name="TPID" />
-          </Key>
-          <Property Name="TPID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="training_TID" Type="Int32" />
-          <Property Name="trainer_TRID" Type="Int32" />
-          <NavigationProperty Name="trainer" Relationship="Self.FK__trainingP__train__6B24EA82" FromRole="trainingProgram" ToRole="trainer" />
-          <NavigationProperty Name="training" Relationship="Self.FK__trainingP__train__6A30C649" FromRole="trainingProgram" ToRole="training" />
-          <NavigationProperty Name="trainingProgramDate" Relationship="Self.FK__trainingP__train__6EF57B66" FromRole="trainingProgram" ToRole="trainingProgramDate" />
-        </EntityType>
-        <EntityType Name="trainingProgramDate">
-          <Key>
-            <PropertyRef Name="TDID" />
-          </Key>
-          <Property Name="TDID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="customer_CID" Type="Int32" />
-          <Property Name="trainingProgram_TPID" Type="Int32" />
-          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="customer" Relationship="Self.FK__trainingP__custo__6E01572D" FromRole="trainingProgramDate" ToRole="customer" />
-          <NavigationProperty Name="trainingProgram" Relationship="Self.FK__trainingP__train__6EF57B66" FromRole="trainingProgramDate" ToRole="trainingProgram" />
-        </EntityType>
-        <EntityType Name="trainingSale">
-          <Key>
-            <PropertyRef Name="TSID" />
-          </Key>
-          <Property Name="TSID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="customer_CID" Type="Int32" />
-          <Property Name="trainer_TRID" Type="Int32" />
-          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="paymentMethod_PMID" Type="Int32" />
-          <NavigationProperty Name="customer" Relationship="Self.FK__trainingS__custo__47DBAE45" FromRole="trainingSale" ToRole="customer" />
-          <NavigationProperty Name="paymentMethod" Relationship="Self.FK__trainingS__payme__49C3F6B7" FromRole="trainingSale" ToRole="paymentMethod" />
-          <NavigationProperty Name="trainer" Relationship="Self.FK__trainingS__train__48CFD27E" FromRole="trainingSale" ToRole="trainer" />
-          <NavigationProperty Name="trainingSaleProduct" Relationship="Self.FK__trainingS__train__71D1E811" FromRole="trainingSale" ToRole="trainingSaleProduct" />
-        </EntityType>
-        <EntityType Name="trainingSaleProduct">
-          <Key>
-            <PropertyRef Name="trainingSale_TSID" />
-            <PropertyRef Name="product_PID" />
-          </Key>
-          <Property Name="price" Type="Int32" Nullable="false" />
-          <Property Name="duration" Type="Int32" Nullable="false" />
-          <Property Name="trainingSale_TSID" Type="Int32" Nullable="false" />
-          <Property Name="product_PID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="product" Relationship="Self.FK__trainingS__produ__70DDC3D8" FromRole="trainingSaleProduct" ToRole="product" />
-          <NavigationProperty Name="trainingSale" Relationship="Self.FK__trainingS__train__71D1E811" FromRole="trainingSaleProduct" ToRole="trainingSale" />
-        </EntityType>
-        <EntityType Name="zipcodes">
-          <Key>
-            <PropertyRef Name="ZIP" />
-          </Key>
-          <Property Name="ZIP" Type="Int32" Nullable="false" />
-          <Property Name="place" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="customer" Relationship="Self.FK__customer__zipcod__3C69FB99" FromRole="zipcodes" ToRole="customer" />
-        </EntityType>
-        <Association Name="FK__customer__traine__3D5E1FD2">
-          <End Role="trainer" Type="Self.trainer" Multiplicity="0..1" />
-          <End Role="customer" Type="Self.customer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="trainer">
-              <PropertyRef Name="TRID" />
-            </Principal>
-            <Dependent Role="customer">
-              <PropertyRef Name="trainer_TRID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__customer__zipcod__3C69FB99">
-          <End Role="zipcodes" Type="Self.zipcodes" Multiplicity="0..1" />
-          <End Role="customer" Type="Self.customer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="zipcodes">
-              <PropertyRef Name="ZIP" />
-            </Principal>
-            <Dependent Role="customer">
-              <PropertyRef Name="zipcodes_ZIP" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__foodProgr__custo__619B8048">
-          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
-          <End Role="foodProgramDate" Type="Self.foodProgramDate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="customer">
-              <PropertyRef Name="CID" />
-            </Principal>
-            <Dependent Role="foodProgramDate">
-              <PropertyRef Name="customer_CID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__goals__customer___403A8C7D">
-          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
-          <End Role="goals" Type="Self.goals" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="customer">
-              <PropertyRef Name="CID" />
-            </Principal>
-            <Dependent Role="goals">
-              <PropertyRef Name="customer_CID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__measureme__custo__4F7CD00D">
-          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
-          <End Role="measurementCM" Type="Self.measurementCM" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="customer">
-              <PropertyRef Name="CID" />
-            </Principal>
-            <Dependent Role="measurementCM">
-              <PropertyRef Name="customer_CID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__measureMM__custo__52593CB8">
-          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
-          <End Role="measureMM" Type="Self.measureMM" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="customer">
-              <PropertyRef Name="CID" />
-            </Principal>
-            <Dependent Role="measureMM">
-              <PropertyRef Name="customer_CID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__progressI__custo__5535A963">
-          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
-          <End Role="progressImage" Type="Self.progressImage" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="customer">
-              <PropertyRef Name="CID" />
-            </Principal>
-            <Dependent Role="progressImage">
-              <PropertyRef Name="customer_CID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__trainingP__custo__6E01572D">
-          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
-          <End Role="trainingProgramDate" Type="Self.trainingProgramDate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="customer">
-              <PropertyRef Name="CID" />
-            </Principal>
-            <Dependent Role="trainingProgramDate">
-              <PropertyRef Name="customer_CID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__trainingS__custo__47DBAE45">
-          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
-          <End Role="trainingSale" Type="Self.trainingSale" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="customer">
-              <PropertyRef Name="CID" />
-            </Principal>
-            <Dependent Role="trainingSale">
-              <PropertyRef Name="customer_CID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__training__exerci__6754599E">
-          <End Role="exercise" Type="Self.exercise" Multiplicity="0..1" />
-          <End Role="training" Type="Self.training" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="exercise">
-              <PropertyRef Name="EID" />
-            </Principal>
-            <Dependent Role="training">
-              <PropertyRef Name="exercise_EID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__foodItem__traine__5812160E">
-          <End Role="trainer" Type="Self.trainer" Multiplicity="0..1" />
-          <End Role="foodItem" Type="Self.foodItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="trainer">
-              <PropertyRef Name="TRID" />
-            </Principal>
-            <Dependent Role="foodItem">
-              <PropertyRef Name="trainer_TRID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__foodPorti__foodI__5AEE82B9">
-          <End Role="foodItem" Type="Self.foodItem" Multiplicity="0..1" />
-          <End Role="foodPortion" Type="Self.foodPortion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="foodItem">
-              <PropertyRef Name="FIID" />
-            </Principal>
-            <Dependent Role="foodPortion">
-              <PropertyRef Name="foodItem_FIID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__foodProgr__foodP__5DCAEF64">
-          <End Role="foodPortion" Type="Self.foodPortion" Multiplicity="0..1" />
-          <End Role="foodProgram" Type="Self.foodProgram" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="foodPortion">
-              <PropertyRef Name="FPID" />
-            </Principal>
-            <Dependent Role="foodProgram">
-              <PropertyRef Name="foodPortion_FPID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__foodProgr__foodP__628FA481">
-          <End Role="foodProgram" Type="Self.foodProgram" Multiplicity="0..1" />
-          <End Role="foodProgramDate" Type="Self.foodProgramDate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="foodProgram">
-              <PropertyRef Name="FPMID" />
-            </Principal>
-            <Dependent Role="foodProgramDate">
-              <PropertyRef Name="foodProgram_FPMID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__foodProgr__train__5EBF139D">
-          <End Role="trainer" Type="Self.trainer" Multiplicity="0..1" />
-          <End Role="foodProgram" Type="Self.foodProgram" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="trainer">
-              <PropertyRef Name="TRID" />
-            </Principal>
-            <Dependent Role="foodProgram">
-              <PropertyRef Name="trainer_TRID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__trainingS__payme__49C3F6B7">
-          <End Role="paymentMethod" Type="Self.paymentMethod" Multiplicity="0..1" />
-          <End Role="trainingSale" Type="Self.trainingSale" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="paymentMethod">
-              <PropertyRef Name="PMID" />
-            </Principal>
-            <Dependent Role="trainingSale">
-              <PropertyRef Name="paymentMethod_PMID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__product__trainer__4316F928">
-          <End Role="trainer" Type="Self.trainer" Multiplicity="0..1" />
-          <End Role="product" Type="Self.product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="trainer">
-              <PropertyRef Name="TRID" />
-            </Principal>
-            <Dependent Role="product">
-              <PropertyRef Name="trainer_TRID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__trainingS__produ__70DDC3D8">
-          <End Role="product" Type="Self.product" Multiplicity="1" />
-          <End Role="trainingSaleProduct" Type="Self.trainingSaleProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="product">
-              <PropertyRef Name="PID" />
-            </Principal>
-            <Dependent Role="trainingSaleProduct">
-              <PropertyRef Name="product_PID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__trainingP__train__6B24EA82">
-          <End Role="trainer" Type="Self.trainer" Multiplicity="0..1" />
-          <End Role="trainingProgram" Type="Self.trainingProgram" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="trainer">
-              <PropertyRef Name="TRID" />
-            </Principal>
-            <Dependent Role="trainingProgram">
-              <PropertyRef Name="trainer_TRID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__trainingS__train__48CFD27E">
-          <End Role="trainer" Type="Self.trainer" Multiplicity="0..1" />
-          <End Role="trainingSale" Type="Self.trainingSale" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="trainer">
-              <PropertyRef Name="TRID" />
-            </Principal>
-            <Dependent Role="trainingSale">
-              <PropertyRef Name="trainer_TRID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__trainingP__train__6A30C649">
-          <End Role="training" Type="Self.training" Multiplicity="0..1" />
-          <End Role="trainingProgram" Type="Self.trainingProgram" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="training">
-              <PropertyRef Name="TID" />
-            </Principal>
-            <Dependent Role="trainingProgram">
-              <PropertyRef Name="training_TID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__trainingP__train__6EF57B66">
-          <End Role="trainingProgram" Type="Self.trainingProgram" Multiplicity="0..1" />
-          <End Role="trainingProgramDate" Type="Self.trainingProgramDate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="trainingProgram">
-              <PropertyRef Name="TPID" />
-            </Principal>
-            <Dependent Role="trainingProgramDate">
-              <PropertyRef Name="trainingProgram_TPID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__trainingS__train__71D1E811">
-          <End Role="trainingSale" Type="Self.trainingSale" Multiplicity="1" />
-          <End Role="trainingSaleProduct" Type="Self.trainingSaleProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="trainingSale">
-              <PropertyRef Name="TSID" />
-            </Principal>
-            <Dependent Role="trainingSaleProduct">
-              <PropertyRef Name="trainingSale_TSID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="TMEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="customer" EntityType="Self.customer" />
-          <EntitySet Name="exercise" EntityType="Self.exercise" />
-          <EntitySet Name="foodItem" EntityType="Self.foodItem" />
-          <EntitySet Name="foodPortion" EntityType="Self.foodPortion" />
-          <EntitySet Name="foodProgram" EntityType="Self.foodProgram" />
-          <EntitySet Name="foodProgramDate" EntityType="Self.foodProgramDate" />
-          <EntitySet Name="goals" EntityType="Self.goals" />
-          <EntitySet Name="measurementCM" EntityType="Self.measurementCM" />
-          <EntitySet Name="measureMM" EntityType="Self.measureMM" />
-          <EntitySet Name="paymentMethod" EntityType="Self.paymentMethod" />
-          <EntitySet Name="product" EntityType="Self.product" />
-          <EntitySet Name="progressImage" EntityType="Self.progressImage" />
-          <EntitySet Name="trainer" EntityType="Self.trainer" />
-          <EntitySet Name="training" EntityType="Self.training" />
-          <EntitySet Name="trainingProgram" EntityType="Self.trainingProgram" />
-          <EntitySet Name="trainingProgramDate" EntityType="Self.trainingProgramDate" />
-          <EntitySet Name="trainingSale" EntityType="Self.trainingSale" />
-          <EntitySet Name="trainingSaleProduct" EntityType="Self.trainingSaleProduct" />
-          <EntitySet Name="zipcodes" EntityType="Self.zipcodes" />
-          <AssociationSet Name="FK__customer__traine__3D5E1FD2" Association="Self.FK__customer__traine__3D5E1FD2">
-            <End Role="trainer" EntitySet="trainer" />
-            <End Role="customer" EntitySet="customer" />
-          </AssociationSet>
-          <AssociationSet Name="FK__customer__zipcod__3C69FB99" Association="Self.FK__customer__zipcod__3C69FB99">
-            <End Role="zipcodes" EntitySet="zipcodes" />
-            <End Role="customer" EntitySet="customer" />
-          </AssociationSet>
-          <AssociationSet Name="FK__foodProgr__custo__619B8048" Association="Self.FK__foodProgr__custo__619B8048">
-            <End Role="customer" EntitySet="customer" />
-            <End Role="foodProgramDate" EntitySet="foodProgramDate" />
-          </AssociationSet>
-          <AssociationSet Name="FK__goals__customer___403A8C7D" Association="Self.FK__goals__customer___403A8C7D">
-            <End Role="customer" EntitySet="customer" />
-            <End Role="goals" EntitySet="goals" />
-          </AssociationSet>
-          <AssociationSet Name="FK__measureme__custo__4F7CD00D" Association="Self.FK__measureme__custo__4F7CD00D">
-            <End Role="customer" EntitySet="customer" />
-            <End Role="measurementCM" EntitySet="measurementCM" />
-          </AssociationSet>
-          <AssociationSet Name="FK__measureMM__custo__52593CB8" Association="Self.FK__measureMM__custo__52593CB8">
-            <End Role="customer" EntitySet="customer" />
-            <End Role="measureMM" EntitySet="measureMM" />
-          </AssociationSet>
-          <AssociationSet Name="FK__progressI__custo__5535A963" Association="Self.FK__progressI__custo__5535A963">
-            <End Role="customer" EntitySet="customer" />
-            <End Role="progressImage" EntitySet="progressImage" />
-          </AssociationSet>
-          <AssociationSet Name="FK__trainingP__custo__6E01572D" Association="Self.FK__trainingP__custo__6E01572D">
-            <End Role="customer" EntitySet="customer" />
-            <End Role="trainingProgramDate" EntitySet="trainingProgramDate" />
-          </AssociationSet>
-          <AssociationSet Name="FK__trainingS__custo__47DBAE45" Association="Self.FK__trainingS__custo__47DBAE45">
-            <End Role="customer" EntitySet="customer" />
-            <End Role="trainingSale" EntitySet="trainingSale" />
-          </AssociationSet>
-          <AssociationSet Name="FK__training__exerci__6754599E" Association="Self.FK__training__exerci__6754599E">
-            <End Role="exercise" EntitySet="exercise" />
-            <End Role="training" EntitySet="training" />
-          </AssociationSet>
-          <AssociationSet Name="FK__foodItem__traine__5812160E" Association="Self.FK__foodItem__traine__5812160E">
-            <End Role="trainer" EntitySet="trainer" />
-            <End Role="foodItem" EntitySet="foodItem" />
-          </AssociationSet>
-          <AssociationSet Name="FK__foodPorti__foodI__5AEE82B9" Association="Self.FK__foodPorti__foodI__5AEE82B9">
-            <End Role="foodItem" EntitySet="foodItem" />
-            <End Role="foodPortion" EntitySet="foodPortion" />
-          </AssociationSet>
-          <AssociationSet Name="FK__foodProgr__foodP__5DCAEF64" Association="Self.FK__foodProgr__foodP__5DCAEF64">
-            <End Role="foodPortion" EntitySet="foodPortion" />
-            <End Role="foodProgram" EntitySet="foodProgram" />
-          </AssociationSet>
-          <AssociationSet Name="FK__foodProgr__foodP__628FA481" Association="Self.FK__foodProgr__foodP__628FA481">
-            <End Role="foodProgram" EntitySet="foodProgram" />
-            <End Role="foodProgramDate" EntitySet="foodProgramDate" />
-          </AssociationSet>
-          <AssociationSet Name="FK__foodProgr__train__5EBF139D" Association="Self.FK__foodProgr__train__5EBF139D">
-            <End Role="trainer" EntitySet="trainer" />
-            <End Role="foodProgram" EntitySet="foodProgram" />
-          </AssociationSet>
-          <AssociationSet Name="FK__trainingS__payme__49C3F6B7" Association="Self.FK__trainingS__payme__49C3F6B7">
-            <End Role="paymentMethod" EntitySet="paymentMethod" />
-            <End Role="trainingSale" EntitySet="trainingSale" />
-          </AssociationSet>
-          <AssociationSet Name="FK__product__trainer__4316F928" Association="Self.FK__product__trainer__4316F928">
-            <End Role="trainer" EntitySet="trainer" />
-            <End Role="product" EntitySet="product" />
-          </AssociationSet>
-          <AssociationSet Name="FK__trainingS__produ__70DDC3D8" Association="Self.FK__trainingS__produ__70DDC3D8">
-            <End Role="product" EntitySet="product" />
-            <End Role="trainingSaleProduct" EntitySet="trainingSaleProduct" />
-          </AssociationSet>
-          <AssociationSet Name="FK__trainingP__train__6B24EA82" Association="Self.FK__trainingP__train__6B24EA82">
-            <End Role="trainer" EntitySet="trainer" />
-            <End Role="trainingProgram" EntitySet="trainingProgram" />
-          </AssociationSet>
-          <AssociationSet Name="FK__trainingS__train__48CFD27E" Association="Self.FK__trainingS__train__48CFD27E">
-            <End Role="trainer" EntitySet="trainer" />
-            <End Role="trainingSale" EntitySet="trainingSale" />
-          </AssociationSet>
-          <AssociationSet Name="FK__trainingP__train__6A30C649" Association="Self.FK__trainingP__train__6A30C649">
-            <End Role="training" EntitySet="training" />
-            <End Role="trainingProgram" EntitySet="trainingProgram" />
-          </AssociationSet>
-          <AssociationSet Name="FK__trainingP__train__6EF57B66" Association="Self.FK__trainingP__train__6EF57B66">
-            <End Role="trainingProgram" EntitySet="trainingProgram" />
-            <End Role="trainingProgramDate" EntitySet="trainingProgramDate" />
-          </AssociationSet>
-          <AssociationSet Name="FK__trainingS__train__71D1E811" Association="Self.FK__trainingS__train__71D1E811">
-            <End Role="trainingSale" EntitySet="trainingSale" />
-            <End Role="trainingSaleProduct" EntitySet="trainingSaleProduct" />
-          </AssociationSet>
           <EntitySet Name="C__MigrationHistory" EntityType="TrainingMasterDatabaseModel.C__MigrationHistory" />
           <EntitySet Name="AspNetRoles" EntityType="TrainingMasterDatabaseModel.AspNetRoles" />
           <EntitySet Name="AspNetUserClaims" EntityType="TrainingMasterDatabaseModel.AspNetUserClaims" />
           <EntitySet Name="AspNetUserLogins" EntityType="TrainingMasterDatabaseModel.AspNetUserLogins" />
           <EntitySet Name="AspNetUsers" EntityType="TrainingMasterDatabaseModel.AspNetUsers" />
+          <EntitySet Name="customer" EntityType="TrainingMasterDatabaseModel.customer" />
+          <EntitySet Name="exercise" EntityType="TrainingMasterDatabaseModel.exercise" />
+          <EntitySet Name="foodItem" EntityType="TrainingMasterDatabaseModel.foodItem" />
+          <EntitySet Name="foodPortion" EntityType="TrainingMasterDatabaseModel.foodPortion" />
+          <EntitySet Name="foodProgram" EntityType="TrainingMasterDatabaseModel.foodProgram" />
+          <EntitySet Name="foodProgramDate" EntityType="TrainingMasterDatabaseModel.foodProgramDate" />
+          <EntitySet Name="goals" EntityType="TrainingMasterDatabaseModel.goals" />
+          <EntitySet Name="measurementCM" EntityType="TrainingMasterDatabaseModel.measurementCM" />
+          <EntitySet Name="measureMM" EntityType="TrainingMasterDatabaseModel.measureMM" />
+          <EntitySet Name="paymentMethod" EntityType="TrainingMasterDatabaseModel.paymentMethod" />
+          <EntitySet Name="product" EntityType="TrainingMasterDatabaseModel.product" />
+          <EntitySet Name="progressImage" EntityType="TrainingMasterDatabaseModel.progressImage" />
+          <EntitySet Name="trainer" EntityType="TrainingMasterDatabaseModel.trainer" />
+          <EntitySet Name="training" EntityType="TrainingMasterDatabaseModel.training" />
+          <EntitySet Name="trainingProgram" EntityType="TrainingMasterDatabaseModel.trainingProgram" />
+          <EntitySet Name="trainingProgramDate" EntityType="TrainingMasterDatabaseModel.trainingProgramDate" />
+          <EntitySet Name="trainingSale" EntityType="TrainingMasterDatabaseModel.trainingSale" />
+          <EntitySet Name="trainingSaleProduct" EntityType="TrainingMasterDatabaseModel.trainingSaleProduct" />
+          <EntitySet Name="zipcodes" EntityType="TrainingMasterDatabaseModel.zipcodes" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="TrainingMasterDatabaseModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -1428,6 +827,106 @@
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="TrainingMasterDatabaseModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AspNetUse__custo__0E6E26BF" Association="TrainingMasterDatabaseModel.FK__AspNetUse__custo__0E6E26BF">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AspNetUse__train__02FC7413" Association="TrainingMasterDatabaseModel.FK__AspNetUse__train__02FC7413">
+            <End Role="trainer" EntitySet="trainer" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__customer__traine__0D7A0286" Association="TrainingMasterDatabaseModel.FK__customer__traine__0D7A0286">
+            <End Role="trainer" EntitySet="trainer" />
+            <End Role="customer" EntitySet="customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__customer__zipcod__0C85DE4D" Association="TrainingMasterDatabaseModel.FK__customer__zipcod__0C85DE4D">
+            <End Role="zipcodes" EntitySet="zipcodes" />
+            <End Role="customer" EntitySet="customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__foodProgr__custo__0A9D95DB" Association="TrainingMasterDatabaseModel.FK__foodProgr__custo__0A9D95DB">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="foodProgramDate" EntitySet="foodProgramDate" />
+          </AssociationSet>
+          <AssociationSet Name="FK__goals__customer___05D8E0BE" Association="TrainingMasterDatabaseModel.FK__goals__customer___05D8E0BE">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="goals" EntitySet="goals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__measureme__custo__07C12930" Association="TrainingMasterDatabaseModel.FK__measureme__custo__07C12930">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="measurementCM" EntitySet="measurementCM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__measureMM__custo__08B54D69" Association="TrainingMasterDatabaseModel.FK__measureMM__custo__08B54D69">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="measureMM" EntitySet="measureMM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__progressI__custo__09A971A2" Association="TrainingMasterDatabaseModel.FK__progressI__custo__09A971A2">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="progressImage" EntitySet="progressImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__trainingP__custo__0B91BA14" Association="TrainingMasterDatabaseModel.FK__trainingP__custo__0B91BA14">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="trainingProgramDate" EntitySet="trainingProgramDate" />
+          </AssociationSet>
+          <AssociationSet Name="FK__trainingS__custo__06CD04F7" Association="TrainingMasterDatabaseModel.FK__trainingS__custo__06CD04F7">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="trainingSale" EntitySet="trainingSale" />
+          </AssociationSet>
+          <AssociationSet Name="FK__training__exerci__6754599E" Association="TrainingMasterDatabaseModel.FK__training__exerci__6754599E">
+            <End Role="exercise" EntitySet="exercise" />
+            <End Role="training" EntitySet="training" />
+          </AssociationSet>
+          <AssociationSet Name="FK__foodItem__traine__5812160E" Association="TrainingMasterDatabaseModel.FK__foodItem__traine__5812160E">
+            <End Role="trainer" EntitySet="trainer" />
+            <End Role="foodItem" EntitySet="foodItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__foodPorti__foodI__5AEE82B9" Association="TrainingMasterDatabaseModel.FK__foodPorti__foodI__5AEE82B9">
+            <End Role="foodItem" EntitySet="foodItem" />
+            <End Role="foodPortion" EntitySet="foodPortion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__foodProgr__foodP__5DCAEF64" Association="TrainingMasterDatabaseModel.FK__foodProgr__foodP__5DCAEF64">
+            <End Role="foodPortion" EntitySet="foodPortion" />
+            <End Role="foodProgram" EntitySet="foodProgram" />
+          </AssociationSet>
+          <AssociationSet Name="FK__foodProgr__foodP__628FA481" Association="TrainingMasterDatabaseModel.FK__foodProgr__foodP__628FA481">
+            <End Role="foodProgram" EntitySet="foodProgram" />
+            <End Role="foodProgramDate" EntitySet="foodProgramDate" />
+          </AssociationSet>
+          <AssociationSet Name="FK__foodProgr__train__5EBF139D" Association="TrainingMasterDatabaseModel.FK__foodProgr__train__5EBF139D">
+            <End Role="trainer" EntitySet="trainer" />
+            <End Role="foodProgram" EntitySet="foodProgram" />
+          </AssociationSet>
+          <AssociationSet Name="FK__trainingS__payme__49C3F6B7" Association="TrainingMasterDatabaseModel.FK__trainingS__payme__49C3F6B7">
+            <End Role="paymentMethod" EntitySet="paymentMethod" />
+            <End Role="trainingSale" EntitySet="trainingSale" />
+          </AssociationSet>
+          <AssociationSet Name="FK__product__trainer__4316F928" Association="TrainingMasterDatabaseModel.FK__product__trainer__4316F928">
+            <End Role="trainer" EntitySet="trainer" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__trainingS__produ__70DDC3D8" Association="TrainingMasterDatabaseModel.FK__trainingS__produ__70DDC3D8">
+            <End Role="product" EntitySet="product" />
+            <End Role="trainingSaleProduct" EntitySet="trainingSaleProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK__trainingP__train__6B24EA82" Association="TrainingMasterDatabaseModel.FK__trainingP__train__6B24EA82">
+            <End Role="trainer" EntitySet="trainer" />
+            <End Role="trainingProgram" EntitySet="trainingProgram" />
+          </AssociationSet>
+          <AssociationSet Name="FK__trainingS__train__48CFD27E" Association="TrainingMasterDatabaseModel.FK__trainingS__train__48CFD27E">
+            <End Role="trainer" EntitySet="trainer" />
+            <End Role="trainingSale" EntitySet="trainingSale" />
+          </AssociationSet>
+          <AssociationSet Name="FK__trainingP__train__6A30C649" Association="TrainingMasterDatabaseModel.FK__trainingP__train__6A30C649">
+            <End Role="training" EntitySet="training" />
+            <End Role="trainingProgram" EntitySet="trainingProgram" />
+          </AssociationSet>
+          <AssociationSet Name="FK__trainingP__train__6EF57B66" Association="TrainingMasterDatabaseModel.FK__trainingP__train__6EF57B66">
+            <End Role="trainingProgram" EntitySet="trainingProgram" />
+            <End Role="trainingProgramDate" EntitySet="trainingProgramDate" />
+          </AssociationSet>
+          <AssociationSet Name="FK__trainingS__train__71D1E811" Association="TrainingMasterDatabaseModel.FK__trainingS__train__71D1E811">
+            <End Role="trainingSale" EntitySet="trainingSale" />
+            <End Role="trainingSaleProduct" EntitySet="trainingSaleProduct" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="TrainingMasterDatabaseModel.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -1490,9 +989,284 @@
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="customer_CID" Type="Int32" />
+          <Property Name="trainer_TRID" Type="Int32" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="TrainingMasterDatabaseModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="TrainingMasterDatabaseModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="customer" Relationship="TrainingMasterDatabaseModel.FK__AspNetUse__custo__0E6E26BF" FromRole="AspNetUsers" ToRole="customer" />
+          <NavigationProperty Name="trainer" Relationship="TrainingMasterDatabaseModel.FK__AspNetUse__train__02FC7413" FromRole="AspNetUsers" ToRole="trainer" />
           <NavigationProperty Name="AspNetRoles" Relationship="TrainingMasterDatabaseModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="CID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="Int16" Nullable="false" />
+          <Property Name="kennitala" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="country" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="foodPref" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="injury" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="allergy" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="zipcodes_ZIP" Type="Int32" />
+          <Property Name="profileImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="height" Type="Int32" Nullable="false" />
+          <Property Name="trainer_TRID" Type="Int32" />
+          <Property Name="hidden" Type="Boolean" />
+          <NavigationProperty Name="AspNetUsers" Relationship="TrainingMasterDatabaseModel.FK__AspNetUse__custo__0E6E26BF" FromRole="customer" ToRole="AspNetUsers" />
+          <NavigationProperty Name="trainer" Relationship="TrainingMasterDatabaseModel.FK__customer__traine__0D7A0286" FromRole="customer" ToRole="trainer" />
+          <NavigationProperty Name="zipcodes" Relationship="TrainingMasterDatabaseModel.FK__customer__zipcod__0C85DE4D" FromRole="customer" ToRole="zipcodes" />
+          <NavigationProperty Name="foodProgramDate" Relationship="TrainingMasterDatabaseModel.FK__foodProgr__custo__0A9D95DB" FromRole="customer" ToRole="foodProgramDate" />
+          <NavigationProperty Name="goals" Relationship="TrainingMasterDatabaseModel.FK__goals__customer___05D8E0BE" FromRole="customer" ToRole="goals" />
+          <NavigationProperty Name="measurementCM" Relationship="TrainingMasterDatabaseModel.FK__measureme__custo__07C12930" FromRole="customer" ToRole="measurementCM" />
+          <NavigationProperty Name="measureMM" Relationship="TrainingMasterDatabaseModel.FK__measureMM__custo__08B54D69" FromRole="customer" ToRole="measureMM" />
+          <NavigationProperty Name="progressImage" Relationship="TrainingMasterDatabaseModel.FK__progressI__custo__09A971A2" FromRole="customer" ToRole="progressImage" />
+          <NavigationProperty Name="trainingProgramDate" Relationship="TrainingMasterDatabaseModel.FK__trainingP__custo__0B91BA14" FromRole="customer" ToRole="trainingProgramDate" />
+          <NavigationProperty Name="trainingSale" Relationship="TrainingMasterDatabaseModel.FK__trainingS__custo__06CD04F7" FromRole="customer" ToRole="trainingSale" />
+        </EntityType>
+        <EntityType Name="exercise">
+          <Key>
+            <PropertyRef Name="EID" />
+          </Key>
+          <Property Name="EID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="link" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="training" Relationship="TrainingMasterDatabaseModel.FK__training__exerci__6754599E" FromRole="exercise" ToRole="training" />
+        </EntityType>
+        <EntityType Name="foodItem">
+          <Key>
+            <PropertyRef Name="FIID" />
+          </Key>
+          <Property Name="FIID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="kcal" Type="Int32" Nullable="false" />
+          <Property Name="fat" Type="Decimal" Nullable="false" Precision="9" Scale="5" />
+          <Property Name="saturatedFat" Type="Decimal" Nullable="false" Precision="9" Scale="5" />
+          <Property Name="unsaturatedFat" Type="Decimal" Nullable="false" Precision="9" Scale="5" />
+          <Property Name="colestrol" Type="Decimal" Nullable="false" Precision="9" Scale="5" />
+          <Property Name="carbohydrate" Type="Decimal" Nullable="false" Precision="9" Scale="5" />
+          <Property Name="addedSugar" Type="Decimal" Nullable="false" Precision="9" Scale="5" />
+          <Property Name="fiber" Type="Decimal" Nullable="false" Precision="9" Scale="5" />
+          <Property Name="water" Type="Decimal" Nullable="false" Precision="9" Scale="5" />
+          <Property Name="protein" Type="Decimal" Nullable="false" Precision="9" Scale="5" />
+          <Property Name="suppliment" Type="Boolean" />
+          <Property Name="trainer_TRID" Type="Int32" />
+          <NavigationProperty Name="trainer" Relationship="TrainingMasterDatabaseModel.FK__foodItem__traine__5812160E" FromRole="foodItem" ToRole="trainer" />
+          <NavigationProperty Name="foodPortion" Relationship="TrainingMasterDatabaseModel.FK__foodPorti__foodI__5AEE82B9" FromRole="foodItem" ToRole="foodPortion" />
+        </EntityType>
+        <EntityType Name="foodPortion">
+          <Key>
+            <PropertyRef Name="FPID" />
+          </Key>
+          <Property Name="FPID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="weekday" Type="Int16" Nullable="false" />
+          <Property Name="timeOfDay" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="foodItem_FIID" Type="Int32" />
+          <NavigationProperty Name="foodItem" Relationship="TrainingMasterDatabaseModel.FK__foodPorti__foodI__5AEE82B9" FromRole="foodPortion" ToRole="foodItem" />
+          <NavigationProperty Name="foodProgram" Relationship="TrainingMasterDatabaseModel.FK__foodProgr__foodP__5DCAEF64" FromRole="foodPortion" ToRole="foodProgram" />
+        </EntityType>
+        <EntityType Name="foodProgram">
+          <Key>
+            <PropertyRef Name="FPMID" />
+          </Key>
+          <Property Name="FPMID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="foodPortion_FPID" Type="Int32" />
+          <Property Name="trainer_TRID" Type="Int32" />
+          <NavigationProperty Name="foodPortion" Relationship="TrainingMasterDatabaseModel.FK__foodProgr__foodP__5DCAEF64" FromRole="foodProgram" ToRole="foodPortion" />
+          <NavigationProperty Name="foodProgramDate" Relationship="TrainingMasterDatabaseModel.FK__foodProgr__foodP__628FA481" FromRole="foodProgram" ToRole="foodProgramDate" />
+          <NavigationProperty Name="trainer" Relationship="TrainingMasterDatabaseModel.FK__foodProgr__train__5EBF139D" FromRole="foodProgram" ToRole="trainer" />
+        </EntityType>
+        <EntityType Name="foodProgramDate">
+          <Key>
+            <PropertyRef Name="FPDID" />
+          </Key>
+          <Property Name="FPDID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customer_CID" Type="Int32" />
+          <Property Name="foodProgram_FPMID" Type="Int32" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="customer" Relationship="TrainingMasterDatabaseModel.FK__foodProgr__custo__0A9D95DB" FromRole="foodProgramDate" ToRole="customer" />
+          <NavigationProperty Name="foodProgram" Relationship="TrainingMasterDatabaseModel.FK__foodProgr__foodP__628FA481" FromRole="foodProgramDate" ToRole="foodProgram" />
+        </EntityType>
+        <EntityType Name="goals">
+          <Key>
+            <PropertyRef Name="GID" />
+          </Key>
+          <Property Name="GID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customer_CID" Type="Int32" />
+          <Property Name="kg" Type="Decimal" Precision="9" Scale="5" />
+          <Property Name="percentage" Type="Decimal" Precision="9" Scale="5" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="diameter" Type="Decimal" Precision="9" Scale="5" />
+          <Property Name="startDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dueDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="customer" Relationship="TrainingMasterDatabaseModel.FK__goals__customer___05D8E0BE" FromRole="goals" ToRole="customer" />
+        </EntityType>
+        <EntityType Name="measurementCM">
+          <Key>
+            <PropertyRef Name="MCMID" />
+          </Key>
+          <Property Name="MCMID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customer_CID" Type="Int32" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="butt" Type="Decimal" Precision="9" Scale="5" />
+          <Property Name="waist" Type="Decimal" Precision="9" Scale="5" />
+          <Property Name="hip" Type="Decimal" Precision="9" Scale="5" />
+          <Property Name="thigh" Type="Decimal" Precision="9" Scale="5" />
+          <Property Name="armLoose" Type="Decimal" Precision="9" Scale="5" />
+          <Property Name="armFlexed" Type="Decimal" Precision="9" Scale="5" />
+          <Property Name="shoulders" Type="Decimal" Precision="9" Scale="5" />
+          <Property Name="performedByTrainer" Type="Boolean" />
+          <NavigationProperty Name="customer" Relationship="TrainingMasterDatabaseModel.FK__measureme__custo__07C12930" FromRole="measurementCM" ToRole="customer" />
+        </EntityType>
+        <EntityType Name="measureMM">
+          <Key>
+            <PropertyRef Name="MMMID" />
+          </Key>
+          <Property Name="MMMID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customer_CID" Type="Int32" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="chest" Type="Decimal" Precision="9" Scale="5" />
+          <Property Name="abdominal" Type="Decimal" Precision="9" Scale="5" />
+          <Property Name="thigh" Type="Decimal" Precision="9" Scale="5" />
+          <Property Name="tricep" Type="Decimal" Precision="9" Scale="5" />
+          <Property Name="subscapular" Type="Decimal" Precision="9" Scale="5" />
+          <Property Name="suprailiac" Type="Decimal" Precision="9" Scale="5" />
+          <Property Name="axilliary" Type="Decimal" Precision="9" Scale="5" />
+          <Property Name="bmi" Type="Decimal" Precision="9" Scale="5" />
+          <Property Name="lbm" Type="Decimal" Precision="9" Scale="5" />
+          <Property Name="fatPercentage" Type="Decimal" Precision="9" Scale="5" />
+          <Property Name="kg" Type="Decimal" Precision="9" Scale="5" />
+          <NavigationProperty Name="customer" Relationship="TrainingMasterDatabaseModel.FK__measureMM__custo__08B54D69" FromRole="measureMM" ToRole="customer" />
+        </EntityType>
+        <EntityType Name="paymentMethod">
+          <Key>
+            <PropertyRef Name="PMID" />
+          </Key>
+          <Property Name="PMID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="trainingSale" Relationship="TrainingMasterDatabaseModel.FK__trainingS__payme__49C3F6B7" FromRole="paymentMethod" ToRole="trainingSale" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="PID" />
+          </Key>
+          <Property Name="PID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="durationInDays" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="trainer_TRID" Type="Int32" />
+          <Property Name="hidden" Type="Boolean" />
+          <NavigationProperty Name="trainer" Relationship="TrainingMasterDatabaseModel.FK__product__trainer__4316F928" FromRole="product" ToRole="trainer" />
+          <NavigationProperty Name="trainingSaleProduct" Relationship="TrainingMasterDatabaseModel.FK__trainingS__produ__70DDC3D8" FromRole="product" ToRole="trainingSaleProduct" />
+        </EntityType>
+        <EntityType Name="progressImage">
+          <Key>
+            <PropertyRef Name="PIID" />
+          </Key>
+          <Property Name="PIID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="customer_CID" Type="Int32" />
+          <NavigationProperty Name="customer" Relationship="TrainingMasterDatabaseModel.FK__progressI__custo__09A971A2" FromRole="progressImage" ToRole="customer" />
+        </EntityType>
+        <EntityType Name="trainer">
+          <Key>
+            <PropertyRef Name="TRID" />
+          </Key>
+          <Property Name="TRID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="kennitala" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="Int16" Nullable="false" />
+          <Property Name="address" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="location" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="hidden" Type="Boolean" />
+          <NavigationProperty Name="AspNetUsers" Relationship="TrainingMasterDatabaseModel.FK__AspNetUse__train__02FC7413" FromRole="trainer" ToRole="AspNetUsers" />
+          <NavigationProperty Name="customer" Relationship="TrainingMasterDatabaseModel.FK__customer__traine__0D7A0286" FromRole="trainer" ToRole="customer" />
+          <NavigationProperty Name="foodItem" Relationship="TrainingMasterDatabaseModel.FK__foodItem__traine__5812160E" FromRole="trainer" ToRole="foodItem" />
+          <NavigationProperty Name="foodProgram" Relationship="TrainingMasterDatabaseModel.FK__foodProgr__train__5EBF139D" FromRole="trainer" ToRole="foodProgram" />
+          <NavigationProperty Name="product" Relationship="TrainingMasterDatabaseModel.FK__product__trainer__4316F928" FromRole="trainer" ToRole="product" />
+          <NavigationProperty Name="trainingProgram" Relationship="TrainingMasterDatabaseModel.FK__trainingP__train__6B24EA82" FromRole="trainer" ToRole="trainingProgram" />
+          <NavigationProperty Name="trainingSale" Relationship="TrainingMasterDatabaseModel.FK__trainingS__train__48CFD27E" FromRole="trainer" ToRole="trainingSale" />
+        </EntityType>
+        <EntityType Name="training">
+          <Key>
+            <PropertyRef Name="TID" />
+          </Key>
+          <Property Name="TID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="numberOfSets" Type="Int32" />
+          <Property Name="numberOfReps" Type="Int32" />
+          <Property Name="exercise_EID" Type="Int32" />
+          <Property Name="durationMin" Type="Int32" />
+          <Property Name="restBetweenMin" Type="Int32" />
+          <Property Name="weekday" Type="Int16" Nullable="false" />
+          <Property Name="timeOfday" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="exercise" Relationship="TrainingMasterDatabaseModel.FK__training__exerci__6754599E" FromRole="training" ToRole="exercise" />
+          <NavigationProperty Name="trainingProgram" Relationship="TrainingMasterDatabaseModel.FK__trainingP__train__6A30C649" FromRole="training" ToRole="trainingProgram" />
+        </EntityType>
+        <EntityType Name="trainingProgram">
+          <Key>
+            <PropertyRef Name="TPID" />
+          </Key>
+          <Property Name="TPID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="training_TID" Type="Int32" />
+          <Property Name="trainer_TRID" Type="Int32" />
+          <NavigationProperty Name="trainer" Relationship="TrainingMasterDatabaseModel.FK__trainingP__train__6B24EA82" FromRole="trainingProgram" ToRole="trainer" />
+          <NavigationProperty Name="training" Relationship="TrainingMasterDatabaseModel.FK__trainingP__train__6A30C649" FromRole="trainingProgram" ToRole="training" />
+          <NavigationProperty Name="trainingProgramDate" Relationship="TrainingMasterDatabaseModel.FK__trainingP__train__6EF57B66" FromRole="trainingProgram" ToRole="trainingProgramDate" />
+        </EntityType>
+        <EntityType Name="trainingProgramDate">
+          <Key>
+            <PropertyRef Name="TDID" />
+          </Key>
+          <Property Name="TDID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customer_CID" Type="Int32" />
+          <Property Name="trainingProgram_TPID" Type="Int32" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="customer" Relationship="TrainingMasterDatabaseModel.FK__trainingP__custo__0B91BA14" FromRole="trainingProgramDate" ToRole="customer" />
+          <NavigationProperty Name="trainingProgram" Relationship="TrainingMasterDatabaseModel.FK__trainingP__train__6EF57B66" FromRole="trainingProgramDate" ToRole="trainingProgram" />
+        </EntityType>
+        <EntityType Name="trainingSale">
+          <Key>
+            <PropertyRef Name="TSID" />
+          </Key>
+          <Property Name="TSID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customer_CID" Type="Int32" />
+          <Property Name="trainer_TRID" Type="Int32" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="paymentMethod_PMID" Type="Int32" />
+          <NavigationProperty Name="customer" Relationship="TrainingMasterDatabaseModel.FK__trainingS__custo__06CD04F7" FromRole="trainingSale" ToRole="customer" />
+          <NavigationProperty Name="paymentMethod" Relationship="TrainingMasterDatabaseModel.FK__trainingS__payme__49C3F6B7" FromRole="trainingSale" ToRole="paymentMethod" />
+          <NavigationProperty Name="trainer" Relationship="TrainingMasterDatabaseModel.FK__trainingS__train__48CFD27E" FromRole="trainingSale" ToRole="trainer" />
+          <NavigationProperty Name="trainingSaleProduct" Relationship="TrainingMasterDatabaseModel.FK__trainingS__train__71D1E811" FromRole="trainingSale" ToRole="trainingSaleProduct" />
+        </EntityType>
+        <EntityType Name="trainingSaleProduct">
+          <Key>
+            <PropertyRef Name="trainingSale_TSID" />
+            <PropertyRef Name="product_PID" />
+          </Key>
+          <Property Name="price" Type="Int32" Nullable="false" />
+          <Property Name="duration" Type="Int32" Nullable="false" />
+          <Property Name="trainingSale_TSID" Type="Int32" Nullable="false" />
+          <Property Name="product_PID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="product" Relationship="TrainingMasterDatabaseModel.FK__trainingS__produ__70DDC3D8" FromRole="trainingSaleProduct" ToRole="product" />
+          <NavigationProperty Name="trainingSale" Relationship="TrainingMasterDatabaseModel.FK__trainingS__train__71D1E811" FromRole="trainingSaleProduct" ToRole="trainingSale" />
+        </EntityType>
+        <EntityType Name="zipcodes">
+          <Key>
+            <PropertyRef Name="ZIP" />
+          </Key>
+          <Property Name="ZIP" Type="Int32" Nullable="false" />
+          <Property Name="place" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="customer" Relationship="TrainingMasterDatabaseModel.FK__customer__zipcod__0C85DE4D" FromRole="zipcodes" ToRole="customer" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="TrainingMasterDatabaseModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
@@ -1522,256 +1296,316 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__AspNetUse__custo__0E6E26BF">
+          <End Type="TrainingMasterDatabaseModel.customer" Role="customer" Multiplicity="0..1" />
+          <End Type="TrainingMasterDatabaseModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="CID" />
+            </Principal>
+            <Dependent Role="AspNetUsers">
+              <PropertyRef Name="customer_CID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AspNetUse__train__02FC7413">
+          <End Type="TrainingMasterDatabaseModel.trainer" Role="trainer" Multiplicity="0..1" />
+          <End Type="TrainingMasterDatabaseModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="trainer">
+              <PropertyRef Name="TRID" />
+            </Principal>
+            <Dependent Role="AspNetUsers">
+              <PropertyRef Name="trainer_TRID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__customer__traine__0D7A0286">
+          <End Type="TrainingMasterDatabaseModel.trainer" Role="trainer" Multiplicity="0..1" />
+          <End Type="TrainingMasterDatabaseModel.customer" Role="customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="trainer">
+              <PropertyRef Name="TRID" />
+            </Principal>
+            <Dependent Role="customer">
+              <PropertyRef Name="trainer_TRID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__customer__zipcod__0C85DE4D">
+          <End Type="TrainingMasterDatabaseModel.zipcodes" Role="zipcodes" Multiplicity="0..1" />
+          <End Type="TrainingMasterDatabaseModel.customer" Role="customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="zipcodes">
+              <PropertyRef Name="ZIP" />
+            </Principal>
+            <Dependent Role="customer">
+              <PropertyRef Name="zipcodes_ZIP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__foodProgr__custo__0A9D95DB">
+          <End Type="TrainingMasterDatabaseModel.customer" Role="customer" Multiplicity="0..1" />
+          <End Type="TrainingMasterDatabaseModel.foodProgramDate" Role="foodProgramDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="CID" />
+            </Principal>
+            <Dependent Role="foodProgramDate">
+              <PropertyRef Name="customer_CID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__goals__customer___05D8E0BE">
+          <End Type="TrainingMasterDatabaseModel.customer" Role="customer" Multiplicity="0..1" />
+          <End Type="TrainingMasterDatabaseModel.goals" Role="goals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="CID" />
+            </Principal>
+            <Dependent Role="goals">
+              <PropertyRef Name="customer_CID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__measureme__custo__07C12930">
+          <End Type="TrainingMasterDatabaseModel.customer" Role="customer" Multiplicity="0..1" />
+          <End Type="TrainingMasterDatabaseModel.measurementCM" Role="measurementCM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="CID" />
+            </Principal>
+            <Dependent Role="measurementCM">
+              <PropertyRef Name="customer_CID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__measureMM__custo__08B54D69">
+          <End Type="TrainingMasterDatabaseModel.customer" Role="customer" Multiplicity="0..1" />
+          <End Type="TrainingMasterDatabaseModel.measureMM" Role="measureMM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="CID" />
+            </Principal>
+            <Dependent Role="measureMM">
+              <PropertyRef Name="customer_CID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__progressI__custo__09A971A2">
+          <End Type="TrainingMasterDatabaseModel.customer" Role="customer" Multiplicity="0..1" />
+          <End Type="TrainingMasterDatabaseModel.progressImage" Role="progressImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="CID" />
+            </Principal>
+            <Dependent Role="progressImage">
+              <PropertyRef Name="customer_CID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__trainingP__custo__0B91BA14">
+          <End Type="TrainingMasterDatabaseModel.customer" Role="customer" Multiplicity="0..1" />
+          <End Type="TrainingMasterDatabaseModel.trainingProgramDate" Role="trainingProgramDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="CID" />
+            </Principal>
+            <Dependent Role="trainingProgramDate">
+              <PropertyRef Name="customer_CID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__trainingS__custo__06CD04F7">
+          <End Type="TrainingMasterDatabaseModel.customer" Role="customer" Multiplicity="0..1" />
+          <End Type="TrainingMasterDatabaseModel.trainingSale" Role="trainingSale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="CID" />
+            </Principal>
+            <Dependent Role="trainingSale">
+              <PropertyRef Name="customer_CID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__training__exerci__6754599E">
+          <End Type="TrainingMasterDatabaseModel.exercise" Role="exercise" Multiplicity="0..1" />
+          <End Type="TrainingMasterDatabaseModel.training" Role="training" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="exercise">
+              <PropertyRef Name="EID" />
+            </Principal>
+            <Dependent Role="training">
+              <PropertyRef Name="exercise_EID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__foodItem__traine__5812160E">
+          <End Type="TrainingMasterDatabaseModel.trainer" Role="trainer" Multiplicity="0..1" />
+          <End Type="TrainingMasterDatabaseModel.foodItem" Role="foodItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="trainer">
+              <PropertyRef Name="TRID" />
+            </Principal>
+            <Dependent Role="foodItem">
+              <PropertyRef Name="trainer_TRID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__foodPorti__foodI__5AEE82B9">
+          <End Type="TrainingMasterDatabaseModel.foodItem" Role="foodItem" Multiplicity="0..1" />
+          <End Type="TrainingMasterDatabaseModel.foodPortion" Role="foodPortion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="foodItem">
+              <PropertyRef Name="FIID" />
+            </Principal>
+            <Dependent Role="foodPortion">
+              <PropertyRef Name="foodItem_FIID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__foodProgr__foodP__5DCAEF64">
+          <End Type="TrainingMasterDatabaseModel.foodPortion" Role="foodPortion" Multiplicity="0..1" />
+          <End Type="TrainingMasterDatabaseModel.foodProgram" Role="foodProgram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="foodPortion">
+              <PropertyRef Name="FPID" />
+            </Principal>
+            <Dependent Role="foodProgram">
+              <PropertyRef Name="foodPortion_FPID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__foodProgr__foodP__628FA481">
+          <End Type="TrainingMasterDatabaseModel.foodProgram" Role="foodProgram" Multiplicity="0..1" />
+          <End Type="TrainingMasterDatabaseModel.foodProgramDate" Role="foodProgramDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="foodProgram">
+              <PropertyRef Name="FPMID" />
+            </Principal>
+            <Dependent Role="foodProgramDate">
+              <PropertyRef Name="foodProgram_FPMID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__foodProgr__train__5EBF139D">
+          <End Type="TrainingMasterDatabaseModel.trainer" Role="trainer" Multiplicity="0..1" />
+          <End Type="TrainingMasterDatabaseModel.foodProgram" Role="foodProgram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="trainer">
+              <PropertyRef Name="TRID" />
+            </Principal>
+            <Dependent Role="foodProgram">
+              <PropertyRef Name="trainer_TRID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__trainingS__payme__49C3F6B7">
+          <End Type="TrainingMasterDatabaseModel.paymentMethod" Role="paymentMethod" Multiplicity="0..1" />
+          <End Type="TrainingMasterDatabaseModel.trainingSale" Role="trainingSale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paymentMethod">
+              <PropertyRef Name="PMID" />
+            </Principal>
+            <Dependent Role="trainingSale">
+              <PropertyRef Name="paymentMethod_PMID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__product__trainer__4316F928">
+          <End Type="TrainingMasterDatabaseModel.trainer" Role="trainer" Multiplicity="0..1" />
+          <End Type="TrainingMasterDatabaseModel.product" Role="product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="trainer">
+              <PropertyRef Name="TRID" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="trainer_TRID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__trainingS__produ__70DDC3D8">
+          <End Type="TrainingMasterDatabaseModel.product" Role="product" Multiplicity="1" />
+          <End Type="TrainingMasterDatabaseModel.trainingSaleProduct" Role="trainingSaleProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="PID" />
+            </Principal>
+            <Dependent Role="trainingSaleProduct">
+              <PropertyRef Name="product_PID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__trainingP__train__6B24EA82">
+          <End Type="TrainingMasterDatabaseModel.trainer" Role="trainer" Multiplicity="0..1" />
+          <End Type="TrainingMasterDatabaseModel.trainingProgram" Role="trainingProgram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="trainer">
+              <PropertyRef Name="TRID" />
+            </Principal>
+            <Dependent Role="trainingProgram">
+              <PropertyRef Name="trainer_TRID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__trainingS__train__48CFD27E">
+          <End Type="TrainingMasterDatabaseModel.trainer" Role="trainer" Multiplicity="0..1" />
+          <End Type="TrainingMasterDatabaseModel.trainingSale" Role="trainingSale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="trainer">
+              <PropertyRef Name="TRID" />
+            </Principal>
+            <Dependent Role="trainingSale">
+              <PropertyRef Name="trainer_TRID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__trainingP__train__6A30C649">
+          <End Type="TrainingMasterDatabaseModel.training" Role="training" Multiplicity="0..1" />
+          <End Type="TrainingMasterDatabaseModel.trainingProgram" Role="trainingProgram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="training">
+              <PropertyRef Name="TID" />
+            </Principal>
+            <Dependent Role="trainingProgram">
+              <PropertyRef Name="training_TID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__trainingP__train__6EF57B66">
+          <End Type="TrainingMasterDatabaseModel.trainingProgram" Role="trainingProgram" Multiplicity="0..1" />
+          <End Type="TrainingMasterDatabaseModel.trainingProgramDate" Role="trainingProgramDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="trainingProgram">
+              <PropertyRef Name="TPID" />
+            </Principal>
+            <Dependent Role="trainingProgramDate">
+              <PropertyRef Name="trainingProgram_TPID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__trainingS__train__71D1E811">
+          <End Type="TrainingMasterDatabaseModel.trainingSale" Role="trainingSale" Multiplicity="1" />
+          <End Type="TrainingMasterDatabaseModel.trainingSaleProduct" Role="trainingSaleProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="trainingSale">
+              <PropertyRef Name="TSID" />
+            </Principal>
+            <Dependent Role="trainingSaleProduct">
+              <PropertyRef Name="trainingSale_TSID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="AspNetUserRoles">
           <End Type="TrainingMasterDatabaseModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
           <End Type="TrainingMasterDatabaseModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="TrainingMasterDatabaseModelStoreContainer" CdmEntityContainer="TMEntities">
-          <EntitySetMapping Name="customer">
-            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.customer">
-              <MappingFragment StoreEntitySet="customer">
-                <ScalarProperty Name="CID" ColumnName="CID" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="gender" ColumnName="gender" />
-                <ScalarProperty Name="kennitala" ColumnName="kennitala" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="country" ColumnName="country" />
-                <ScalarProperty Name="foodPref" ColumnName="foodPref" />
-                <ScalarProperty Name="injury" ColumnName="injury" />
-                <ScalarProperty Name="allergy" ColumnName="allergy" />
-                <ScalarProperty Name="zipcodes_ZIP" ColumnName="zipcodes_ZIP" />
-                <ScalarProperty Name="profileImagePath" ColumnName="profileImagePath" />
-                <ScalarProperty Name="height" ColumnName="height" />
-                <ScalarProperty Name="trainer_TRID" ColumnName="trainer_TRID" />
-                <ScalarProperty Name="hidden" ColumnName="hidden" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="exercise">
-            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.exercise">
-              <MappingFragment StoreEntitySet="exercise">
-                <ScalarProperty Name="EID" ColumnName="EID" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="link" ColumnName="link" />
-                <ScalarProperty Name="type" ColumnName="type" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="foodItem">
-            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.foodItem">
-              <MappingFragment StoreEntitySet="foodItem">
-                <ScalarProperty Name="FIID" ColumnName="FIID" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="kcal" ColumnName="kcal" />
-                <ScalarProperty Name="fat" ColumnName="fat" />
-                <ScalarProperty Name="saturatedFat" ColumnName="saturatedFat" />
-                <ScalarProperty Name="unsaturatedFat" ColumnName="unsaturatedFat" />
-                <ScalarProperty Name="colestrol" ColumnName="colestrol" />
-                <ScalarProperty Name="carbohydrate" ColumnName="carbohydrate" />
-                <ScalarProperty Name="addedSugar" ColumnName="addedSugar" />
-                <ScalarProperty Name="fiber" ColumnName="fiber" />
-                <ScalarProperty Name="water" ColumnName="water" />
-                <ScalarProperty Name="protein" ColumnName="protein" />
-                <ScalarProperty Name="suppliment" ColumnName="suppliment" />
-                <ScalarProperty Name="trainer_TRID" ColumnName="trainer_TRID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="foodPortion">
-            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.foodPortion">
-              <MappingFragment StoreEntitySet="foodPortion">
-                <ScalarProperty Name="FPID" ColumnName="FPID" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="weekday" ColumnName="weekday" />
-                <ScalarProperty Name="timeOfDay" ColumnName="timeOfDay" />
-                <ScalarProperty Name="foodItem_FIID" ColumnName="foodItem_FIID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="foodProgram">
-            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.foodProgram">
-              <MappingFragment StoreEntitySet="foodProgram">
-                <ScalarProperty Name="FPMID" ColumnName="FPMID" />
-                <ScalarProperty Name="foodPortion_FPID" ColumnName="foodPortion_FPID" />
-                <ScalarProperty Name="trainer_TRID" ColumnName="trainer_TRID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="foodProgramDate">
-            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.foodProgramDate">
-              <MappingFragment StoreEntitySet="foodProgramDate">
-                <ScalarProperty Name="FPDID" ColumnName="FPDID" />
-                <ScalarProperty Name="customer_CID" ColumnName="customer_CID" />
-                <ScalarProperty Name="foodProgram_FPMID" ColumnName="foodProgram_FPMID" />
-                <ScalarProperty Name="date" ColumnName="date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="goals">
-            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.goals">
-              <MappingFragment StoreEntitySet="goals">
-                <ScalarProperty Name="GID" ColumnName="GID" />
-                <ScalarProperty Name="customer_CID" ColumnName="customer_CID" />
-                <ScalarProperty Name="kg" ColumnName="kg" />
-                <ScalarProperty Name="percentage" ColumnName="percentage" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="diameter" ColumnName="diameter" />
-                <ScalarProperty Name="startDate" ColumnName="startDate" />
-                <ScalarProperty Name="dueDate" ColumnName="dueDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="measurementCM">
-            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.measurementCM">
-              <MappingFragment StoreEntitySet="measurementCM">
-                <ScalarProperty Name="MCMID" ColumnName="MCMID" />
-                <ScalarProperty Name="customer_CID" ColumnName="customer_CID" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="butt" ColumnName="butt" />
-                <ScalarProperty Name="waist" ColumnName="waist" />
-                <ScalarProperty Name="hip" ColumnName="hip" />
-                <ScalarProperty Name="thigh" ColumnName="thigh" />
-                <ScalarProperty Name="armLoose" ColumnName="armLoose" />
-                <ScalarProperty Name="armFlexed" ColumnName="armFlexed" />
-                <ScalarProperty Name="shoulders" ColumnName="shoulders" />
-                <ScalarProperty Name="performedByTrainer" ColumnName="performedByTrainer" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="measureMM">
-            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.measureMM">
-              <MappingFragment StoreEntitySet="measureMM">
-                <ScalarProperty Name="MMMID" ColumnName="MMMID" />
-                <ScalarProperty Name="customer_CID" ColumnName="customer_CID" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="chest" ColumnName="chest" />
-                <ScalarProperty Name="abdominal" ColumnName="abdominal" />
-                <ScalarProperty Name="thigh" ColumnName="thigh" />
-                <ScalarProperty Name="tricep" ColumnName="tricep" />
-                <ScalarProperty Name="subscapular" ColumnName="subscapular" />
-                <ScalarProperty Name="suprailiac" ColumnName="suprailiac" />
-                <ScalarProperty Name="axilliary" ColumnName="axilliary" />
-                <ScalarProperty Name="bmi" ColumnName="bmi" />
-                <ScalarProperty Name="lbm" ColumnName="lbm" />
-                <ScalarProperty Name="fatPercentage" ColumnName="fatPercentage" />
-                <ScalarProperty Name="kg" ColumnName="kg" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="paymentMethod">
-            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.paymentMethod">
-              <MappingFragment StoreEntitySet="paymentMethod">
-                <ScalarProperty Name="PMID" ColumnName="PMID" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="product">
-            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.product">
-              <MappingFragment StoreEntitySet="product">
-                <ScalarProperty Name="PID" ColumnName="PID" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="durationInDays" ColumnName="durationInDays" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="trainer_TRID" ColumnName="trainer_TRID" />
-                <ScalarProperty Name="hidden" ColumnName="hidden" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="progressImage">
-            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.progressImage">
-              <MappingFragment StoreEntitySet="progressImage">
-                <ScalarProperty Name="PIID" ColumnName="PIID" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="customer_CID" ColumnName="customer_CID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="trainer">
-            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.trainer">
-              <MappingFragment StoreEntitySet="trainer">
-                <ScalarProperty Name="TRID" ColumnName="TRID" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="kennitala" ColumnName="kennitala" />
-                <ScalarProperty Name="gender" ColumnName="gender" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="location" ColumnName="location" />
-                <ScalarProperty Name="hidden" ColumnName="hidden" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="training">
-            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.training">
-              <MappingFragment StoreEntitySet="training">
-                <ScalarProperty Name="TID" ColumnName="TID" />
-                <ScalarProperty Name="numberOfSets" ColumnName="numberOfSets" />
-                <ScalarProperty Name="numberOfReps" ColumnName="numberOfReps" />
-                <ScalarProperty Name="exercise_EID" ColumnName="exercise_EID" />
-                <ScalarProperty Name="durationMin" ColumnName="durationMin" />
-                <ScalarProperty Name="restBetweenMin" ColumnName="restBetweenMin" />
-                <ScalarProperty Name="weekday" ColumnName="weekday" />
-                <ScalarProperty Name="timeOfday" ColumnName="timeOfday" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="trainingProgram">
-            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.trainingProgram">
-              <MappingFragment StoreEntitySet="trainingProgram">
-                <ScalarProperty Name="TPID" ColumnName="TPID" />
-                <ScalarProperty Name="training_TID" ColumnName="training_TID" />
-                <ScalarProperty Name="trainer_TRID" ColumnName="trainer_TRID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="trainingProgramDate">
-            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.trainingProgramDate">
-              <MappingFragment StoreEntitySet="trainingProgramDate">
-                <ScalarProperty Name="TDID" ColumnName="TDID" />
-                <ScalarProperty Name="customer_CID" ColumnName="customer_CID" />
-                <ScalarProperty Name="trainingProgram_TPID" ColumnName="trainingProgram_TPID" />
-                <ScalarProperty Name="date" ColumnName="date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="trainingSale">
-            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.trainingSale">
-              <MappingFragment StoreEntitySet="trainingSale">
-                <ScalarProperty Name="TSID" ColumnName="TSID" />
-                <ScalarProperty Name="customer_CID" ColumnName="customer_CID" />
-                <ScalarProperty Name="trainer_TRID" ColumnName="trainer_TRID" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="paymentMethod_PMID" ColumnName="paymentMethod_PMID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="trainingSaleProduct">
-            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.trainingSaleProduct">
-              <MappingFragment StoreEntitySet="trainingSaleProduct">
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="duration" ColumnName="duration" />
-                <ScalarProperty Name="trainingSale_TSID" ColumnName="trainingSale_TSID" />
-                <ScalarProperty Name="product_PID" ColumnName="product_PID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="zipcodes">
-            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.zipcodes">
-              <MappingFragment StoreEntitySet="zipcodes">
-                <ScalarProperty Name="ZIP" ColumnName="ZIP" />
-                <ScalarProperty Name="place" ColumnName="place" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="C__MigrationHistory">
             <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.C__MigrationHistory">
               <MappingFragment StoreEntitySet="__MigrationHistory">
@@ -1812,6 +1646,8 @@
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.AspNetUsers">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="trainer_TRID" ColumnName="trainer_TRID" />
+                <ScalarProperty Name="customer_CID" ColumnName="customer_CID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
                 <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
@@ -1825,6 +1661,247 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customer">
+            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.customer">
+              <MappingFragment StoreEntitySet="customer">
+                <ScalarProperty Name="hidden" ColumnName="hidden" />
+                <ScalarProperty Name="trainer_TRID" ColumnName="trainer_TRID" />
+                <ScalarProperty Name="height" ColumnName="height" />
+                <ScalarProperty Name="profileImagePath" ColumnName="profileImagePath" />
+                <ScalarProperty Name="zipcodes_ZIP" ColumnName="zipcodes_ZIP" />
+                <ScalarProperty Name="allergy" ColumnName="allergy" />
+                <ScalarProperty Name="injury" ColumnName="injury" />
+                <ScalarProperty Name="foodPref" ColumnName="foodPref" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="kennitala" ColumnName="kennitala" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CID" ColumnName="CID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="exercise">
+            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.exercise">
+              <MappingFragment StoreEntitySet="exercise">
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="link" ColumnName="link" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="EID" ColumnName="EID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="foodItem">
+            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.foodItem">
+              <MappingFragment StoreEntitySet="foodItem">
+                <ScalarProperty Name="trainer_TRID" ColumnName="trainer_TRID" />
+                <ScalarProperty Name="suppliment" ColumnName="suppliment" />
+                <ScalarProperty Name="protein" ColumnName="protein" />
+                <ScalarProperty Name="water" ColumnName="water" />
+                <ScalarProperty Name="fiber" ColumnName="fiber" />
+                <ScalarProperty Name="addedSugar" ColumnName="addedSugar" />
+                <ScalarProperty Name="carbohydrate" ColumnName="carbohydrate" />
+                <ScalarProperty Name="colestrol" ColumnName="colestrol" />
+                <ScalarProperty Name="unsaturatedFat" ColumnName="unsaturatedFat" />
+                <ScalarProperty Name="saturatedFat" ColumnName="saturatedFat" />
+                <ScalarProperty Name="fat" ColumnName="fat" />
+                <ScalarProperty Name="kcal" ColumnName="kcal" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="FIID" ColumnName="FIID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="foodPortion">
+            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.foodPortion">
+              <MappingFragment StoreEntitySet="foodPortion">
+                <ScalarProperty Name="foodItem_FIID" ColumnName="foodItem_FIID" />
+                <ScalarProperty Name="timeOfDay" ColumnName="timeOfDay" />
+                <ScalarProperty Name="weekday" ColumnName="weekday" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="FPID" ColumnName="FPID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="foodProgram">
+            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.foodProgram">
+              <MappingFragment StoreEntitySet="foodProgram">
+                <ScalarProperty Name="trainer_TRID" ColumnName="trainer_TRID" />
+                <ScalarProperty Name="foodPortion_FPID" ColumnName="foodPortion_FPID" />
+                <ScalarProperty Name="FPMID" ColumnName="FPMID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="foodProgramDate">
+            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.foodProgramDate">
+              <MappingFragment StoreEntitySet="foodProgramDate">
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="foodProgram_FPMID" ColumnName="foodProgram_FPMID" />
+                <ScalarProperty Name="customer_CID" ColumnName="customer_CID" />
+                <ScalarProperty Name="FPDID" ColumnName="FPDID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="goals">
+            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.goals">
+              <MappingFragment StoreEntitySet="goals">
+                <ScalarProperty Name="dueDate" ColumnName="dueDate" />
+                <ScalarProperty Name="startDate" ColumnName="startDate" />
+                <ScalarProperty Name="diameter" ColumnName="diameter" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="percentage" ColumnName="percentage" />
+                <ScalarProperty Name="kg" ColumnName="kg" />
+                <ScalarProperty Name="customer_CID" ColumnName="customer_CID" />
+                <ScalarProperty Name="GID" ColumnName="GID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="measurementCM">
+            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.measurementCM">
+              <MappingFragment StoreEntitySet="measurementCM">
+                <ScalarProperty Name="performedByTrainer" ColumnName="performedByTrainer" />
+                <ScalarProperty Name="shoulders" ColumnName="shoulders" />
+                <ScalarProperty Name="armFlexed" ColumnName="armFlexed" />
+                <ScalarProperty Name="armLoose" ColumnName="armLoose" />
+                <ScalarProperty Name="thigh" ColumnName="thigh" />
+                <ScalarProperty Name="hip" ColumnName="hip" />
+                <ScalarProperty Name="waist" ColumnName="waist" />
+                <ScalarProperty Name="butt" ColumnName="butt" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="customer_CID" ColumnName="customer_CID" />
+                <ScalarProperty Name="MCMID" ColumnName="MCMID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="measureMM">
+            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.measureMM">
+              <MappingFragment StoreEntitySet="measureMM">
+                <ScalarProperty Name="kg" ColumnName="kg" />
+                <ScalarProperty Name="fatPercentage" ColumnName="fatPercentage" />
+                <ScalarProperty Name="lbm" ColumnName="lbm" />
+                <ScalarProperty Name="bmi" ColumnName="bmi" />
+                <ScalarProperty Name="axilliary" ColumnName="axilliary" />
+                <ScalarProperty Name="suprailiac" ColumnName="suprailiac" />
+                <ScalarProperty Name="subscapular" ColumnName="subscapular" />
+                <ScalarProperty Name="tricep" ColumnName="tricep" />
+                <ScalarProperty Name="thigh" ColumnName="thigh" />
+                <ScalarProperty Name="abdominal" ColumnName="abdominal" />
+                <ScalarProperty Name="chest" ColumnName="chest" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="customer_CID" ColumnName="customer_CID" />
+                <ScalarProperty Name="MMMID" ColumnName="MMMID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="paymentMethod">
+            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.paymentMethod">
+              <MappingFragment StoreEntitySet="paymentMethod">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="PMID" ColumnName="PMID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="product">
+            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.product">
+              <MappingFragment StoreEntitySet="product">
+                <ScalarProperty Name="hidden" ColumnName="hidden" />
+                <ScalarProperty Name="trainer_TRID" ColumnName="trainer_TRID" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="durationInDays" ColumnName="durationInDays" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="PID" ColumnName="PID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="progressImage">
+            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.progressImage">
+              <MappingFragment StoreEntitySet="progressImage">
+                <ScalarProperty Name="customer_CID" ColumnName="customer_CID" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="PIID" ColumnName="PIID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="trainer">
+            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.trainer">
+              <MappingFragment StoreEntitySet="trainer">
+                <ScalarProperty Name="hidden" ColumnName="hidden" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="kennitala" ColumnName="kennitala" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="TRID" ColumnName="TRID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="training">
+            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.training">
+              <MappingFragment StoreEntitySet="training">
+                <ScalarProperty Name="timeOfday" ColumnName="timeOfday" />
+                <ScalarProperty Name="weekday" ColumnName="weekday" />
+                <ScalarProperty Name="restBetweenMin" ColumnName="restBetweenMin" />
+                <ScalarProperty Name="durationMin" ColumnName="durationMin" />
+                <ScalarProperty Name="exercise_EID" ColumnName="exercise_EID" />
+                <ScalarProperty Name="numberOfReps" ColumnName="numberOfReps" />
+                <ScalarProperty Name="numberOfSets" ColumnName="numberOfSets" />
+                <ScalarProperty Name="TID" ColumnName="TID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="trainingProgram">
+            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.trainingProgram">
+              <MappingFragment StoreEntitySet="trainingProgram">
+                <ScalarProperty Name="trainer_TRID" ColumnName="trainer_TRID" />
+                <ScalarProperty Name="training_TID" ColumnName="training_TID" />
+                <ScalarProperty Name="TPID" ColumnName="TPID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="trainingProgramDate">
+            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.trainingProgramDate">
+              <MappingFragment StoreEntitySet="trainingProgramDate">
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="trainingProgram_TPID" ColumnName="trainingProgram_TPID" />
+                <ScalarProperty Name="customer_CID" ColumnName="customer_CID" />
+                <ScalarProperty Name="TDID" ColumnName="TDID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="trainingSale">
+            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.trainingSale">
+              <MappingFragment StoreEntitySet="trainingSale">
+                <ScalarProperty Name="paymentMethod_PMID" ColumnName="paymentMethod_PMID" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="trainer_TRID" ColumnName="trainer_TRID" />
+                <ScalarProperty Name="customer_CID" ColumnName="customer_CID" />
+                <ScalarProperty Name="TSID" ColumnName="TSID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="trainingSaleProduct">
+            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.trainingSaleProduct">
+              <MappingFragment StoreEntitySet="trainingSaleProduct">
+                <ScalarProperty Name="product_PID" ColumnName="product_PID" />
+                <ScalarProperty Name="trainingSale_TSID" ColumnName="trainingSale_TSID" />
+                <ScalarProperty Name="duration" ColumnName="duration" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="zipcodes">
+            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.zipcodes">
+              <MappingFragment StoreEntitySet="zipcodes">
+                <ScalarProperty Name="place" ColumnName="place" />
+                <ScalarProperty Name="ZIP" ColumnName="ZIP" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

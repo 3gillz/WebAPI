@@ -8,6 +8,7 @@ namespace TrainingMasterWebAPI.Models.DTO
     public class CustomerDTO
     {
         public int CID { get; set; }
+        public string ID { get; set; }
         public string name { get; set; }
         public string email { get; set; }
         public string phone { get; set; }
@@ -18,10 +19,10 @@ namespace TrainingMasterWebAPI.Models.DTO
         public string foodPref { get; set; }
         public string injury { get; set; }
         public string allergy { get; set; }
-        public int zipcodes_ZIP { get; set; }
+        public int? zipcodes_ZIP { get; set; }
         public string profileImagePath { get; set; }
         public int height { get; set; }
-        public int trainer_TRID { get; set; }
-        public bool hidden { get; set; }
+        public int? trainer_TRID { get; set; }
+        public bool? hidden { get; set; }
     }
 }

@@ -17,6 +17,7 @@ namespace TrainingMasterWebAPI.Models.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public trainer()
         {
+            this.AspNetUsers = new HashSet<AspNetUsers>();
             this.customer = new HashSet<customer>();
             this.foodItem = new HashSet<foodItem>();
             this.foodProgram = new HashSet<foodProgram>();
@@ -35,6 +36,8 @@ namespace TrainingMasterWebAPI.Models.EF
         public string location { get; set; }
         public Nullable<bool> hidden { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<customer> customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
