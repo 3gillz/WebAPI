@@ -36,21 +36,21 @@ namespace TrainingMasterWebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("GetAllCustomers")]
+        [Route("GetAll")]
         public IEnumerable<CustomerDTO> GetAllCustomers()
         {
             return cq.GetAllCustomers();
         }
 
         [HttpPost]
-        [Route("AddCustomer")]
+        [Route("Add")]
         public bool AddCustomer(CustomerDTO customer)
         {
             return cq.AddCustomer(customer);
         }
 
         [HttpPut]
-        [Route("UpdateCustomer")]
+        [Route("Update")]
         public bool UpdateCustomer(CustomerDTO customer)
         {
             return cq.UpdateCustomer(customer);
