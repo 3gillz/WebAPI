@@ -5,6 +5,7 @@ using System.Web;
 using System.Data.Entity;
 using TrainingMasterWebAPI.Models.DTO;
 using TrainingMasterWebAPI.Models.EF;
+using TrainingMasterWebAPI.Models;
 
 namespace TrainingMasterWebAPI.Queries
 {
@@ -73,8 +74,9 @@ namespace TrainingMasterWebAPI.Queries
             try
             {
                 var c = (from x in db.customer
-                            where customer.CID == x.CID
-                            select x).SingleOrDefault();
+                         where customer.CID == x.CID
+                         select x).SingleOrDefault();
+
                 c.name = customer.name;
                 c.email = customer.email;
                 c.phone = customer.phone;
@@ -90,6 +92,41 @@ namespace TrainingMasterWebAPI.Queries
                 c.height = customer.height;
                 c.trainer_TRID = customer.trainer_TRID;
                 c.hidden = customer.hidden;
+
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool AddCustomer(CustomerDTO Customer)
+        {
+            try
+            {
+                var c = new customer
+                {
+                    CID = Customer.CID,
+                    ID = Customer.ID,
+                    name = Customer.name,
+                    email = Customer.email,
+                    phone = Customer.phone,
+                    gender = Customer.gender,
+                    kennitala = Customer.kennitala,
+                    address = Customer.address,
+                    foodPref = Customer.foodPref,
+                    injury = Customer.injury,
+                    allergy = Customer.allergy,
+                    zipcodes_ZIP = Customer.zipcodes_ZIP,
+                    profileImagePath = Customer.profileImagePath,
+                    height = Customer.height,
+                    trainer_TRID = Customer.trainer_TRID,
+                    hidden = Customer.hidden
+                };
+
+                db.customer.Add(c);
                 db.SaveChanges();
                 return true;
             }

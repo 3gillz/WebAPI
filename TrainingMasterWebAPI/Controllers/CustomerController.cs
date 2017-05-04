@@ -42,6 +42,13 @@ namespace TrainingMasterWebAPI.Controllers
             return cq.GetAllCustomers();
         }
 
+        [HttpPost]
+        [Route("AddCustomer")]
+        public bool AddCustomer(CustomerDTO customer)
+        {
+            return cq.AddCustomer(customer);
+        }
+
         [HttpPut]
         [Route("UpdateCustomer")]
         public bool UpdateCustomer(CustomerDTO customer)
