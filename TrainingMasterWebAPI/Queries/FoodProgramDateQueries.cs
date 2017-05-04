@@ -15,7 +15,7 @@ namespace TrainingMasterWebAPI.Queries
             db = new TMEntities();
         }
 
-        public IEnumerable<FoodProgramDateDTO> GetAll()
+        public IEnumerable<FoodProgramDateDTO> GetAllFoodProgramDate()
         {
             var foodDate = (from x in db.foodProgramDate
                      select new FoodProgramDateDTO
@@ -27,5 +27,64 @@ namespace TrainingMasterWebAPI.Queries
                      });
             return foodDate;
         }
+
+        public FoodProgramDateDTO GetFoodProgramDateById(int id)
+        {
+            var foodDate = (from x in db.foodProgramDate
+                            where x.FPDID == id
+                            select new FoodProgramDateDTO
+                            {
+                                FPDID = x.FPDID,
+                                customer_CID = x.customer_CID,
+                                foodProgram_FPMID = x.foodProgram_FPMID,
+                                date = x.date
+                            }).SingleOrDefault();
+            return foodDate;
+        }
+
+        public bool AddFoodProgramDate(FoodProgramDateDTO FoodProgramDate)
+        {
+            try
+            {
+                var f = new foodProgramDate
+                {
+                    FPDID = FoodProgramDate.FPDID,
+                    customer_CID = FoodProgramDate.customer_CID,
+                    foodProgram_FPMID = FoodProgramDate.foodProgram_FPMID,
+                    date = FoodProgramDate.date
+                };
+                db.foodProgramDate.Add(f);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool UpdateFoodProgramDate(FoodProgramDateDTO FoodProgramDate)
+        {
+            try
+            {
+                var foodDate = (from x in db.foodProgramDate
+                                where x.FPDID == FoodProgramDate.FPDID
+                                select x).SingleOrDefault();
+
+                foodDate.FPDID = FoodProgramDate.FPDID;
+                foodDate.customer_CID = FoodProgramDate.customer_CID;
+                foodDate.foodProgram_FPMID = FoodProgramDate.foodProgram_FPMID;
+                foodDate.date = FoodProgramDate.date;
+
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+
     }
 }

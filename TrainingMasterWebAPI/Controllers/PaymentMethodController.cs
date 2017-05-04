@@ -4,10 +4,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using TrainingMasterWebAPI.Models.DTO;
 using TrainingMasterWebAPI.Queries;
 
 namespace TrainingMasterWebAPI.Controllers
 {
+    [Authorize]
+    [RoutePrefix("api/PaymentMethod")]
     public class PaymentMethodController : ApiController
     {
         readonly private PaymentMethodQueries pmq;
@@ -15,32 +18,34 @@ namespace TrainingMasterWebAPI.Controllers
         {
             pmq = new PaymentMethodQueries();
         }
-
-        // GET api/<controller>
-        public IEnumerable<string> Get()
+        [HttpGet]
+        [Route("GetAll")]
+        public IEnumerable<PaymentMethodDTO> GetAllPaymentMethods()
         {
-            return new string[] { "value1", "value2" };
+            return pmq.GetAllPaymentMethods();
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
+        [HttpGet]
+        [Route("GetById")]
+        public PaymentMethodDTO GetPaymentMethodById(int id)
         {
-            return "value";
+            return pmq.GetPaymentMethodById(id);
         }
 
-        // POST api/<controller>
-        public void Post([FromBody]string value)
+        [HttpPut]
+        [Route("Add")]
+        public bool AddPaymentMethod(PaymentMethodDTO PaymentMethod)
         {
+            return pmq.AddPaymentMethod(PaymentMethod);
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        [HttpPost]
+        [Route("Update")]
+        public bool UpdatePaymentMethod(PaymentMethodDTO PaymentMethod)
         {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
+            return pmq.UpdatePaymentMethod(PaymentMethod);
         }
     }
+
+
 }

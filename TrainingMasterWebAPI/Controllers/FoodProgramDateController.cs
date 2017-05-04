@@ -21,9 +21,30 @@ namespace TrainingMasterWebAPI.Controllers
 
         [HttpGet]
         [Route("GetAll")]
-        public IEnumerable<FoodProgramDateDTO> GetAll()
+        public IEnumerable<FoodProgramDateDTO> GetAllFoodProgramDate()
         {
-            return fpdq.GetAll();
+            return fpdq.GetAllFoodProgramDate();
+        }
+
+        [HttpGet]
+        [Route("GetById")]
+        public FoodProgramDateDTO GetFoodProgramDateById(int id)
+        {
+            return fpdq.GetFoodProgramDateById(id);
+        }
+
+        [HttpPut]
+        [Route("Add")]
+        public bool AddFoodProgramDate(FoodProgramDateDTO FoodProgramDate)
+        {
+            return fpdq.AddFoodProgramDate(FoodProgramDate);
+        }
+
+        [HttpPost]
+        [Route("Update")]
+        public bool UpdateFoodProgramDate(FoodProgramDateDTO FoodProgramDate)
+        {
+            return fpdq.UpdateFoodProgramDate(FoodProgramDate);
         }
     }
 }
