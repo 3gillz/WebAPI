@@ -49,23 +49,23 @@ namespace TrainingMasterWebAPI.Queries
             var customers = (from x in db.customer
                              select new CustomerDTO
                              {
-                                CID = x.CID,
-                                name = x.name,
-                                email = x.email,
-                                phone = x.phone,
-                                gender = x.gender,
-                                kennitala = x.kennitala,
-                                address = x.address,
-                                country = x.country,
-                                foodPref = x.foodPref,
-                                injury = x.injury,
-                                allergy = x.allergy,
-                                zipcodes_ZIP = x.zipcodes_ZIP,
-                                profileImagePath = x.profileImagePath,
-                                height = x.height,
-                                trainer_TRID = x.trainer_TRID,
-                                hidden = x.hidden
-                            });
+                                 CID = x.CID,
+                                 name = x.name,
+                                 email = x.email,
+                                 phone = x.phone,
+                                 gender = x.gender,
+                                 kennitala = x.kennitala,
+                                 address = x.address,
+                                 country = x.country,
+                                 foodPref = x.foodPref,
+                                 injury = x.injury,
+                                 allergy = x.allergy,
+                                 zipcodes_ZIP = x.zipcodes_ZIP,
+                                 profileImagePath = x.profileImagePath,
+                                 height = x.height,
+                                 trainer_TRID = x.trainer_TRID,
+                                 hidden = x.hidden
+                             });
             return customers;
         }
 
