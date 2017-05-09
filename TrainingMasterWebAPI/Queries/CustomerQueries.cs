@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
+using System.Data.Entity;
 using TrainingMasterWebAPI.Models.DTO;
 using TrainingMasterWebAPI.Models.EF;
+using TrainingMasterWebAPI.Models;
 
 namespace TrainingMasterWebAPI.Queries
 {
     public class CustomerQueries
     {
         private TMEntities db;
-
         public CustomerQueries()
         {
             db = new TMEntities();
@@ -17,6 +19,7 @@ namespace TrainingMasterWebAPI.Queries
 
         public CustomerDTO GetCustomerById(string id)
         {
+
             var customer = (from x in db.customer
                             where x.ID == id
                             select new CustomerDTO

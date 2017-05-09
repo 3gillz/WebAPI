@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
-using TrainingMasterWebAPI.Models.DTO;
 using TrainingMasterWebAPI.Queries;
+using TrainingMasterWebAPI.Models.DTO;
+using Microsoft.AspNet.Identity;
 
 namespace TrainingMasterWebAPI.Controllers
 {
@@ -11,7 +15,6 @@ namespace TrainingMasterWebAPI.Controllers
     public class CustomerController : ApiController
     {
         readonly private CustomerQueries cq;
-
         public CustomerController()
         {
             cq = new CustomerQueries();
@@ -52,5 +55,6 @@ namespace TrainingMasterWebAPI.Controllers
         {
             return cq.UpdateCustomer(customer);
         }
+
     }
 }
