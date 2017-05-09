@@ -19,8 +19,8 @@ namespace TrainingMasterWebAPI.Models.DTO
         public decimal fiber { get; set; }
         public decimal water { get; set; }
         public decimal protein { get; set; }
-        public bool suppliment { get; set; }
-        public int trainer_TRID { get; set; }
+        public bool? suppliment { get; set; }
+        public int? trainer_TRID { get; set; }
 
 
     }
