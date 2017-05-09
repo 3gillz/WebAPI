@@ -17,6 +17,9 @@ namespace TrainingMasterWebAPI.Providers
     {
         private readonly string _publicClientId;
 
+        //Added
+        private string userPathFromRole;
+        //---
         public ApplicationOAuthProvider(string publicClientId)
         {
             if (publicClientId == null)
@@ -43,6 +46,10 @@ namespace TrainingMasterWebAPI.Providers
                OAuthDefaults.AuthenticationType);
             ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
                 CookieAuthenticationDefaults.AuthenticationType);
+            //addded
+            List<Claim> roles = oAuthIdentity.Claims.Where(c => c.Type == ClaimTypes.Role).ToList();
+            userPathFromRole = Newtonsoft.Json.JsonConvert.SerializeObject(roles.Select(x => x.Value));
+            //---
 
             AuthenticationProperties properties = CreateProperties(user.UserName);
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
@@ -56,7 +63,9 @@ namespace TrainingMasterWebAPI.Providers
             {
                 context.AdditionalResponseParameters.Add(property.Key, property.Value);
             }
-
+            //addedd
+            context.AdditionalResponseParameters.Add("path", userPathFromRole.Trim(new Char[] { '"', '[', ']' }));
+            //--
             return Task.FromResult<object>(null);
         }
 

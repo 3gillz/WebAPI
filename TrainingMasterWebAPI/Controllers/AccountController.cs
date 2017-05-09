@@ -51,6 +51,17 @@ namespace TrainingMasterWebAPI.Controllers
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
+        // Added ----------------------------
+        // GET api/Account/ValidateToken
+        [Authorize]
+        [Route("ValidateToken")]
+        [HttpGet]
+        public bool ValidateToken()
+        {
+            return true;
+        }
+        // ------------------------
+
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UserInfo")]
