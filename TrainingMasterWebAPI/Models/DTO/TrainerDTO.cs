@@ -15,6 +15,6 @@ namespace TrainingMasterWebAPI.Models.DTO
         public short gender { get; set; }
         public string address { get; set; }
         public string location { get; set; }
-        public bool hidden { get; set; }
+        public bool? hidden { get; set; }
     }
 }

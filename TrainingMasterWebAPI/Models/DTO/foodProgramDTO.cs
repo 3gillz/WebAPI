@@ -5,10 +5,10 @@ using System.Web;
 
 namespace TrainingMasterWebAPI.Models.DTO
 {
-    public class foodProgramDTO
+    public class FoodProgramDTO
     {
         public int FPMID { get; set; }
-        public int foodPortion_FPID { get; set; }
-        public int trainer_TRID { get; set; }
+        public int? foodPortion_FPID { get; set; }
+        public int? trainer_TRID { get; set; }
     }
 }

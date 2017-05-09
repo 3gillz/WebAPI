@@ -4,10 +4,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using TrainingMasterWebAPI.Models.DTO;
 using TrainingMasterWebAPI.Queries;
 
 namespace TrainingMasterWebAPI.Controllers
 {
+    [Authorize]
+    [RoutePrefix("api/Trainer")]
     public class TrainerController : ApiController
     {
         readonly private TrainerQueries tq;
@@ -15,5 +18,35 @@ namespace TrainingMasterWebAPI.Controllers
         {
             tq = new TrainerQueries();
         }
+
+        [HttpGet]
+        [Route("GetAll")]
+        public IEnumerable<TrainerDTO> GetAllTrainers()
+        {
+            return tq.GetAllTrainers();
+        }
+
+        [HttpGet]
+        [Route("GetById")]
+        public TrainerDTO GetTrainerById(int id)
+        {
+            return tq.GetTrainerById(id);
+        }
+
+        [HttpPut]
+        [Route("Add")]
+        public bool AddTrainer(TrainerDTO Trainer)
+        {
+            return tq.AddTrainer(Trainer);
+        }
+
+        [HttpPost]
+        [Route("Update")]
+        public bool UpdateTrainer(TrainerDTO Trainer)
+        {
+            return tq.UpdateTrainer(Trainer);
+        }
     }
+
+
 }
