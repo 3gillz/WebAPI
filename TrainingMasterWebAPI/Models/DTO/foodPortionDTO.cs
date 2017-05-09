@@ -11,6 +11,6 @@ namespace TrainingMasterWebAPI.Models.DTO
         public int quantity { get; set; }
         public short weekday { get; set; }
         public DateTime timeOfDay { get; set; }
-        public int foodItem_FIID { get; set; }
+        public int? foodItem_FIID { get; set; } //TODO: Þarf að laga í DB og ekki leyfa null
     }
 }
