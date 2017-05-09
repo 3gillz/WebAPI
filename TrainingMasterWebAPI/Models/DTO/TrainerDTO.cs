@@ -8,6 +8,7 @@ namespace TrainingMasterWebAPI.Models.DTO
     public class TrainerDTO
     {
         public int TRID { get; set; }
+        public string ID { get; set; }
         public string name { get; set; }
         public string email { get; set; }
         public string phone { get; set; }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNet.Identity;
+using System.Collections.Generic;
 using System.Web.Http;
 using TrainingMasterWebAPI.Models.DTO;
 using TrainingMasterWebAPI.Queries;
@@ -22,6 +23,15 @@ namespace TrainingMasterWebAPI.Controllers
         {
             return piq.GetProgressImageById(id);
         }
+
+        [HttpGet]
+        [Route("GetAllByCID")]
+        public IEnumerable<ProgressImageDTO> GetProgressImagesByCID()
+        {
+            var UserId = User.Identity.GetUserId();
+            return piq.GetAllProgressImagesByCID(UserId);
+        }
+
 
         [HttpGet]
         [Route("GetAll")]

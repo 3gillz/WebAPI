@@ -19,6 +19,7 @@ namespace TrainingMasterWebAPI.Models.EF
         {
             this.AspNetUsers = new HashSet<AspNetUsers>();
             this.customer = new HashSet<customer>();
+            this.exercise = new HashSet<exercise>();
             this.foodItem = new HashSet<foodItem>();
             this.foodProgram = new HashSet<foodProgram>();
             this.product = new HashSet<product>();
@@ -27,6 +28,7 @@ namespace TrainingMasterWebAPI.Models.EF
         }
     
         public int TRID { get; set; }
+        public string ID { get; set; }
         public string name { get; set; }
         public string email { get; set; }
         public string phone { get; set; }
@@ -40,6 +42,8 @@ namespace TrainingMasterWebAPI.Models.EF
         public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<customer> customer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<exercise> exercise { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<foodItem> foodItem { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

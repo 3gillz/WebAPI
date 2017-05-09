@@ -40,6 +40,23 @@ namespace TrainingMasterWebAPI.Queries
             return img;
         }
 
+        public IEnumerable<ProgressImageDTO> GetAllProgressImagesByCID(string userId)
+        {
+            var customer = (from x in db.customer
+                            where x.ID == userId
+                            select x).FirstOrDefault();
+
+            var img = (from x in db.progressImage
+                       where x.customer_CID == customer.CID
+                       select new ProgressImageDTO
+                       {
+                           PIID = x.PIID,
+                           date = x.date,
+                           customer_CID = x.customer_CID
+                       });
+            return img;
+        }
+
         public bool AddProgressImage(ProgressImageDTO x)
         {
             try
