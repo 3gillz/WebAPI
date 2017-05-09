@@ -1,12 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using TrainingMasterWebAPI.Queries;
 using TrainingMasterWebAPI.Models.DTO;
-using Microsoft.AspNet.Identity;
+using TrainingMasterWebAPI.Queries;
 
 namespace TrainingMasterWebAPI.Controllers
 {
@@ -15,6 +11,7 @@ namespace TrainingMasterWebAPI.Controllers
     public class CustomerController : ApiController
     {
         readonly private CustomerQueries cq;
+
         public CustomerController()
         {
             cq = new CustomerQueries();
@@ -36,25 +33,24 @@ namespace TrainingMasterWebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("GetAll")]
+        [Route("GetAllCustomers")]
         public IEnumerable<CustomerDTO> GetAllCustomers()
         {
             return cq.GetAllCustomers();
         }
 
         [HttpPost]
-        [Route("Add")]
+        [Route("AddCustomer")]
         public bool AddCustomer(CustomerDTO customer)
         {
             return cq.AddCustomer(customer);
         }
 
         [HttpPut]
-        [Route("Update")]
+        [Route("UpdateCustomer")]
         public bool UpdateCustomer(CustomerDTO customer)
         {
             return cq.UpdateCustomer(customer);
         }
-
     }
 }
