@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -20,9 +21,22 @@ namespace TrainingMasterWebAPI.Controllers
         }
         [HttpGet]
         [Route("GetAll")]
-        public IEnumerable<trainingProgramDateDTO> GetAll()
+        public IEnumerable<TrainingProgramDateDTO> GetAll()
         {
             return tpdq.GetAll();
+        }
+        [HttpGet]
+        [Route("GetById")]
+        public TrainingProgramDateDTO GetById(int id)
+        {
+            return tpdq.GetSingleById(id);
+        }
+        [HttpGet]
+        [Route("GetByTRID")]
+        public TrainingProgramDateDTO GetByTRID(int id)
+        {
+            var UserId = User.Identity.GetUserId();
+            return tpdq.GetSingleByTRID(UserId);
         }
     }
 }

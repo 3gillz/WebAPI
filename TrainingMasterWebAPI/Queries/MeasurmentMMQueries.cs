@@ -19,8 +19,7 @@ namespace TrainingMasterWebAPI.Queries
         {
             var m = (from x in db.measureMM
                      select new MeasurmentMMDTO
-                     {
-                        
+                     {        
                          MMMID = x.MMMID,
                          customer_CID = x. customer_CID,
                          date = x.date,

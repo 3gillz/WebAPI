@@ -36,6 +36,7 @@ namespace TrainingMasterWebAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "superadmin")]
         [Route("GetAllCustomers")]
         public IEnumerable<CustomerDTO> GetAllCustomers()
         {

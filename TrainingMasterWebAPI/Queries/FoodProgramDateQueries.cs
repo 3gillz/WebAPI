@@ -109,9 +109,7 @@ namespace TrainingMasterWebAPI.Queries
                             where x.ID == UserId
                             select x).FirstOrDefault();
 
-            var datenow = DateTime.Now;
-
-            var fpd = (from x in db.foodProgramDate.OrderBy(x => x.date) //Spurning hvort þetta þurfi? Cool ef það virkar
+            var fpd = (from x in db.foodProgramDate.OrderBy(x => x.date)
                        where x.customer_CID == customer.CID
                        select new FoodProgramDateDTO
                        {

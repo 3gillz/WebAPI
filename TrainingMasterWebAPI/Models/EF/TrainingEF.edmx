@@ -266,6 +266,7 @@
           <Property Name="customer_CID" Type="int" />
           <Property Name="trainingProgram_TPID" Type="int" />
           <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="trainer_TRID" Type="int" />
         </EntityType>
         <EntityType Name="trainingSale">
           <Key>
@@ -522,6 +523,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__trainingP__train__19DFD96B">
+          <End Role="trainer" Type="Self.trainer" Multiplicity="0..1" />
+          <End Role="trainingProgramDate" Type="Self.trainingProgramDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="trainer">
+              <PropertyRef Name="TRID" />
+            </Principal>
+            <Dependent Role="trainingProgramDate">
+              <PropertyRef Name="trainer_TRID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__trainingP__train__6A30C649">
           <End Role="training" Type="Self.training" Multiplicity="0..1" />
           <End Role="trainingProgram" Type="Self.trainingProgram" Multiplicity="*" />
@@ -764,6 +777,10 @@
             <End Role="trainer" EntitySet="trainer" />
             <End Role="trainingProgram" EntitySet="trainingProgram" />
           </AssociationSet>
+          <AssociationSet Name="FK__trainingP__train__19DFD96B" Association="Self.FK__trainingP__train__19DFD96B">
+            <End Role="trainer" EntitySet="trainer" />
+            <End Role="trainingProgramDate" EntitySet="trainingProgramDate" />
+          </AssociationSet>
           <AssociationSet Name="FK__trainingP__train__6A30C649" Association="Self.FK__trainingP__train__6A30C649">
             <End Role="training" EntitySet="training" />
             <End Role="trainingProgram" EntitySet="trainingProgram" />
@@ -933,6 +950,10 @@
           <AssociationSet Name="FK__trainingP__train__17F790F9" Association="TrainingMasterDatabaseModel.FK__trainingP__train__17F790F9">
             <End Role="trainer" EntitySet="trainer" />
             <End Role="trainingProgram" EntitySet="trainingProgram" />
+          </AssociationSet>
+          <AssociationSet Name="FK__trainingP__train__19DFD96B" Association="TrainingMasterDatabaseModel.FK__trainingP__train__19DFD96B">
+            <End Role="trainer" EntitySet="trainer" />
+            <End Role="trainingProgramDate" EntitySet="trainingProgramDate" />
           </AssociationSet>
           <AssociationSet Name="FK__trainingS__train__14270015" Association="TrainingMasterDatabaseModel.FK__trainingS__train__14270015">
             <End Role="trainer" EntitySet="trainer" />
@@ -1221,6 +1242,7 @@
           <NavigationProperty Name="foodProgram" Relationship="TrainingMasterDatabaseModel.FK__foodProgr__train__160F4887" FromRole="trainer" ToRole="foodProgram" />
           <NavigationProperty Name="product" Relationship="TrainingMasterDatabaseModel.FK__product__trainer__1332DBDC" FromRole="trainer" ToRole="product" />
           <NavigationProperty Name="trainingProgram" Relationship="TrainingMasterDatabaseModel.FK__trainingP__train__17F790F9" FromRole="trainer" ToRole="trainingProgram" />
+          <NavigationProperty Name="trainingProgramDate" Relationship="TrainingMasterDatabaseModel.FK__trainingP__train__19DFD96B" FromRole="trainer" ToRole="trainingProgramDate" />
           <NavigationProperty Name="trainingSale" Relationship="TrainingMasterDatabaseModel.FK__trainingS__train__14270015" FromRole="trainer" ToRole="trainingSale" />
         </EntityType>
         <EntityType Name="training">
@@ -1257,7 +1279,9 @@
           <Property Name="customer_CID" Type="Int32" />
           <Property Name="trainingProgram_TPID" Type="Int32" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="trainer_TRID" Type="Int32" />
           <NavigationProperty Name="customer" Relationship="TrainingMasterDatabaseModel.FK__trainingP__custo__0B91BA14" FromRole="trainingProgramDate" ToRole="customer" />
+          <NavigationProperty Name="trainer" Relationship="TrainingMasterDatabaseModel.FK__trainingP__train__19DFD96B" FromRole="trainingProgramDate" ToRole="trainer" />
           <NavigationProperty Name="trainingProgram" Relationship="TrainingMasterDatabaseModel.FK__trainingP__train__6EF57B66" FromRole="trainingProgramDate" ToRole="trainingProgram" />
         </EntityType>
         <EntityType Name="trainingSale">
@@ -1586,6 +1610,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__trainingP__train__19DFD96B">
+          <End Type="TrainingMasterDatabaseModel.trainer" Role="trainer" Multiplicity="0..1" />
+          <End Type="TrainingMasterDatabaseModel.trainingProgramDate" Role="trainingProgramDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="trainer">
+              <PropertyRef Name="TRID" />
+            </Principal>
+            <Dependent Role="trainingProgramDate">
+              <PropertyRef Name="trainer_TRID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__trainingS__train__14270015">
           <End Type="TrainingMasterDatabaseModel.trainer" Role="trainer" Multiplicity="0..1" />
           <End Type="TrainingMasterDatabaseModel.trainingSale" Role="trainingSale" Multiplicity="*" />
@@ -1909,6 +1945,7 @@
           <EntitySetMapping Name="trainingProgramDate">
             <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.trainingProgramDate">
               <MappingFragment StoreEntitySet="trainingProgramDate">
+                <ScalarProperty Name="trainer_TRID" ColumnName="trainer_TRID" />
                 <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="trainingProgram_TPID" ColumnName="trainingProgram_TPID" />
                 <ScalarProperty Name="customer_CID" ColumnName="customer_CID" />
