@@ -2,6 +2,7 @@
 using System.Web.Http;
 using TrainingMasterWebAPI.Models.DTO;
 using TrainingMasterWebAPI.Queries;
+using Microsoft.AspNet.Identity;
 
 namespace TrainingMasterWebAPI.Controllers
 {
@@ -42,6 +43,14 @@ namespace TrainingMasterWebAPI.Controllers
         public bool UpdateFoodItem(FoodItemDTO fooditem)
         {
             return fiq.UpdateFoodItem(fooditem);
+        }
+
+        [HttpGet]
+        [Route("GetAllByTRID")]
+        public IEnumerable<FoodItemDTO> GetAllFoodItemsByTRID()
+        {
+            var trainerUserID = User.Identity.GetUserId();
+            return fiq.GetAllFoodItemsByTRID(trainerUserID);
         }
     }
 }

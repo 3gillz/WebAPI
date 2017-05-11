@@ -124,5 +124,34 @@ namespace TrainingMasterWebAPI.Queries
                 return false;
             }
         }
+
+        public IEnumerable<FoodItemDTO> GetAllFoodItemsByTRID(string id)
+        {
+            var trainer = (from x in db.trainer
+                           where x.ID == id
+                           select x).FirstOrDefault();
+
+            var f = (from x in db.foodItem
+                     where x.trainer_TRID == trainer.TRID
+                     select new FoodItemDTO
+                     {
+                         FIID = x.FIID,
+                         name = x.name,
+                         kcal = x.kcal,
+                         fat = x.fat,
+                         saturatedFat = x.saturatedFat,
+                         unsaturatedFat = x.unsaturatedFat,
+                         colestrol = x.colestrol,
+                         carbohydrate = x.carbohydrate,
+                         addedSugar = x.addedSugar,
+                         fiber = x.fiber,
+                         water = x.water,
+                         protein = x.protein,
+                         suppliment = x.suppliment,
+                         trainer_TRID = x.trainer_TRID
+                     });
+            return f;
+        }
+
     }
 }
