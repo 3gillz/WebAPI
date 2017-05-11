@@ -1,13 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNet.Identity;
+using System.Collections.Generic;
 using System.Web.Http;
 using TrainingMasterWebAPI.Models.DTO;
 using TrainingMasterWebAPI.Queries;
 
 namespace TrainingMasterWebAPI.Controllers
 {
+    [Authorize]
+    [RoutePrefix("api/MeasurmentCM")]
     public class MeasurmentCMController : ApiController
     {
         readonly private MeasurmentCMQueries mcmq;
+        private string userId;
+        protected string UserId
+        {
+            get { return userId = User.Identity.GetUserId(); }
+            set { userId = value; }
+        }
 
         public MeasurmentCMController()
         {
@@ -40,6 +49,20 @@ namespace TrainingMasterWebAPI.Controllers
         public bool UpdateMeasurmentCM(MeasurmentCMDTO CM)
         {
             return mcmq.UpdateMeasurmentCM(CM);
+        }
+
+        [HttpGet]
+        [Route("GetAllByCID")]
+        public IEnumerable<MeasurmentCMDTO> GetAllMeasurementCMByCID()
+        {
+            return mcmq.GetAllMeasurementCMByCID(UserId);
+        }
+
+        [HttpGet]
+        [Route("GetSingleByCID")]
+        public MeasurmentCMDTO GetSingleMeasurementCMByCID()
+        {
+            return mcmq.GetSingleMeasurementCMByCID(UserId);
         }
     }
 }

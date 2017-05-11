@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -14,6 +15,13 @@ namespace TrainingMasterWebAPI.Controllers
     public class FoodProgramDateController : ApiController
     {
         readonly private FoodProgramDateQueries fpdq;
+        private string userId;
+        protected string UserId
+        {
+            get { return userId = User.Identity.GetUserId(); }
+            set { userId = value; }
+        }
+
         public FoodProgramDateController()
         {
             fpdq = new FoodProgramDateQueries();
@@ -45,6 +53,20 @@ namespace TrainingMasterWebAPI.Controllers
         public bool UpdateFoodProgramDate(FoodProgramDateDTO FoodProgramDate)
         {
             return fpdq.UpdateFoodProgramDate(FoodProgramDate);
+        }
+
+        [HttpGet]
+        [Route("GetAllByCID")]
+        public IEnumerable<FoodProgramDateDTO> GetAllFoodProgramDatesByCID()
+        {
+            return fpdq.GetAllFoodProgramDatesByCID(UserId);
+        }
+
+        [HttpGet]
+        [Route("GetCurrentByCID")]
+        public FoodProgramDateDTO GetCurrentFoodProgramDateByCID()
+        {
+            return fpdq.GetCurrentFoodProgramDateByCID(UserId);
         }
     }
 }

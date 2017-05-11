@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -14,6 +15,12 @@ namespace TrainingMasterWebAPI.Controllers
     public class MeasurmentMMController : ApiController
     {
         readonly private MeasurmentMMQueries mmmq;
+        private string userId;
+        protected string UserId
+        {
+            get { return userId = User.Identity.GetUserId(); }
+            set { userId = value; }
+        }
         public MeasurmentMMController()
         {
             mmmq = new MeasurmentMMQueries();
@@ -47,6 +54,21 @@ namespace TrainingMasterWebAPI.Controllers
         {
             return mmmq.UpdateMeasurmentMM(MeasurmentMM);
         }
-    
+
+        [HttpGet]
+        [Route("GetAllByCID")]
+        public IEnumerable<MeasurmentMMDTO> GetAllMeasurementMMByCID()
+        {
+            return mmmq.GetAllMeasurementMMByCID(UserId);
+        }
+
+        [HttpGet]
+        [Route("GetSingleByCID")]
+        public MeasurmentMMDTO GetSingleMeasurementMMByCID()
+        {
+            return mmmq.GetSingleMeasurementMMByCID(UserId);
+        }
+
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -14,6 +15,12 @@ namespace TrainingMasterWebAPI.Controllers
     public class GoalsController : ApiController
     {
         readonly private GoalsQueries gq;
+        private string userId;
+        protected string UserId
+        {
+            get { return userId = User.Identity.GetUserId(); }
+            set { userId = value; }
+        }
         public GoalsController()
         {
             gq = new GoalsQueries();
@@ -25,6 +32,19 @@ namespace TrainingMasterWebAPI.Controllers
         public IEnumerable<GoalsDTO> GetAllGoals()
         {
             return gq.GetAllGoals();
+        }
+
+        [HttpGet]
+        [Route("GetAllByCID")]
+        public IEnumerable<GoalsDTO> GetAllGoalsByCID()
+        {
+            return gq.GetAllGoalsByCID(UserId);
+        }
+        [HttpGet]
+        [Route("GetSingleByCID")]
+        public GoalsDTO GetCurrentGoalByCID()
+        {
+            return gq.GetCurrentGoalByCID(UserId);
         }
 
         [HttpGet]

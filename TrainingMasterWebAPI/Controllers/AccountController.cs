@@ -16,6 +16,9 @@ using Microsoft.Owin.Security.OAuth;
 using TrainingMasterWebAPI.Models;
 using TrainingMasterWebAPI.Providers;
 using TrainingMasterWebAPI.Results;
+using System.Linq;
+using TrainingMasterWebAPI.Queries;
+using TrainingMasterWebAPI.Models.DTO;
 
 namespace TrainingMasterWebAPI.Controllers
 {
@@ -25,9 +28,11 @@ namespace TrainingMasterWebAPI.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
+        readonly private AccountQueries aq;
 
         public AccountController()
         {
+            aq = new AccountQueries();
         }
 
         public AccountController(ApplicationUserManager userManager,
@@ -327,6 +332,23 @@ namespace TrainingMasterWebAPI.Controllers
             }
 
             return logins;
+        }
+        //added 
+        //[HttpGet]
+        //[Authorize(Roles = "superadmin")]
+        //[Route("GetAll")]
+        //public List<ApplicationUser> GetAllUsers()
+        //{
+        //    var context = new ApplicationDbContext();
+        //    var allUsers = context.Users.ToList();
+        //    return allUsers;
+        //}
+        [HttpGet]
+        [Authorize(Roles = "superadmin")]
+        [Route("GetAll")]
+        public IEnumerable<AspNetUsersDTO> GetAllUsers()
+        {
+            return aq.GetAllCustomers();
         }
 
         // POST api/Account/Register

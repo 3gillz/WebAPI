@@ -81,6 +81,41 @@ namespace TrainingMasterWebAPI.Queries
             }
         }
 
+        public IEnumerable<FoodProgramDTO> GetAllFoodProgramByTRID(string UserId)
+        {
+            var trainer = (from x in db.trainer
+                           where x.ID == UserId
+                           select x).FirstOrDefault();
+
+            var fp = (from x in db.foodProgram
+                      where x.trainer_TRID == trainer.TRID
+                      select new FoodProgramDTO
+                      {
+                          FPMID = x.FPMID,
+                          foodPortion_FPID = x.foodPortion_FPID,
+                          trainer_TRID = x.trainer_TRID
+                      });
+
+            return fp;
+        }
+
+        public FoodProgramDTO GetSingleFoodProgramByTRID(string UserId)
+        {
+            var trainer = (from x in db.trainer
+                           where x.ID == UserId
+                           select x).FirstOrDefault();
+
+            var fp = (from x in db.foodProgram
+                      where x.trainer_TRID == trainer.TRID
+                      select new FoodProgramDTO
+                      {
+                          FPMID = x.FPMID,
+                          foodPortion_FPID = x.foodPortion_FPID,
+                          trainer_TRID = x.trainer_TRID
+                      }).FirstOrDefault();
+
+            return fp;
+        }
 
     }
 }

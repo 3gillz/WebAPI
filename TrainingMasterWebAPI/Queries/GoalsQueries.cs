@@ -31,6 +31,48 @@ namespace TrainingMasterWebAPI.Queries
                             });
             return g;
         }
+        public IEnumerable<GoalsDTO> GetAllGoalsByCID(string UserId)
+        {
+            var customer = (from x in db.customer
+                            where x.ID == UserId
+                            select x).FirstOrDefault();
+            var g = (from x in db.goals
+                     where x.customer_CID == customer.CID
+                     select new GoalsDTO
+                     {
+                         GID = x.GID,
+                         customer_CID = x.customer_CID,
+                         kg = x.kg,
+                         percentage = x.percentage,
+                         description = x.description,
+                         diameter = x.diameter,
+                         startDate = x.startDate,
+                         dueDate = x.dueDate
+                     });
+            return g;
+        }
+
+        public GoalsDTO GetCurrentGoalByCID(string UserId)
+        {
+            var customer = (from x in db.customer
+                            where x.ID == UserId
+                            select x).FirstOrDefault();
+
+            var g = (from x in db.goals.OrderBy(x => x.startDate)
+                     where x.customer_CID == customer.CID
+                     select new GoalsDTO
+                     {
+                         GID = x.GID,
+                         customer_CID = x.customer_CID,
+                         kg = x.kg,
+                         percentage = x.percentage,
+                         description = x.description,
+                         diameter = x.diameter,
+                         startDate = x.startDate,
+                         dueDate = x.dueDate
+                     }).SingleOrDefault();
+            return g;
+        }
 
         public GoalsDTO GetGoalById(int id)
         {

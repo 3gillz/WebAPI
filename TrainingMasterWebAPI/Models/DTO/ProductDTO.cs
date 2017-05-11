@@ -11,7 +11,7 @@ namespace TrainingMasterWebAPI.Models.DTO
         public string name { get; set; }
         public int durationInDays { get; set; }
         public string description { get; set; }
-        public int trainer_TRID { get; set; }
-        public bool hidden { get; set; }
+        public int? trainer_TRID { get; set; }
+        public bool? hidden { get; set; }
     }
 }

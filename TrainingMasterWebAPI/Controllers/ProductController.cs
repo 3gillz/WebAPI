@@ -10,20 +10,28 @@ using TrainingMasterWebAPI.Queries;
 
 namespace TrainingMasterWebAPI.Controllers
 {
+    [Authorize]
+    [RoutePrefix("api/Product")]
     public class ProductController : ApiController
     {
         readonly private ProductQueries pq;
+        private string userId;
+        protected string UserId
+        {
+            get { return userId = User.Identity.GetUserId(); }
+            set { userId = value; }
+        }
         public ProductController()
         {
             pq = new ProductQueries();
         }
-        //[HttpGet]
-        //[Route("GetProductsByTRID")]
-        //public IEnumerable<ProductDTO> GetProductsByTRID()
-        //{
-        //    var UserId = User.Identity.GetUserId();
-        //    return pq.GetProductsByTRID(UserId);
-        //}
+
+        [HttpGet]
+        [Route("GetByTRID")]
+        public IEnumerable<ProductDTO> GetProductsByTRID()
+        {
+            return pq.GetProductsByTRID(UserId);
+        }
 
     }
 }

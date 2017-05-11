@@ -19,8 +19,7 @@ namespace TrainingMasterWebAPI.Queries
         {
             var m = (from x in db.measureMM
                      select new MeasurmentMMDTO
-                     {
-                        
+                     {        
                          MMMID = x.MMMID,
                          customer_CID = x. customer_CID,
                          date = x.date,
@@ -124,6 +123,64 @@ namespace TrainingMasterWebAPI.Queries
             {
                 return false;
             }
+        }
+
+        public IEnumerable<MeasurmentMMDTO> GetAllMeasurementMMByCID(string UserId)
+        {
+            var customer = (from x in db.customer
+                            where x.ID == UserId
+                            select x).FirstOrDefault();
+
+            var m = (from x in db.measureMM
+                     where x.customer_CID == customer.CID
+                     select new MeasurmentMMDTO
+                     {
+
+                         MMMID = x.MMMID,
+                         customer_CID = x.customer_CID,
+                         date = x.date,
+                         chest = x.chest,
+                         abdominal = x.abdominal,
+                         thigh = x.thigh,
+                         tricep = x.tricep,
+                         subscapular = x.subscapular,
+                         suprailiac = x.suprailiac,
+                         axilliary = x.axilliary,
+                         bmi = x.bmi,
+                         lbm = x.lbm,
+                         fatPercentage = x.fatPercentage,
+                         kg = x.kg
+                     });
+            return m;
+        }
+
+        public MeasurmentMMDTO GetSingleMeasurementMMByCID(string UserId)
+        {
+            var customer = (from x in db.customer
+                            where x.ID == UserId
+                            select x).FirstOrDefault();
+
+            var m = (from x in db.measureMM
+                     where x.customer_CID == customer.CID
+                     select new MeasurmentMMDTO
+                     {
+
+                         MMMID = x.MMMID,
+                         customer_CID = x.customer_CID,
+                         date = x.date,
+                         chest = x.chest,
+                         abdominal = x.abdominal,
+                         thigh = x.thigh,
+                         tricep = x.tricep,
+                         subscapular = x.subscapular,
+                         suprailiac = x.suprailiac,
+                         axilliary = x.axilliary,
+                         bmi = x.bmi,
+                         lbm = x.lbm,
+                         fatPercentage = x.fatPercentage,
+                         kg = x.kg
+                     }).FirstOrDefault();
+            return m;
         }
 
     }
