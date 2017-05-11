@@ -15,8 +15,12 @@ namespace TrainingMasterWebAPI.Controllers
     public class MeasurmentMMController : ApiController
     {
         readonly private MeasurmentMMQueries mmmq;
-        private string UserId { get => User.Identity.GetUserId(); set => UserId = value; }
-
+        private string userId;
+        protected string UserId
+        {
+            get { return userId = User.Identity.GetUserId(); }
+            set { userId = value; }
+        }
         public MeasurmentMMController()
         {
             mmmq = new MeasurmentMMQueries();

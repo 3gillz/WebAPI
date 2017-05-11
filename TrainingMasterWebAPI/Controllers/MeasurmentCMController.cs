@@ -6,10 +6,17 @@ using TrainingMasterWebAPI.Queries;
 
 namespace TrainingMasterWebAPI.Controllers
 {
+    [Authorize]
+    [RoutePrefix("api/MeasurmentCM")]
     public class MeasurmentCMController : ApiController
     {
         readonly private MeasurmentCMQueries mcmq;
-        private string UserId { get => User.Identity.GetUserId(); set => UserId = value; }
+        private string userId;
+        protected string UserId
+        {
+            get { return userId = User.Identity.GetUserId(); }
+            set { userId = value; }
+        }
 
         public MeasurmentCMController()
         {

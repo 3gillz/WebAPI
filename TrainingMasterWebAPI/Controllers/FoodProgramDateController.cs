@@ -15,7 +15,12 @@ namespace TrainingMasterWebAPI.Controllers
     public class FoodProgramDateController : ApiController
     {
         readonly private FoodProgramDateQueries fpdq;
-        private string UserId { get => User.Identity.GetUserId(); set => UserId = value; }
+        private string userId;
+        protected string UserId
+        {
+            get { return userId = User.Identity.GetUserId(); }
+            set { userId = value; }
+        }
 
         public FoodProgramDateController()
         {

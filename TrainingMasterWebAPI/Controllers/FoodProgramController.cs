@@ -9,11 +9,17 @@ using TrainingMasterWebAPI.Queries;
 
 namespace TrainingMasterWebAPI.Controllers
 {
+    [Authorize]
+    [RoutePrefix("api/FoodProgram")]
     public class FoodProgramController : Controller
     {
         readonly private FoodProgramQueries fpq;
-        private string UserId { get => User.Identity.GetUserId(); set => UserId = value; }
-
+        private string userId;
+        protected string UserId
+        {
+            get { return userId = User.Identity.GetUserId(); }
+            set { userId = value; }
+        }
         public FoodProgramController()
         {
             fpq = new FoodProgramQueries();

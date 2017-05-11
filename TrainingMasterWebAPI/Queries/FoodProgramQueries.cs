@@ -94,7 +94,7 @@ namespace TrainingMasterWebAPI.Queries
                           FPMID = x.FPMID,
                           foodPortion_FPID = x.foodPortion_FPID,
                           trainer_TRID = x.trainer_TRID
-                      })
+                      });
 
             return fp;
         }

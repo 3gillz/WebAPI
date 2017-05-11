@@ -11,7 +11,12 @@ namespace TrainingMasterWebAPI.Controllers
     public class ProgressImageController : ApiController
     {
         readonly private ProgressImageQueries piq;
-
+        private string userId;
+        protected string UserId
+        {
+            get { return userId = User.Identity.GetUserId(); }
+            set { userId = value; }
+        }
         public ProgressImageController()
         {
             piq = new ProgressImageQueries();
@@ -28,7 +33,6 @@ namespace TrainingMasterWebAPI.Controllers
         [Route("GetAllByCID")]
         public IEnumerable<ProgressImageDTO> GetProgressImagesByCID()
         {
-            var UserId = User.Identity.GetUserId();
             return piq.GetAllProgressImagesByCID(UserId);
         }
 
