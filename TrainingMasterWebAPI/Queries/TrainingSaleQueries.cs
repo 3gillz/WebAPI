@@ -33,10 +33,10 @@ namespace TrainingMasterWebAPI.Queries
             return ts;
         }
 
-        public TrainingSaleDTO GetTrainingSaleByID(int id) 
+        public TrainingSaleDTO GetTrainingSaleByTRID(int TRID) 
         {
             var ts = (from x in db.trainingSale
-                          where x.TSID == id
+                          where x.trainer_TRID == TRID
                           select new TrainingSaleDTO
                           {
                               TSID = x.TSID,

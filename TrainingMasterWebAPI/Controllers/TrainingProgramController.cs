@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNet.Identity;
+using System.Collections.Generic;
 using System.Web.Http;
 using TrainingMasterWebAPI.Models.DTO;
 using TrainingMasterWebAPI.Queries;
@@ -17,10 +18,20 @@ namespace TrainingMasterWebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
-        public TrainingProgramDTO GetTrainingProgram(int id)
+        [Route("{tpid}")]
+        public IEnumerable<TrainingProgramDTO> GetTrainingProgramByTPID(int tpid)
         {
-            return tpq.GetTrainingProgramById(id);
+            return tpq.GetTrainingProgramByTPID(tpid);
+        }
+
+        [HttpGet]
+        [Route("{UserId}")]
+        public IEnumerable<TrainingProgramDTO> GetTrainingProgramByTRID()
+        {
+            var UserId = User.Identity.GetUserId();
+            return tpq.GetTrainingProgramByTRID(UserId);
+
+
         }
 
         [HttpGet]

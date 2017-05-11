@@ -15,16 +15,33 @@ namespace TrainingMasterWebAPI.Queries
             db = new TMEntities();
         }
 
-        public TrainingProgramDTO GetTrainingProgramById(int id)
+        public IEnumerable<TrainingProgramDTO> GetTrainingProgramByTPID(int TPID)
         {
             var tp = (from x in db.trainingProgram
-                      where id == x.TPID
+                      where x.TPID == TPID
                       select new TrainingProgramDTO
                       {
                           TPID = x.TPID,
                           training_TID = x.training_TID,
                           trainer_TRID = x.trainer_TRID
-                      }).SingleOrDefault();
+                      });
+            return tp;
+        }
+
+        public IEnumerable<TrainingProgramDTO> GetTrainingProgramByTRID(string userId)
+        {
+            var trainer = (from x in db.trainer
+                           where x.ID == userId
+                           select x).FirstOrDefault();
+
+            var tp = (from x in db.trainingProgram
+                      where x.trainer_TRID == trainer.TRID
+                      select new TrainingProgramDTO
+                      {
+                          TPID = x.TPID,
+                          training_TID = x.training_TID,
+                          trainer_TRID = x.trainer_TRID
+                      });
             return tp;
         }
 
