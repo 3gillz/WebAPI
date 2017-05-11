@@ -27,12 +27,12 @@ namespace TrainingMasterWebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
-        public TrainingSaleDTO GetTrainingSale(int id)
+        [Route("{trid}")]
+        public TrainingSaleDTO GetTrainingSale(int trid)
         {
-            return tsq.GetTrainingSaleByID(id);
+            return tsq.GetTrainingSaleByTRID(trid);
         }
-
+        
         [HttpPost]
         [Route("Add")]
         public bool AddTrainingSale(TrainingSaleDTO trainingSale)
