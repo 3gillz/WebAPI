@@ -85,6 +85,44 @@ namespace TrainingMasterWebAPI.Queries
             }
         }
 
+        public IEnumerable<FoodProgramDateDTO> GetAllFoodProgramDatesByCID(string UserId)
+        {
+            var customer = (from x in db.customer
+                            where x.ID == UserId
+                            select x).FirstOrDefault();
+
+            var fpd = (from x in db.foodProgramDate
+                       where x.customer_CID == customer.CID
+                       select new FoodProgramDateDTO
+                       {
+                           FPDID = x.FPDID,
+                           customer_CID = x.customer_CID,
+                           foodProgram_FPMID = x.foodProgram_FPMID,
+                           date = x.date
+                       });
+            return fpd;
+        }
+
+        public FoodProgramDateDTO GetCurrentFoodProgramDateByCID(string UserId)
+        {
+            var customer = (from x in db.customer
+                            where x.ID == UserId
+                            select x).FirstOrDefault();
+
+            var datenow = DateTime.Now;
+
+            var fpd = (from x in db.foodProgramDate.OrderBy(x => x.date) //Spurning hvort þetta þurfi? Cool ef það virkar
+                       where x.customer_CID == customer.CID
+                       select new FoodProgramDateDTO
+                       {
+                           FPDID = x.FPDID,
+                           customer_CID = x.customer_CID,
+                           foodProgram_FPMID = x.foodProgram_FPMID,
+                           date = x.date
+                       }).FirstOrDefault();
+            return fpd;
+        }
+
 
     }
 }

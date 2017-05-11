@@ -112,5 +112,55 @@ namespace TrainingMasterWebAPI.Queries
                 return false;
             }
         }
+
+        public IEnumerable<MeasurmentCMDTO> GetAllMeasurementCMByCID(string UserId)
+        {
+            var customer = (from x in db.customer
+                            where x.ID == UserId
+                            select x).FirstOrDefault();
+
+            var m = (from x in db.measurementCM
+                     where x.customer_CID == customer.CID
+                     select new MeasurmentCMDTO
+                     {
+                         MCMID = x.MCMID,
+                         customer_CID = x.customer_CID,
+                         date = x.date,
+                         butt = x.butt,
+                         waist = x.waist,
+                         hip = x.hip,
+                         thigh = x.thigh,
+                         armLoose = x.armLoose,
+                         armFlexed = x.armFlexed,
+                         shoulders = x.shoulders,
+                         performedByTrainer = x.performedByTrainer
+                     });
+            return m;
+        }
+
+        public MeasurmentCMDTO GetSingleMeasurementCMByCID(string UserId)
+        {
+            var customer = (from x in db.customer
+                            where x.ID == UserId
+                            select x).FirstOrDefault();
+
+            var m = (from x in db.measurementCM
+                     where x.customer_CID == customer.CID
+                     select new MeasurmentCMDTO
+                     {
+                         MCMID = x.MCMID,
+                         customer_CID = x.customer_CID,
+                         date = x.date,
+                         butt = x.butt,
+                         waist = x.waist,
+                         hip = x.hip,
+                         thigh = x.thigh,
+                         armLoose = x.armLoose,
+                         armFlexed = x.armFlexed,
+                         shoulders = x.shoulders,
+                         performedByTrainer = x.performedByTrainer
+                     }).FirstOrDefault();
+            return m;
+        }
     }
 }

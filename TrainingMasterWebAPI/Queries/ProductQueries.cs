@@ -15,10 +15,25 @@ namespace TrainingMasterWebAPI.Queries
             db = new TMEntities();
         }
 
-        //public IEnumerable<ProductDTO> GetProductsByTRID(string UserId)
-        //{
-        //    trainer = 
-        //}
+        public IEnumerable<ProductDTO> GetProductsByTRID(string UserId)
+        {
+            var trainer = (from x in db.trainer
+                           where x.ID == UserId
+                           select x).FirstOrDefault();
+
+            var products = (from x in db.product
+                            where x.trainer_TRID == trainer.TRID
+                            select new ProductDTO
+                            {
+                                PID = x.PID,
+                                name = x.name,
+                                durationInDays = x.durationInDays,
+                                description = x.description,
+                                trainer_TRID = x.trainer_TRID,
+                                hidden = x.hidden
+                            });
+            return products;
+        }
 
 
     }
