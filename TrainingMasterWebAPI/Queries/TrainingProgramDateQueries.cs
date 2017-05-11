@@ -43,25 +43,40 @@ namespace TrainingMasterWebAPI.Queries
             return trainingDate;
         }
 
-        public TrainingProgramDateDTO GetSingleByTRID(string UserID)
+        public IEnumerable<TrainingProgramDateDTO> GetAllByTRID(string UserID)
         {
             var trainer = (from x in db.trainer
                            where x.ID == UserID
                            select x).FirstOrDefault();
 
-            var trainingDate = (from x in db.trainingProgramDate
-                                where x.trainer_TRID == trainer.TRID
+            var trainingDate = (from x in db.trainingProgramDate.OrderByDescending(x => x.date)
+                                where x.trainingProgram.trainer_TRID == trainer.TRID
                                 select new TrainingProgramDateDTO
                                 {
                                     TDID = x.TDID,
                                     customer_CID = x.customer_CID,
                                     trainingProgram_TPID = x.trainingProgram_TPID,
                                     date = x.date,
-                                    trainer_TRID = x.trainer_TRID
+                                });
+            return trainingDate;
+        }
+        public TrainingProgramDateDTO GetSingleByTRID(string UserID)
+        {
+            var trainer = (from x in db.trainer
+                           where x.ID == UserID
+                           select x).FirstOrDefault();
+
+            var trainingDate = (from x in db.trainingProgramDate.OrderByDescending(x => x.date)
+                                where x.trainingProgram.trainer_TRID == trainer.TRID
+                                select new TrainingProgramDateDTO
+                                {
+                                    TDID = x.TDID,
+                                    customer_CID = x.customer_CID,
+                                    trainingProgram_TPID = x.trainingProgram_TPID,
+                                    date = x.date,
                                 }).FirstOrDefault();
             return trainingDate;
         }
-
 
     }
 }

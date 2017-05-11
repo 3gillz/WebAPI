@@ -18,10 +18,8 @@ namespace TrainingMasterWebAPI.Models.EF
         public Nullable<int> customer_CID { get; set; }
         public Nullable<int> trainingProgram_TPID { get; set; }
         public System.DateTime date { get; set; }
-        public Nullable<int> trainer_TRID { get; set; }
     
         public virtual customer customer { get; set; }
-        public virtual trainer trainer { get; set; }
         public virtual trainingProgram trainingProgram { get; set; }
     }
 }

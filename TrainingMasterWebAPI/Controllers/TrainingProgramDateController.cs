@@ -32,8 +32,15 @@ namespace TrainingMasterWebAPI.Controllers
             return tpdq.GetSingleById(id);
         }
         [HttpGet]
+        [Route("GetAllByTRID")]
+        public IEnumerable<TrainingProgramDateDTO> GetByTRID(int id)
+        {
+            var UserId = User.Identity.GetUserId();
+            return tpdq.GetAllByTRID(UserId);
+        }
+        [HttpGet]
         [Route("GetByTRID")]
-        public TrainingProgramDateDTO GetByTRID(int id)
+        public TrainingProgramDateDTO GetSingleByTRID(int id)
         {
             var UserId = User.Identity.GetUserId();
             return tpdq.GetSingleByTRID(UserId);
