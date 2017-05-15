@@ -26,8 +26,8 @@ namespace TrainingMasterWebAPI.Models.EF
         public System.DateTime timeOfDay { get; set; }
         public Nullable<int> foodItem_FIID { get; set; }
     
-        public virtual foodItem foodItem { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<foodProgram> foodProgram { get; set; }
+        public virtual foodItem foodItem { get; set; }
     }
 }

@@ -32,7 +32,6 @@ namespace TrainingMasterWebAPI.Models.EF
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<customer> customer { get; set; }
         public virtual DbSet<exercise> exercise { get; set; }
-        public virtual DbSet<foodItem> foodItem { get; set; }
         public virtual DbSet<foodPortion> foodPortion { get; set; }
         public virtual DbSet<foodProgram> foodProgram { get; set; }
         public virtual DbSet<foodProgramDate> foodProgramDate { get; set; }
@@ -49,5 +48,6 @@ namespace TrainingMasterWebAPI.Models.EF
         public virtual DbSet<trainingSale> trainingSale { get; set; }
         public virtual DbSet<trainingSaleProduct> trainingSaleProduct { get; set; }
         public virtual DbSet<zipcodes> zipcodes { get; set; }
+        public virtual DbSet<foodItem> foodItem { get; set; }
     }
 }

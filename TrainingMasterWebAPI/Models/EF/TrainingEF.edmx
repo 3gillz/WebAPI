@@ -108,7 +108,7 @@
           </Key>
           <Property Name="FIID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="kcal" Type="int" Nullable="false" />
+          <Property Name="kcal" Type="decimal" Precision="9" Scale="5" Nullable="false" />
           <Property Name="fat" Type="decimal" Precision="9" Scale="5" Nullable="false" />
           <Property Name="saturatedFat" Type="decimal" Precision="9" Scale="5" Nullable="false" />
           <Property Name="unsaturatedFat" Type="decimal" Precision="9" Scale="5" Nullable="false" />
@@ -354,7 +354,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__foodItem__traine__151B244E">
+        <Association Name="FK__foodItem__traine__2180FB33">
           <End Role="trainer" Type="Self.trainer" Multiplicity="0..1" />
           <End Role="foodItem" Type="Self.foodItem" Multiplicity="*" />
           <ReferentialConstraint>
@@ -366,7 +366,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__foodPorti__foodI__5AEE82B9">
+        <Association Name="FK__foodPorti__foodI__208CD6FA">
           <End Role="foodItem" Type="Self.foodItem" Multiplicity="0..1" />
           <End Role="foodPortion" Type="Self.foodPortion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -708,11 +708,11 @@
             <End Role="trainer" EntitySet="trainer" />
             <End Role="exercise" EntitySet="exercise" />
           </AssociationSet>
-          <AssociationSet Name="FK__foodItem__traine__151B244E" Association="Self.FK__foodItem__traine__151B244E">
+          <AssociationSet Name="FK__foodItem__traine__2180FB33" Association="Self.FK__foodItem__traine__2180FB33">
             <End Role="trainer" EntitySet="trainer" />
             <End Role="foodItem" EntitySet="foodItem" />
           </AssociationSet>
-          <AssociationSet Name="FK__foodPorti__foodI__5AEE82B9" Association="Self.FK__foodPorti__foodI__5AEE82B9">
+          <AssociationSet Name="FK__foodPorti__foodI__208CD6FA" Association="Self.FK__foodPorti__foodI__208CD6FA">
             <End Role="foodItem" EntitySet="foodItem" />
             <End Role="foodPortion" EntitySet="foodPortion" />
           </AssociationSet>
@@ -821,7 +821,6 @@
           <EntitySet Name="AspNetUsers" EntityType="TrainingMasterDatabaseModel.AspNetUsers" />
           <EntitySet Name="customer" EntityType="TrainingMasterDatabaseModel.customer" />
           <EntitySet Name="exercise" EntityType="TrainingMasterDatabaseModel.exercise" />
-          <EntitySet Name="foodItem" EntityType="TrainingMasterDatabaseModel.foodItem" />
           <EntitySet Name="foodPortion" EntityType="TrainingMasterDatabaseModel.foodPortion" />
           <EntitySet Name="foodProgram" EntityType="TrainingMasterDatabaseModel.foodProgram" />
           <EntitySet Name="foodProgramDate" EntityType="TrainingMasterDatabaseModel.foodProgramDate" />
@@ -898,14 +897,6 @@
             <End Role="exercise" EntitySet="exercise" />
             <End Role="training" EntitySet="training" />
           </AssociationSet>
-          <AssociationSet Name="FK__foodItem__traine__151B244E" Association="TrainingMasterDatabaseModel.FK__foodItem__traine__151B244E">
-            <End Role="trainer" EntitySet="trainer" />
-            <End Role="foodItem" EntitySet="foodItem" />
-          </AssociationSet>
-          <AssociationSet Name="FK__foodPorti__foodI__5AEE82B9" Association="TrainingMasterDatabaseModel.FK__foodPorti__foodI__5AEE82B9">
-            <End Role="foodItem" EntitySet="foodItem" />
-            <End Role="foodPortion" EntitySet="foodPortion" />
-          </AssociationSet>
           <AssociationSet Name="FK__foodProgr__foodP__5DCAEF64" Association="TrainingMasterDatabaseModel.FK__foodProgr__foodP__5DCAEF64">
             <End Role="foodPortion" EntitySet="foodPortion" />
             <End Role="foodProgram" EntitySet="foodProgram" />
@@ -953,6 +944,15 @@
           <AssociationSet Name="AspNetUserRoles" Association="TrainingMasterDatabaseModel.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="foodItem" EntityType="TrainingMasterDatabaseModel.foodItem" />
+          <AssociationSet Name="FK__foodItem__traine__2180FB33" Association="TrainingMasterDatabaseModel.FK__foodItem__traine__2180FB33">
+            <End Role="trainer" EntitySet="trainer" />
+            <End Role="foodItem" EntitySet="foodItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__foodPorti__foodI__208CD6FA" Association="TrainingMasterDatabaseModel.FK__foodPorti__foodI__208CD6FA">
+            <End Role="foodItem" EntitySet="foodItem" />
+            <End Role="foodPortion" EntitySet="foodPortion" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
@@ -1064,27 +1064,6 @@
           <NavigationProperty Name="trainer" Relationship="TrainingMasterDatabaseModel.FK__exercise__traine__17036CC0" FromRole="exercise" ToRole="trainer" />
           <NavigationProperty Name="training" Relationship="TrainingMasterDatabaseModel.FK__training__exerci__6754599E" FromRole="exercise" ToRole="training" />
         </EntityType>
-        <EntityType Name="foodItem">
-          <Key>
-            <PropertyRef Name="FIID" />
-          </Key>
-          <Property Name="FIID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="kcal" Type="Int32" Nullable="false" />
-          <Property Name="fat" Type="Decimal" Nullable="false" Precision="9" Scale="5" />
-          <Property Name="saturatedFat" Type="Decimal" Nullable="false" Precision="9" Scale="5" />
-          <Property Name="unsaturatedFat" Type="Decimal" Nullable="false" Precision="9" Scale="5" />
-          <Property Name="colestrol" Type="Decimal" Nullable="false" Precision="9" Scale="5" />
-          <Property Name="carbohydrate" Type="Decimal" Nullable="false" Precision="9" Scale="5" />
-          <Property Name="addedSugar" Type="Decimal" Nullable="false" Precision="9" Scale="5" />
-          <Property Name="fiber" Type="Decimal" Nullable="false" Precision="9" Scale="5" />
-          <Property Name="water" Type="Decimal" Nullable="false" Precision="9" Scale="5" />
-          <Property Name="protein" Type="Decimal" Nullable="false" Precision="9" Scale="5" />
-          <Property Name="suppliment" Type="Boolean" />
-          <Property Name="trainer_TRID" Type="Int32" />
-          <NavigationProperty Name="trainer" Relationship="TrainingMasterDatabaseModel.FK__foodItem__traine__151B244E" FromRole="foodItem" ToRole="trainer" />
-          <NavigationProperty Name="foodPortion" Relationship="TrainingMasterDatabaseModel.FK__foodPorti__foodI__5AEE82B9" FromRole="foodItem" ToRole="foodPortion" />
-        </EntityType>
         <EntityType Name="foodPortion">
           <Key>
             <PropertyRef Name="FPID" />
@@ -1094,8 +1073,8 @@
           <Property Name="weekday" Type="Int16" Nullable="false" />
           <Property Name="timeOfDay" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="foodItem_FIID" Type="Int32" />
-          <NavigationProperty Name="foodItem" Relationship="TrainingMasterDatabaseModel.FK__foodPorti__foodI__5AEE82B9" FromRole="foodPortion" ToRole="foodItem" />
           <NavigationProperty Name="foodProgram" Relationship="TrainingMasterDatabaseModel.FK__foodProgr__foodP__5DCAEF64" FromRole="foodPortion" ToRole="foodProgram" />
+          <NavigationProperty Name="foodItem" Relationship="TrainingMasterDatabaseModel.FK__foodPorti__foodI__208CD6FA" FromRole="foodPortion" ToRole="foodItem" />
         </EntityType>
         <EntityType Name="foodProgram">
           <Key>
@@ -1217,11 +1196,11 @@
           <NavigationProperty Name="AspNetUsers" Relationship="TrainingMasterDatabaseModel.FK__AspNetUse__train__18EBB532" FromRole="trainer" ToRole="AspNetUsers" />
           <NavigationProperty Name="customer" Relationship="TrainingMasterDatabaseModel.FK__customer__traine__123EB7A3" FromRole="trainer" ToRole="customer" />
           <NavigationProperty Name="exercise" Relationship="TrainingMasterDatabaseModel.FK__exercise__traine__17036CC0" FromRole="trainer" ToRole="exercise" />
-          <NavigationProperty Name="foodItem" Relationship="TrainingMasterDatabaseModel.FK__foodItem__traine__151B244E" FromRole="trainer" ToRole="foodItem" />
           <NavigationProperty Name="foodProgram" Relationship="TrainingMasterDatabaseModel.FK__foodProgr__train__160F4887" FromRole="trainer" ToRole="foodProgram" />
           <NavigationProperty Name="product" Relationship="TrainingMasterDatabaseModel.FK__product__trainer__1332DBDC" FromRole="trainer" ToRole="product" />
           <NavigationProperty Name="trainingProgram" Relationship="TrainingMasterDatabaseModel.FK__trainingP__train__17F790F9" FromRole="trainer" ToRole="trainingProgram" />
           <NavigationProperty Name="trainingSale" Relationship="TrainingMasterDatabaseModel.FK__trainingS__train__14270015" FromRole="trainer" ToRole="trainingSale" />
+          <NavigationProperty Name="foodItem" Relationship="TrainingMasterDatabaseModel.FK__foodItem__traine__2180FB33" FromRole="trainer" ToRole="foodItem" />
         </EntityType>
         <EntityType Name="training">
           <Key>
@@ -1478,30 +1457,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__foodItem__traine__151B244E">
-          <End Type="TrainingMasterDatabaseModel.trainer" Role="trainer" Multiplicity="0..1" />
-          <End Type="TrainingMasterDatabaseModel.foodItem" Role="foodItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="trainer">
-              <PropertyRef Name="TRID" />
-            </Principal>
-            <Dependent Role="foodItem">
-              <PropertyRef Name="trainer_TRID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__foodPorti__foodI__5AEE82B9">
-          <End Type="TrainingMasterDatabaseModel.foodItem" Role="foodItem" Multiplicity="0..1" />
-          <End Type="TrainingMasterDatabaseModel.foodPortion" Role="foodPortion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="foodItem">
-              <PropertyRef Name="FIID" />
-            </Principal>
-            <Dependent Role="foodPortion">
-              <PropertyRef Name="foodItem_FIID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__foodProgr__foodP__5DCAEF64">
           <End Type="TrainingMasterDatabaseModel.foodPortion" Role="foodPortion" Multiplicity="0..1" />
           <End Type="TrainingMasterDatabaseModel.foodProgram" Role="foodProgram" Multiplicity="*" />
@@ -1638,6 +1593,51 @@
           <End Type="TrainingMasterDatabaseModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
           <End Type="TrainingMasterDatabaseModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
         </Association>
+        <EntityType Name="foodItem">
+          <Key>
+            <PropertyRef Name="FIID" />
+          </Key>
+          <Property Name="FIID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="kcal" Type="Decimal" Nullable="false" Precision="9" Scale="5" />
+          <Property Name="fat" Type="Decimal" Nullable="false" Precision="9" Scale="5" />
+          <Property Name="saturatedFat" Type="Decimal" Nullable="false" Precision="9" Scale="5" />
+          <Property Name="unsaturatedFat" Type="Decimal" Nullable="false" Precision="9" Scale="5" />
+          <Property Name="colestrol" Type="Decimal" Nullable="false" Precision="9" Scale="5" />
+          <Property Name="carbohydrate" Type="Decimal" Nullable="false" Precision="9" Scale="5" />
+          <Property Name="addedSugar" Type="Decimal" Nullable="false" Precision="9" Scale="5" />
+          <Property Name="fiber" Type="Decimal" Nullable="false" Precision="9" Scale="5" />
+          <Property Name="water" Type="Decimal" Nullable="false" Precision="9" Scale="5" />
+          <Property Name="protein" Type="Decimal" Nullable="false" Precision="9" Scale="5" />
+          <Property Name="suppliment" Type="Boolean" />
+          <Property Name="trainer_TRID" Type="Int32" />
+          <NavigationProperty Name="trainer" Relationship="TrainingMasterDatabaseModel.FK__foodItem__traine__2180FB33" FromRole="foodItem" ToRole="trainer" />
+          <NavigationProperty Name="foodPortion" Relationship="TrainingMasterDatabaseModel.FK__foodPorti__foodI__208CD6FA" FromRole="foodItem" ToRole="foodPortion" />
+        </EntityType>
+        <Association Name="FK__foodItem__traine__2180FB33">
+          <End Type="TrainingMasterDatabaseModel.trainer" Role="trainer" Multiplicity="0..1" />
+          <End Type="TrainingMasterDatabaseModel.foodItem" Role="foodItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="trainer">
+              <PropertyRef Name="TRID" />
+            </Principal>
+            <Dependent Role="foodItem">
+              <PropertyRef Name="trainer_TRID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__foodPorti__foodI__208CD6FA">
+          <End Type="TrainingMasterDatabaseModel.foodItem" Role="foodItem" Multiplicity="0..1" />
+          <End Type="TrainingMasterDatabaseModel.foodPortion" Role="foodPortion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="foodItem">
+              <PropertyRef Name="FIID" />
+            </Principal>
+            <Dependent Role="foodPortion">
+              <PropertyRef Name="foodItem_FIID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1734,26 +1734,6 @@
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="EID" ColumnName="EID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="foodItem">
-            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.foodItem">
-              <MappingFragment StoreEntitySet="foodItem">
-                <ScalarProperty Name="trainer_TRID" ColumnName="trainer_TRID" />
-                <ScalarProperty Name="suppliment" ColumnName="suppliment" />
-                <ScalarProperty Name="protein" ColumnName="protein" />
-                <ScalarProperty Name="water" ColumnName="water" />
-                <ScalarProperty Name="fiber" ColumnName="fiber" />
-                <ScalarProperty Name="addedSugar" ColumnName="addedSugar" />
-                <ScalarProperty Name="carbohydrate" ColumnName="carbohydrate" />
-                <ScalarProperty Name="colestrol" ColumnName="colestrol" />
-                <ScalarProperty Name="unsaturatedFat" ColumnName="unsaturatedFat" />
-                <ScalarProperty Name="saturatedFat" ColumnName="saturatedFat" />
-                <ScalarProperty Name="fat" ColumnName="fat" />
-                <ScalarProperty Name="kcal" ColumnName="kcal" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="FIID" ColumnName="FIID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1953,6 +1933,26 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="foodItem">
+            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.foodItem">
+              <MappingFragment StoreEntitySet="foodItem">
+                <ScalarProperty Name="trainer_TRID" ColumnName="trainer_TRID" />
+                <ScalarProperty Name="suppliment" ColumnName="suppliment" />
+                <ScalarProperty Name="protein" ColumnName="protein" />
+                <ScalarProperty Name="water" ColumnName="water" />
+                <ScalarProperty Name="fiber" ColumnName="fiber" />
+                <ScalarProperty Name="addedSugar" ColumnName="addedSugar" />
+                <ScalarProperty Name="carbohydrate" ColumnName="carbohydrate" />
+                <ScalarProperty Name="colestrol" ColumnName="colestrol" />
+                <ScalarProperty Name="unsaturatedFat" ColumnName="unsaturatedFat" />
+                <ScalarProperty Name="saturatedFat" ColumnName="saturatedFat" />
+                <ScalarProperty Name="fat" ColumnName="fat" />
+                <ScalarProperty Name="kcal" ColumnName="kcal" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="FIID" ColumnName="FIID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
