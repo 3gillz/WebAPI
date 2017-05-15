@@ -17,17 +17,15 @@ namespace TrainingMasterWebAPI.Models.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public foodPortion()
         {
-            this.foodProgram = new HashSet<foodProgram>();
+            this.foodProgramPortion = new HashSet<foodProgramPortion>();
         }
     
         public int FPID { get; set; }
         public int quantity { get; set; }
-        public short weekday { get; set; }
-        public System.DateTime timeOfDay { get; set; }
-        public Nullable<int> foodItem_FIID { get; set; }
+        public int foodItem_FIID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<foodProgram> foodProgram { get; set; }
         public virtual foodItem foodItem { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<foodProgramPortion> foodProgramPortion { get; set; }
     }
 }

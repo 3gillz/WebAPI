@@ -307,6 +307,9 @@
     <Compile Include="Models\EF\foodProgramDate.cs">
       <DependentUpon>TrainingEF.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EF\foodProgramPortion.cs">
+      <DependentUpon>TrainingEF.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EF\goals.cs">
       <DependentUpon>TrainingEF.tt</DependentUpon>
     </Compile>
@@ -350,6 +353,9 @@
       <DependentUpon>TrainingEF.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EF\trainingProgramDate.cs">
+      <DependentUpon>TrainingEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EF\trainingProgramTraining.cs">
       <DependentUpon>TrainingEF.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EF\trainingSale.cs">
@@ -496,7 +502,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>55322</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

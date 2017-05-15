@@ -17,7 +17,7 @@ namespace TrainingMasterWebAPI.Models.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public training()
         {
-            this.trainingProgram = new HashSet<trainingProgram>();
+            this.trainingProgramTraining = new HashSet<trainingProgramTraining>();
         }
     
         public int TID { get; set; }
@@ -26,11 +26,9 @@ namespace TrainingMasterWebAPI.Models.EF
         public Nullable<int> exercise_EID { get; set; }
         public Nullable<int> durationMin { get; set; }
         public Nullable<int> restBetweenMin { get; set; }
-        public short weekday { get; set; }
-        public Nullable<System.DateTime> timeOfday { get; set; }
     
         public virtual exercise exercise { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<trainingProgram> trainingProgram { get; set; }
+        public virtual ICollection<trainingProgramTraining> trainingProgramTraining { get; set; }
     }
 }

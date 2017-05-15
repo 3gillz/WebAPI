@@ -17,15 +17,17 @@ namespace TrainingMasterWebAPI.Models.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public trainingProgram()
         {
+            this.trainingProgramTraining = new HashSet<trainingProgramTraining>();
             this.trainingProgramDate = new HashSet<trainingProgramDate>();
         }
     
         public int TPID { get; set; }
-        public Nullable<int> training_TID { get; set; }
         public Nullable<int> trainer_TRID { get; set; }
+        public string name { get; set; }
     
         public virtual trainer trainer { get; set; }
-        public virtual training training { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<trainingProgramTraining> trainingProgramTraining { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<trainingProgramDate> trainingProgramDate { get; set; }
     }
