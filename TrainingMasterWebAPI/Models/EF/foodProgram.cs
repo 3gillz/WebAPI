@@ -23,6 +23,7 @@ namespace TrainingMasterWebAPI.Models.EF
     
         public int FPMID { get; set; }
         public int trainer_TRID { get; set; }
+        public string name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<foodProgramPortion> foodProgramPortion { get; set; }

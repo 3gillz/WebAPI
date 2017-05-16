@@ -27,8 +27,6 @@ namespace TrainingMasterWebAPI.Queries
                          exercise_EID = x.exercise_EID,
                          durationMin = x.durationMin,
                          restBetweenMin = x.restBetweenMin,
-                         weekday = x.weekday,
-                         timeOfday = x.timeOfday
                      }).SingleOrDefault();
             return t;
         }
@@ -43,9 +41,7 @@ namespace TrainingMasterWebAPI.Queries
                          numberOfReps = x.numberOfReps,
                          exercise_EID = x.exercise_EID,
                          durationMin = x.durationMin,
-                         restBetweenMin = x.restBetweenMin,
-                         weekday = x.weekday,
-                         timeOfday = x.timeOfday
+                         restBetweenMin = x.restBetweenMin
                      });
             return t;
         }
@@ -61,9 +57,7 @@ namespace TrainingMasterWebAPI.Queries
                     numberOfReps = x.numberOfReps,
                     exercise_EID = x.exercise_EID,
                     durationMin = x.durationMin,
-                    restBetweenMin = x.restBetweenMin,
-                    weekday = x.weekday,
-                    timeOfday = x.timeOfday
+                    restBetweenMin = x.restBetweenMin
                 };
 
                 db.training.Add(t);
@@ -90,8 +84,6 @@ namespace TrainingMasterWebAPI.Queries
                 t.exercise_EID = x.exercise_EID;
                 t.durationMin = x.durationMin;
                 t.restBetweenMin = x.restBetweenMin;
-                t.weekday = x.weekday;
-                t.timeOfday = x.timeOfday;
 
                 db.SaveChanges();
                 return true;

@@ -48,8 +48,8 @@ namespace TrainingMasterWebAPI.Models.EF
         public virtual DbSet<trainingProgramTraining> trainingProgramTraining { get; set; }
         public virtual DbSet<training> training { get; set; }
         public virtual DbSet<foodPortion> foodPortion { get; set; }
-        public virtual DbSet<foodProgram> foodProgram { get; set; }
         public virtual DbSet<foodProgramPortion> foodProgramPortion { get; set; }
         public virtual DbSet<trainingProgram> trainingProgram { get; set; }
+        public virtual DbSet<foodProgram> foodProgram { get; set; }
     }
 }

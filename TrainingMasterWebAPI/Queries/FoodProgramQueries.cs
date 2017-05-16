@@ -21,7 +21,7 @@ namespace TrainingMasterWebAPI.Queries
                             select new FoodProgramDTO
                             {
                                 FPMID = x.FPMID,
-                                foodPortion_FPID = x.foodPortion_FPID,
+                                name = x.name,
                                 trainer_TRID = x.trainer_TRID
                             });
             return f;
@@ -34,7 +34,7 @@ namespace TrainingMasterWebAPI.Queries
                             select new FoodProgramDTO
                             {
                                 FPMID = x.FPMID,
-                                foodPortion_FPID = x.foodPortion_FPID,
+                                name = x.name,
                                 trainer_TRID = x.trainer_TRID
                             }).SingleOrDefault();
             return f;
@@ -47,7 +47,7 @@ namespace TrainingMasterWebAPI.Queries
                 var f = new foodProgram
                 {
                     FPMID = FoodProgram.FPMID,
-                    foodPortion_FPID = FoodProgram.foodPortion_FPID,
+                    name = FoodProgram.name,
                     trainer_TRID = FoodProgram.trainer_TRID
                 };
                 db.foodProgram.Add(f);
@@ -69,7 +69,7 @@ namespace TrainingMasterWebAPI.Queries
                          select x).SingleOrDefault();
 
                 f.FPMID = FoodProgram.FPMID;
-                f.foodPortion_FPID = FoodProgram.foodPortion_FPID;
+                f.name = FoodProgram.name;
                 f.trainer_TRID = FoodProgram.trainer_TRID;
 
                 db.SaveChanges();
@@ -92,7 +92,7 @@ namespace TrainingMasterWebAPI.Queries
                       select new FoodProgramDTO
                       {
                           FPMID = x.FPMID,
-                          foodPortion_FPID = x.foodPortion_FPID,
+                          name = x.name,
                           trainer_TRID = x.trainer_TRID
                       });
 
@@ -110,7 +110,7 @@ namespace TrainingMasterWebAPI.Queries
                       select new FoodProgramDTO
                       {
                           FPMID = x.FPMID,
-                          foodPortion_FPID = x.foodPortion_FPID,
+                          name = x.name,
                           trainer_TRID = x.trainer_TRID
                       }).FirstOrDefault();
 

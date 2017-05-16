@@ -8,7 +8,7 @@ namespace TrainingMasterWebAPI.Models.DTO
     public class FoodProgramDTO
     {
         public int FPMID { get; set; }
-        public int? foodPortion_FPID { get; set; }
-        public int? trainer_TRID { get; set; }
+        public string name { get; set; }
+        public int trainer_TRID { get; set; }
     }
 }

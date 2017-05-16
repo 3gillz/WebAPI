@@ -13,7 +13,5 @@ namespace TrainingMasterWebAPI.Models.DTO
         public int? exercise_EID { get; set; }
         public int? durationMin { get; set; }
         public int? restBetweenMin { get; set; }
-        public short weekday { get; set; }
-        public DateTime? timeOfday { get; set; }
     }
 }

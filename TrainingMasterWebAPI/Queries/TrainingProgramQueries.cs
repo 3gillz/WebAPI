@@ -22,7 +22,7 @@ namespace TrainingMasterWebAPI.Queries
                       select new TrainingProgramDTO
                       {
                           TPID = x.TPID,
-                          training_TID = x.training_TID,
+                          name = x.name,
                           trainer_TRID = x.trainer_TRID
                       });
             return tp;
@@ -39,7 +39,7 @@ namespace TrainingMasterWebAPI.Queries
                       select new TrainingProgramDTO
                       {
                           TPID = x.TPID,
-                          training_TID = x.training_TID,
+                          name = x.name,
                           trainer_TRID = x.trainer_TRID
                       });
             return tp;
@@ -51,7 +51,7 @@ namespace TrainingMasterWebAPI.Queries
                       select new TrainingProgramDTO
                       {
                           TPID = x.TPID,
-                          training_TID = x.training_TID,
+                          name = x.name,
                           trainer_TRID = x.trainer_TRID
                       });
             return tp;
@@ -64,7 +64,7 @@ namespace TrainingMasterWebAPI.Queries
                 var tp = new trainingProgram
                 {
                     TPID = x.TPID,
-                    training_TID = x.training_TID,
+                    name = x.name,
                     trainer_TRID = x.trainer_TRID
                 };
 
@@ -87,7 +87,7 @@ namespace TrainingMasterWebAPI.Queries
                           select y).SingleOrDefault();
 
                 tp.TPID = x.TPID;
-                tp.training_TID = x.training_TID;
+                tp.name = x.name;
                 tp.trainer_TRID = x.trainer_TRID;
 
                 db.SaveChanges();

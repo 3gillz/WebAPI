@@ -136,6 +136,7 @@
           </Key>
           <Property Name="FPMID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="trainer_TRID" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="foodProgramDate">
           <Key>
@@ -979,7 +980,6 @@
             <End Role="trainingProgramTraining" EntitySet="trainingProgramTraining" />
           </AssociationSet>
           <EntitySet Name="foodPortion" EntityType="TrainingMasterDatabaseModel.foodPortion" />
-          <EntitySet Name="foodProgram" EntityType="TrainingMasterDatabaseModel.foodProgram" />
           <EntitySet Name="foodProgramPortion" EntityType="TrainingMasterDatabaseModel.foodProgramPortion" />
           <AssociationSet Name="FK__foodPorti__foodI__2FCF1A8A" Association="TrainingMasterDatabaseModel.FK__foodPorti__foodI__2FCF1A8A">
             <End Role="foodItem" EntitySet="foodItem" />
@@ -988,18 +988,6 @@
           <AssociationSet Name="FK__foodProgr__foodP__2CF2ADDF" Association="TrainingMasterDatabaseModel.FK__foodProgr__foodP__2CF2ADDF">
             <End Role="foodPortion" EntitySet="foodPortion" />
             <End Role="foodProgramPortion" EntitySet="foodProgramPortion" />
-          </AssociationSet>
-          <AssociationSet Name="FK__foodProgr__foodP__2DE6D218" Association="TrainingMasterDatabaseModel.FK__foodProgr__foodP__2DE6D218">
-            <End Role="foodProgram" EntitySet="foodProgram" />
-            <End Role="foodProgramPortion" EntitySet="foodProgramPortion" />
-          </AssociationSet>
-          <AssociationSet Name="FK__foodProgr__foodP__628FA481" Association="TrainingMasterDatabaseModel.FK__foodProgr__foodP__628FA481">
-            <End Role="foodProgram" EntitySet="foodProgram" />
-            <End Role="foodProgramDate" EntitySet="foodProgramDate" />
-          </AssociationSet>
-          <AssociationSet Name="FK__foodProgr__train__30C33EC3" Association="TrainingMasterDatabaseModel.FK__foodProgr__train__30C33EC3">
-            <End Role="trainer" EntitySet="trainer" />
-            <End Role="foodProgram" EntitySet="foodProgram" />
           </AssociationSet>
           <EntitySet Name="trainingProgram" EntityType="TrainingMasterDatabaseModel.trainingProgram" />
           <AssociationSet Name="FK__trainingP__train__31B762FC" Association="TrainingMasterDatabaseModel.FK__trainingP__train__31B762FC">
@@ -1013,6 +1001,19 @@
           <AssociationSet Name="FK__trainingP__train__6EF57B66" Association="TrainingMasterDatabaseModel.FK__trainingP__train__6EF57B66">
             <End Role="trainingProgram" EntitySet="trainingProgram" />
             <End Role="trainingProgramDate" EntitySet="trainingProgramDate" />
+          </AssociationSet>
+          <EntitySet Name="foodProgram" EntityType="TrainingMasterDatabaseModel.foodProgram" />
+          <AssociationSet Name="FK__foodProgr__foodP__2DE6D218" Association="TrainingMasterDatabaseModel.FK__foodProgr__foodP__2DE6D218">
+            <End Role="foodProgram" EntitySet="foodProgram" />
+            <End Role="foodProgramPortion" EntitySet="foodProgramPortion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__foodProgr__foodP__628FA481" Association="TrainingMasterDatabaseModel.FK__foodProgr__foodP__628FA481">
+            <End Role="foodProgram" EntitySet="foodProgram" />
+            <End Role="foodProgramDate" EntitySet="foodProgramDate" />
+          </AssociationSet>
+          <AssociationSet Name="FK__foodProgr__train__30C33EC3" Association="TrainingMasterDatabaseModel.FK__foodProgr__train__30C33EC3">
+            <End Role="trainer" EntitySet="trainer" />
+            <End Role="foodProgram" EntitySet="foodProgram" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="C__MigrationHistory">
@@ -1236,8 +1237,8 @@
           <NavigationProperty Name="product" Relationship="TrainingMasterDatabaseModel.FK__product__trainer__1332DBDC" FromRole="trainer" ToRole="product" />
           <NavigationProperty Name="trainingSale" Relationship="TrainingMasterDatabaseModel.FK__trainingS__train__14270015" FromRole="trainer" ToRole="trainingSale" />
           <NavigationProperty Name="foodItem" Relationship="TrainingMasterDatabaseModel.FK__foodItem__traine__2180FB33" FromRole="trainer" ToRole="foodItem" />
-          <NavigationProperty Name="foodProgram" Relationship="TrainingMasterDatabaseModel.FK__foodProgr__train__30C33EC3" FromRole="trainer" ToRole="foodProgram" />
           <NavigationProperty Name="trainingProgram" Relationship="TrainingMasterDatabaseModel.FK__trainingP__train__31B762FC" FromRole="trainer" ToRole="trainingProgram" />
+          <NavigationProperty Name="foodProgram" Relationship="TrainingMasterDatabaseModel.FK__foodProgr__train__30C33EC3" FromRole="trainer" ToRole="foodProgram" />
         </EntityType>
         <EntityType Name="trainingProgramDate">
           <Key>
@@ -1613,16 +1614,6 @@
           <NavigationProperty Name="foodItem" Relationship="TrainingMasterDatabaseModel.FK__foodPorti__foodI__2FCF1A8A" FromRole="foodPortion" ToRole="foodItem" />
           <NavigationProperty Name="foodProgramPortion" Relationship="TrainingMasterDatabaseModel.FK__foodProgr__foodP__2CF2ADDF" FromRole="foodPortion" ToRole="foodProgramPortion" />
         </EntityType>
-        <EntityType Name="foodProgram">
-          <Key>
-            <PropertyRef Name="FPMID" />
-          </Key>
-          <Property Name="FPMID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="trainer_TRID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="foodProgramPortion" Relationship="TrainingMasterDatabaseModel.FK__foodProgr__foodP__2DE6D218" FromRole="foodProgram" ToRole="foodProgramPortion" />
-          <NavigationProperty Name="foodProgramDate" Relationship="TrainingMasterDatabaseModel.FK__foodProgr__foodP__628FA481" FromRole="foodProgram" ToRole="foodProgramDate" />
-          <NavigationProperty Name="trainer" Relationship="TrainingMasterDatabaseModel.FK__foodProgr__train__30C33EC3" FromRole="foodProgram" ToRole="trainer" />
-        </EntityType>
         <EntityType Name="foodProgramPortion">
           <Key>
             <PropertyRef Name="foodProgram_FPMID" />
@@ -1656,42 +1647,6 @@
             </Principal>
             <Dependent Role="foodProgramPortion">
               <PropertyRef Name="foodPortion_FPID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__foodProgr__foodP__2DE6D218">
-          <End Type="TrainingMasterDatabaseModel.foodProgram" Role="foodProgram" Multiplicity="1" />
-          <End Type="TrainingMasterDatabaseModel.foodProgramPortion" Role="foodProgramPortion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="foodProgram">
-              <PropertyRef Name="FPMID" />
-            </Principal>
-            <Dependent Role="foodProgramPortion">
-              <PropertyRef Name="foodProgram_FPMID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__foodProgr__foodP__628FA481">
-          <End Type="TrainingMasterDatabaseModel.foodProgram" Role="foodProgram" Multiplicity="0..1" />
-          <End Type="TrainingMasterDatabaseModel.foodProgramDate" Role="foodProgramDate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="foodProgram">
-              <PropertyRef Name="FPMID" />
-            </Principal>
-            <Dependent Role="foodProgramDate">
-              <PropertyRef Name="foodProgram_FPMID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__foodProgr__train__30C33EC3">
-          <End Type="TrainingMasterDatabaseModel.trainer" Role="trainer" Multiplicity="1" />
-          <End Type="TrainingMasterDatabaseModel.foodProgram" Role="foodProgram" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="trainer">
-              <PropertyRef Name="TRID" />
-            </Principal>
-            <Dependent Role="foodProgram">
-              <PropertyRef Name="trainer_TRID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1739,6 +1694,53 @@
             </Principal>
             <Dependent Role="trainingProgramDate">
               <PropertyRef Name="trainingProgram_TPID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="foodProgram">
+          <Key>
+            <PropertyRef Name="FPMID" />
+          </Key>
+          <Property Name="FPMID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="trainer_TRID" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="foodProgramPortion" Relationship="TrainingMasterDatabaseModel.FK__foodProgr__foodP__2DE6D218" FromRole="foodProgram" ToRole="foodProgramPortion" />
+          <NavigationProperty Name="foodProgramDate" Relationship="TrainingMasterDatabaseModel.FK__foodProgr__foodP__628FA481" FromRole="foodProgram" ToRole="foodProgramDate" />
+          <NavigationProperty Name="trainer" Relationship="TrainingMasterDatabaseModel.FK__foodProgr__train__30C33EC3" FromRole="foodProgram" ToRole="trainer" />
+        </EntityType>
+        <Association Name="FK__foodProgr__foodP__2DE6D218">
+          <End Type="TrainingMasterDatabaseModel.foodProgram" Role="foodProgram" Multiplicity="1" />
+          <End Type="TrainingMasterDatabaseModel.foodProgramPortion" Role="foodProgramPortion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="foodProgram">
+              <PropertyRef Name="FPMID" />
+            </Principal>
+            <Dependent Role="foodProgramPortion">
+              <PropertyRef Name="foodProgram_FPMID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__foodProgr__foodP__628FA481">
+          <End Type="TrainingMasterDatabaseModel.foodProgram" Role="foodProgram" Multiplicity="0..1" />
+          <End Type="TrainingMasterDatabaseModel.foodProgramDate" Role="foodProgramDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="foodProgram">
+              <PropertyRef Name="FPMID" />
+            </Principal>
+            <Dependent Role="foodProgramDate">
+              <PropertyRef Name="foodProgram_FPMID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__foodProgr__train__30C33EC3">
+          <End Type="TrainingMasterDatabaseModel.trainer" Role="trainer" Multiplicity="1" />
+          <End Type="TrainingMasterDatabaseModel.foodProgram" Role="foodProgram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="trainer">
+              <PropertyRef Name="TRID" />
+            </Principal>
+            <Dependent Role="foodProgram">
+              <PropertyRef Name="trainer_TRID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2046,14 +2048,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="foodProgram">
-            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.foodProgram">
-              <MappingFragment StoreEntitySet="foodProgram">
-                <ScalarProperty Name="trainer_TRID" ColumnName="trainer_TRID" />
-                <ScalarProperty Name="FPMID" ColumnName="FPMID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="foodProgramPortion">
             <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.foodProgramPortion">
               <MappingFragment StoreEntitySet="foodProgramPortion">
@@ -2070,6 +2064,15 @@
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="trainer_TRID" ColumnName="trainer_TRID" />
                 <ScalarProperty Name="TPID" ColumnName="TPID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="foodProgram">
+            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.foodProgram">
+              <MappingFragment StoreEntitySet="foodProgram">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="trainer_TRID" ColumnName="trainer_TRID" />
+                <ScalarProperty Name="FPMID" ColumnName="FPMID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

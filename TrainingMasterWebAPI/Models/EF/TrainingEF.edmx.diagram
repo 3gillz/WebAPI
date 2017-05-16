@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="eca39b8d9d8f4f35be68c511c4a58858" Name="Diagram1" ZoomLevel="55">
+      <Diagram DiagramId="eca39b8d9d8f4f35be68c511c4a58858" Name="Diagram1" ZoomLevel="72">
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="26.25" />
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="31.5" />
@@ -51,17 +51,17 @@
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__training__exerci__6754599E" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__trainingP__train__29221CFB" />
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.foodPortion" Width="1.5" PointX="5.25" PointY="19.375" />
-        <EntityTypeShape EntityType="TrainingMasterDatabaseModel.foodProgram" Width="1.5" PointX="3" PointY="30.875" />
-        <EntityTypeShape EntityType="TrainingMasterDatabaseModel.foodProgramPortion" Width="1.5" PointX="7.5" PointY="21" />
+        <EntityTypeShape EntityType="TrainingMasterDatabaseModel.foodProgramPortion" Width="2.25" PointX="7.5" PointY="21" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__foodPorti__foodI__2FCF1A8A" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__foodProgr__foodP__2CF2ADDF" />
-        <AssociationConnector Association="TrainingMasterDatabaseModel.FK__foodProgr__foodP__2DE6D218" />
-        <AssociationConnector Association="TrainingMasterDatabaseModel.FK__foodProgr__foodP__628FA481" />
-        <AssociationConnector Association="TrainingMasterDatabaseModel.FK__foodProgr__train__30C33EC3" />
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.trainingProgram" Width="1.5" PointX="3" PointY="14.125" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__trainingP__train__31B762FC" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__trainingP__train__2A164134" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__trainingP__train__6EF57B66" />
+        <EntityTypeShape EntityType="TrainingMasterDatabaseModel.foodProgram" Width="1.5" PointX="3" PointY="31.125" />
+        <AssociationConnector Association="TrainingMasterDatabaseModel.FK__foodProgr__foodP__2DE6D218" />
+        <AssociationConnector Association="TrainingMasterDatabaseModel.FK__foodProgr__foodP__628FA481" />
+        <AssociationConnector Association="TrainingMasterDatabaseModel.FK__foodProgr__train__30C33EC3" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

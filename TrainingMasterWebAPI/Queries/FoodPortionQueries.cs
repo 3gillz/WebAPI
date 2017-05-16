@@ -22,8 +22,6 @@ namespace TrainingMasterWebAPI.Queries
                      {
                          FPID = x.FPID,
                          quantity = x.quantity,
-                         weekday = x.weekday,
-                         timeOfDay = x.timeOfDay,
                          foodItem_FIID = x.foodItem_FIID
 
                      });
@@ -38,8 +36,6 @@ namespace TrainingMasterWebAPI.Queries
                      {
                          FPID = x.FPID,
                          quantity = x.quantity,
-                         weekday = x.weekday,
-                         timeOfDay = x.timeOfDay,
                          foodItem_FIID = x.foodItem_FIID
 
                      }).SingleOrDefault();
@@ -54,8 +50,6 @@ namespace TrainingMasterWebAPI.Queries
                          select x).SingleOrDefault();
 
                 f.quantity = foodPortion.quantity;
-                f.weekday = foodPortion.weekday;
-                f.timeOfDay = foodPortion.timeOfDay;
                 f.foodItem_FIID = foodPortion.foodItem_FIID;
 
                 db.SaveChanges();
@@ -74,8 +68,6 @@ namespace TrainingMasterWebAPI.Queries
                 {
                     FPID = foodPortion.FPID,
                     quantity = foodPortion.quantity,
-                    weekday = foodPortion.weekday,
-                    timeOfDay = foodPortion.timeOfDay,
                     foodItem_FIID = foodPortion.foodItem_FIID
                 };
 
