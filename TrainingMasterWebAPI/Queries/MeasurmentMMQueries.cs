@@ -61,11 +61,47 @@ namespace TrainingMasterWebAPI.Queries
                      }).SingleOrDefault();
             return m;
         }
+        public decimal calculatedPercentage;
 
+        public int aldur(string kt)
+        {
+            char[] c = kt.ToCharArray();
+            int i = int.Parse((c[4].ToString() + c[5].ToString()));
+            DateTime d = DateTime.Now;
+            c = d.Year.ToString().ToCharArray();
+            int b = int.Parse((c[2].ToString() + c[3].ToString()));
+            if (((b - i)) < 0)
+            {
+                return 100 + (b - i);
+            }
+            return (b - i);
+        }
+
+    
         public bool AddMeasurmentMM(MeasurmentMMDTO MeasureMM)
         {
-            try
+            var customer = (from x in db.customer
+                            where x.CID == MeasureMM.customer_CID
+                            select x).SingleOrDefault();
+
+            var age = aldur(customer.kennitala);
+
+            if (MeasureMM.chest != 0 || MeasureMM.chest != null)
             {
+                if (customer.gender == 1)
+                {
+                    var total = MeasureMM.chest + MeasureMM.axilliary + MeasureMM.suprailiac + MeasureMM.abdominal + MeasureMM.thigh + MeasureMM.tricep + MeasureMM.subscapular;
+                    calculatedPercentage = 495M / (1.112M - (0.00043499M * (decimal)total) + (0.00000055M * (decimal)total * (decimal)total) - (0.00028826M * age)) - 450M;
+                }
+                else
+                {
+                    var total = MeasureMM.chest + MeasureMM.axilliary + MeasureMM.suprailiac + MeasureMM.abdominal + MeasureMM.thigh + MeasureMM.tricep + MeasureMM.subscapular;
+                    calculatedPercentage =  495M / (1.097M - (0.00046971M * (decimal)total) + (0.00000056M * (decimal)total * (decimal)total) - (0.00012828M * age)) - 450M;
+                }
+            }
+
+            var heightf = customer.height / 100;
+    
                 var m = new measureMM
                 {
                     MMMID = MeasureMM.MMMID,
@@ -78,20 +114,17 @@ namespace TrainingMasterWebAPI.Queries
                     subscapular = MeasureMM.subscapular,
                     suprailiac = MeasureMM.suprailiac,
                     axilliary = MeasureMM.axilliary,
-                    bmi = MeasureMM.bmi,
-                    lbm = MeasureMM.lbm,
-                    fatPercentage = MeasureMM.fatPercentage,
+                    bmi = MeasureMM.kg / heightf / heightf,
+                    lbm = (( 0.32810M * MeasureMM.kg.Value) + (0.33929M * customer.height)) - 29.5336M,
+                    fatPercentage = calculatedPercentage,
                     kg = MeasureMM.kg
                 };
-                db.measureMM.Add(m);
-                db.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                return true;
-            }
+           
+            db.measureMM.Add(m);
+            db.SaveChanges();
+            return true;     
         }
+
 
         public bool UpdateMeasurmentMM(MeasurmentMMDTO MeasureMM)
         {
