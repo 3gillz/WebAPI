@@ -275,7 +275,6 @@
     <Compile Include="Models\DTO\TrainingDTO.cs" />
     <Compile Include="Models\DTO\TrainingProgramDateDTO.cs" />
     <Compile Include="Models\DTO\TrainingProgramDTO.cs" />
-    <Compile Include="Models\DTO\TrainingProgramTraining.cs" />
     <Compile Include="Models\DTO\TrainingProgramTrainingDTO.cs" />
     <Compile Include="Models\DTO\TrainingSaleDTO.cs" />
     <Compile Include="Models\DTO\TrainingSaleProductDTO.cs" />
