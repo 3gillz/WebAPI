@@ -18,7 +18,7 @@ namespace TrainingMasterWebAPI.Queries
 
         public IEnumerable<TrainingProgramTrainingDTO> GetTrainingProgramTrainingByTPID(int TPID)
         {
-            var tp = (from x in db.trainingProgramTraining
+            var tpt = (from x in db.trainingProgramTraining
                       where x.trainingProgram_TPID == TPID
                       select new TrainingProgramTrainingDTO
                       {
@@ -27,7 +27,7 @@ namespace TrainingMasterWebAPI.Queries
                           weekDay = x.weekday,
                           timeOfDay = x.timeOfDay
                       });
-            return tp;
+            return tpt;
         }
 
         public bool AddTrainingProgramTraining(TrainingProgramTrainingDTO x)
