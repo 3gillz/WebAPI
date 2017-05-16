@@ -246,6 +246,7 @@
     <Compile Include="Controllers\TrainingProductSaleController.cs" />
     <Compile Include="Controllers\TrainingProgramController.cs" />
     <Compile Include="Controllers\TrainingProgramDateController.cs" />
+    <Compile Include="Controllers\TrainingProgramTrainingController.cs" />
     <Compile Include="Controllers\TrainingSaleController.cs" />
     <Compile Include="Controllers\ZipcodesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -387,6 +388,7 @@
     <Compile Include="Queries\TrainingProductSaleQueries.cs" />
     <Compile Include="Queries\TrainingProgramDateQueries.cs" />
     <Compile Include="Queries\TrainingProgramQueries.cs" />
+    <Compile Include="Queries\TrainingProgramTrainingQueries.cs" />
     <Compile Include="Queries\TrainingQueries.cs" />
     <Compile Include="Queries\TrainingSaleQueries.cs" />
     <Compile Include="Queries\ZipcodesQueries.cs" />

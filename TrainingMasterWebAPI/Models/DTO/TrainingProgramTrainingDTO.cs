@@ -9,7 +9,7 @@ namespace TrainingMasterWebAPI.Models.DTO
     {
         public int trainingProgram_TPID { get; set; }
         public int training_TID { get; set; }
-        public int weekDay { get; set; }
-        public int timeOfDay { get; set; }
+        public short weekDay { get; set; }
+        public short timeOfDay { get; set; }
     }
 }
