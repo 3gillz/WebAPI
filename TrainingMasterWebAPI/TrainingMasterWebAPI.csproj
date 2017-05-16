@@ -230,6 +230,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FoodProgramController.cs" />
     <Compile Include="Controllers\FoodProgramDateController.cs" />
+    <Compile Include="Controllers\FoodProgramPortionController.cs" />
     <Compile Include="Controllers\GoalsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MeasurmentCMController.cs" />
@@ -262,6 +263,8 @@
     <Compile Include="Models\DTO\FoodPortionDTO.cs" />
     <Compile Include="Models\DTO\FoodProgramDateDTO.cs" />
     <Compile Include="Models\DTO\FoodProgramDTO.cs" />
+    <Compile Include="Models\DTO\FoodProgramPortion.cs" />
+    <Compile Include="Models\DTO\FoodProgramPortionDTO.cs" />
     <Compile Include="Models\DTO\GoalsDTO.cs" />
     <Compile Include="Models\DTO\MeasurmentCMDTO.cs" />
     <Compile Include="Models\DTO\MeasurmentMMDTO.cs" />
@@ -272,6 +275,8 @@
     <Compile Include="Models\DTO\TrainingDTO.cs" />
     <Compile Include="Models\DTO\TrainingProgramDateDTO.cs" />
     <Compile Include="Models\DTO\TrainingProgramDTO.cs" />
+    <Compile Include="Models\DTO\TrainingProgramTraining.cs" />
+    <Compile Include="Models\DTO\TrainingProgramTrainingDTO.cs" />
     <Compile Include="Models\DTO\TrainingSaleDTO.cs" />
     <Compile Include="Models\DTO\TrainingSaleProductDTO.cs" />
     <Compile Include="Models\DTO\ZipcodesDTO.cs" />
@@ -373,6 +378,7 @@
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Queries\AccountQueries.cs" />
     <Compile Include="Queries\FoodProgramDateQueries.cs" />
+    <Compile Include="Queries\FoodProgramPortionQueries.cs" />
     <Compile Include="Queries\GoalsQueries.cs" />
     <Compile Include="Queries\MeasurmentCMQueries.cs" />
     <Compile Include="Queries\MeasurmentMMQueries.cs" />

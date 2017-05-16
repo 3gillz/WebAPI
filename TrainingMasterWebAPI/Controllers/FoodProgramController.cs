@@ -33,7 +33,7 @@ namespace TrainingMasterWebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("GetById")]
+        [Route("{id}")]
         public FoodProgramDTO GetFoodProgramById(int id)
         {
             return fpq.GetFoodProgramById(id);
