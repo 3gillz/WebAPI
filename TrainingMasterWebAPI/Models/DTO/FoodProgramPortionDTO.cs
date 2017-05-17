@@ -9,7 +9,7 @@ namespace TrainingMasterWebAPI.Models.DTO
     {
         public int foodPortion_FPID { get; set; } 
         public int foodProgram_FPMID { get; set; }
-        public int weekDay { get; set; }
-        public int timeOfDay { get; set; }
+        public short weekDay { get; set; }
+        public short timeOfDay { get; set; }
     }
 }

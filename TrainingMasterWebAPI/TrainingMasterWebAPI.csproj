@@ -230,6 +230,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FoodProgramController.cs" />
     <Compile Include="Controllers\FoodProgramDateController.cs" />
+    <Compile Include="Controllers\FoodProgramPortionController.cs" />
     <Compile Include="Controllers\GoalsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MeasurmentCMController.cs" />
@@ -246,6 +247,7 @@
     <Compile Include="Controllers\TrainingProductSaleController.cs" />
     <Compile Include="Controllers\TrainingProgramController.cs" />
     <Compile Include="Controllers\TrainingProgramDateController.cs" />
+    <Compile Include="Controllers\TrainingProgramTrainingController.cs" />
     <Compile Include="Controllers\TrainingSaleController.cs" />
     <Compile Include="Controllers\ZipcodesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -261,6 +263,8 @@
     <Compile Include="Models\DTO\FoodPortionDTO.cs" />
     <Compile Include="Models\DTO\FoodProgramDateDTO.cs" />
     <Compile Include="Models\DTO\FoodProgramDTO.cs" />
+    <Compile Include="Models\DTO\FoodProgramPortion.cs" />
+    <Compile Include="Models\DTO\FoodProgramPortionDTO.cs" />
     <Compile Include="Models\DTO\GoalsDTO.cs" />
     <Compile Include="Models\DTO\MeasurmentCMDTO.cs" />
     <Compile Include="Models\DTO\MeasurmentMMDTO.cs" />
@@ -271,6 +275,7 @@
     <Compile Include="Models\DTO\TrainingDTO.cs" />
     <Compile Include="Models\DTO\TrainingProgramDateDTO.cs" />
     <Compile Include="Models\DTO\TrainingProgramDTO.cs" />
+    <Compile Include="Models\DTO\TrainingProgramTrainingDTO.cs" />
     <Compile Include="Models\DTO\TrainingSaleDTO.cs" />
     <Compile Include="Models\DTO\TrainingSaleProductDTO.cs" />
     <Compile Include="Models\DTO\ZipcodesDTO.cs" />
@@ -372,6 +377,7 @@
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Queries\AccountQueries.cs" />
     <Compile Include="Queries\FoodProgramDateQueries.cs" />
+    <Compile Include="Queries\FoodProgramPortionQueries.cs" />
     <Compile Include="Queries\GoalsQueries.cs" />
     <Compile Include="Queries\MeasurmentCMQueries.cs" />
     <Compile Include="Queries\MeasurmentMMQueries.cs" />
@@ -387,6 +393,7 @@
     <Compile Include="Queries\TrainingProductSaleQueries.cs" />
     <Compile Include="Queries\TrainingProgramDateQueries.cs" />
     <Compile Include="Queries\TrainingProgramQueries.cs" />
+    <Compile Include="Queries\TrainingProgramTrainingQueries.cs" />
     <Compile Include="Queries\TrainingQueries.cs" />
     <Compile Include="Queries\TrainingSaleQueries.cs" />
     <Compile Include="Queries\ZipcodesQueries.cs" />
