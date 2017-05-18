@@ -36,8 +36,8 @@ namespace TrainingMasterWebAPI.Models.EF
         public Nullable<int> trainer_TRID { get; set; }
         public string category { get; set; }
     
-        public virtual trainer trainer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<foodPortion> foodPortion { get; set; }
+        public virtual trainer trainer { get; set; }
     }
 }

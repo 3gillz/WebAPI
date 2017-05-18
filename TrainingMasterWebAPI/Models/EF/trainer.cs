@@ -18,13 +18,13 @@ namespace TrainingMasterWebAPI.Models.EF
         public trainer()
         {
             this.AspNetUsers = new HashSet<AspNetUsers>();
-            this.customer = new HashSet<customer>();
             this.exercise = new HashSet<exercise>();
-            this.product = new HashSet<product>();
-            this.trainingSale = new HashSet<trainingSale>();
             this.foodItem = new HashSet<foodItem>();
-            this.trainingProgram = new HashSet<trainingProgram>();
             this.foodProgram = new HashSet<foodProgram>();
+            this.trainingSale = new HashSet<trainingSale>();
+            this.product = new HashSet<product>();
+            this.customer = new HashSet<customer>();
+            this.trainingProgram = new HashSet<trainingProgram>();
         }
     
         public int TRID { get; set; }
@@ -37,22 +37,23 @@ namespace TrainingMasterWebAPI.Models.EF
         public string address { get; set; }
         public string location { get; set; }
         public Nullable<bool> hidden { get; set; }
+        public string profileImagePath { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<customer> customer { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<exercise> exercise { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<product> product { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<trainingSale> trainingSale { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<foodItem> foodItem { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<trainingProgram> trainingProgram { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<foodProgram> foodProgram { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<trainingSale> trainingSale { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<product> product { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<customer> customer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<trainingProgram> trainingProgram { get; set; }
     }
 }

@@ -18,6 +18,7 @@ namespace TrainingMasterWebAPI.Models.EF
         public int duration { get; set; }
         public int trainingSale_TSID { get; set; }
         public int product_PID { get; set; }
+        public System.DateTime endDate { get; set; }
     
         public virtual product product { get; set; }
         public virtual trainingSale trainingSale { get; set; }

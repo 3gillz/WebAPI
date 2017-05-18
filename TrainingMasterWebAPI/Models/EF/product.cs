@@ -26,6 +26,7 @@ namespace TrainingMasterWebAPI.Models.EF
         public string description { get; set; }
         public Nullable<int> trainer_TRID { get; set; }
         public Nullable<bool> hidden { get; set; }
+        public int price { get; set; }
     
         public virtual trainer trainer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -44,6 +44,7 @@ namespace TrainingMasterWebAPI.Models.EF
         public int height { get; set; }
         public Nullable<int> trainer_TRID { get; set; }
         public Nullable<bool> hidden { get; set; }
+        public short jobDifficulty { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }

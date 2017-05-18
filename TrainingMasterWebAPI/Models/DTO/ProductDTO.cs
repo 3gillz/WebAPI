@@ -13,5 +13,6 @@ namespace TrainingMasterWebAPI.Models.DTO
         public string description { get; set; }
         public int? trainer_TRID { get; set; }
         public bool? hidden { get; set; }
+        public int price { get; set; }
     }
 }
