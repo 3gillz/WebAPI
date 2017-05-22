@@ -61,9 +61,9 @@ namespace TrainingMasterWebAPI.Queries
                      }).SingleOrDefault();
             return m;
         }
-        public decimal calculatedPercentage;
 
-        public int aldur(string kt)
+
+        public int ageFromKt(string kt)
         {
             char[] c = kt.ToCharArray();
             int i = int.Parse((c[4].ToString() + c[5].ToString()));
@@ -77,6 +77,7 @@ namespace TrainingMasterWebAPI.Queries
             return (b - i);
         }
 
+        public decimal? calculatedPercentage;
     
         public bool AddMeasurmentMM(MeasurmentMMDTO MeasureMM)
         {
@@ -84,41 +85,55 @@ namespace TrainingMasterWebAPI.Queries
                             where x.CID == MeasureMM.customer_CID
                             select x).SingleOrDefault();
 
-            var age = aldur(customer.kennitala);
+            var age = ageFromKt(customer.kennitala);
+            var heightf = customer.height / 100;
 
-            if (MeasureMM.chest != 0 || MeasureMM.chest != null)
+            if (MeasureMM.chest == 0 || MeasureMM.chest == null) //Four Point Measurment
             {
-                if (customer.gender == 1)
+                decimal? total4 = MeasureMM.tricep + MeasureMM.suprailiac + MeasureMM.abdominal + MeasureMM.thigh;
+                decimal squaredTotal = (decimal)Math.Pow((double)total4, 2);
+
+                if(customer.gender == 1)   //Male
                 {
-                    var total = MeasureMM.chest + MeasureMM.axilliary + MeasureMM.suprailiac + MeasureMM.abdominal + MeasureMM.thigh + MeasureMM.tricep + MeasureMM.subscapular;
-                    calculatedPercentage = 495M / (1.112M - (0.00043499M * (decimal)total) + (0.00000055M * (decimal)total * (decimal)total) - (0.00028826M * age)) - 450M;
+                    calculatedPercentage = (0.29288M * total4) - (0.0005M * squaredTotal) + (0.15845M * age) - 5.76377M;
                 }
-                else
+                else if(customer.gender == 2)   //Female
                 {
-                    var total = MeasureMM.chest + MeasureMM.axilliary + MeasureMM.suprailiac + MeasureMM.abdominal + MeasureMM.thigh + MeasureMM.tricep + MeasureMM.subscapular;
-                    calculatedPercentage =  495M / (1.097M - (0.00046971M * (decimal)total) + (0.00000056M * (decimal)total * (decimal)total) - (0.00012828M * age)) - 450M;
+                    calculatedPercentage = (0.29669M * total4) - (0.00043M * squaredTotal) + (0.02963M * age) + 1.4072M;
+                }
+
+            }
+            else //Seven Point Measurment
+            {
+                decimal? total7 = MeasureMM.chest + MeasureMM.axilliary + MeasureMM.suprailiac + MeasureMM.abdominal + MeasureMM.thigh + MeasureMM.tricep + MeasureMM.subscapular;
+
+                if (customer.gender == 1)   //Male
+                {
+                    calculatedPercentage = 495M / (1.112M - (0.00043499M * total7) + (0.00000055M * total7 * total7) - (0.00028826M * age)) - 450M;
+                }
+                else if (customer.gender == 2) //Female
+                {
+                    calculatedPercentage =  495M / (1.097M - (0.00046971M * total7) + (0.00000056M * total7 * total7) - (0.00012828M * age)) - 450M;
                 }
             }
 
-            var heightf = customer.height / 100;
-    
-                var m = new measureMM
-                {
-                    MMMID = MeasureMM.MMMID,
-                    customer_CID = MeasureMM.customer_CID,
-                    date = MeasureMM.date,
-                    chest = MeasureMM.chest,
-                    abdominal = MeasureMM.abdominal,
-                    thigh = MeasureMM.thigh,
-                    tricep = MeasureMM.tricep,
-                    subscapular = MeasureMM.subscapular,
-                    suprailiac = MeasureMM.suprailiac,
-                    axilliary = MeasureMM.axilliary,
-                    bmi = MeasureMM.kg / heightf / heightf,
-                    lbm = (( 0.32810M * MeasureMM.kg.Value) + (0.33929M * customer.height)) - 29.5336M,
-                    fatPercentage = calculatedPercentage,
-                    kg = MeasureMM.kg
-                };
+            var m = new measureMM
+            {
+                MMMID = MeasureMM.MMMID,
+                customer_CID = MeasureMM.customer_CID,
+                date = MeasureMM.date,
+                chest = MeasureMM.chest,
+                abdominal = MeasureMM.abdominal,
+                thigh = MeasureMM.thigh,
+                tricep = MeasureMM.tricep,
+                subscapular = MeasureMM.subscapular,
+                suprailiac = MeasureMM.suprailiac,
+                axilliary = MeasureMM.axilliary,
+                bmi = MeasureMM.kg / heightf / heightf,
+                lbm = ((0.32810M * MeasureMM.kg.Value) + (0.33929M * customer.height)) - 29.5336M,
+                fatPercentage = calculatedPercentage,
+                kg = MeasureMM.kg
+            };
            
             db.measureMM.Add(m);
             db.SaveChanges();

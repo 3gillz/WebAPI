@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -32,6 +33,15 @@ namespace TrainingMasterWebAPI.Controllers
         {
             return tq.GetTrainerById(id);
         }
+
+        [HttpGet]
+        [Route("GetCurrentTrainer")]
+        public TrainerDTO GetCurrentTrainer()
+        {
+            var user = User.Identity.GetUserId();
+            return tq.GetCurrentTrainer(user);
+        }
+
 
         [HttpPut]
         [Route("Add")]
