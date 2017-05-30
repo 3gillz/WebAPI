@@ -24,6 +24,7 @@ namespace TrainingMasterWebAPI.Queries
                          duration = x.duration,
                          price = x.price,
                          product_PID = x.product_PID,
+                         endDate = x.endDate,
                          trainingSale_TSID = x.trainingSale_TSID
                      };
 
@@ -39,6 +40,7 @@ namespace TrainingMasterWebAPI.Queries
                            duration = x.duration,
                            price = x.price,
                            product_PID = x.product_PID,
+                           endDate = x.endDate,
                            trainingSale_TSID = x.trainingSale_TSID
 
                        }).SingleOrDefault();
@@ -55,6 +57,7 @@ namespace TrainingMasterWebAPI.Queries
                     duration = TrainingSaleProduct.duration,
                     price = TrainingSaleProduct.price,
                     product_PID = TrainingSaleProduct.product_PID,
+                    endDate = TrainingSaleProduct.endDate,
                     trainingSale_TSID = TrainingSaleProduct.trainingSale_TSID
                 };
 
@@ -79,6 +82,7 @@ namespace TrainingMasterWebAPI.Queries
                 tsp.duration = TrainingSaleProduct.duration;
                 tsp.price = TrainingSaleProduct.price;
                 tsp.product_PID = TrainingSaleProduct.product_PID;
+                tsp.endDate = TrainingSaleProduct.endDate;
                 tsp.trainingSale_TSID = TrainingSaleProduct.trainingSale_TSID;
 
                 db.SaveChanges();

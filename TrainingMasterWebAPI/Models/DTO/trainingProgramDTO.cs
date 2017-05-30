@@ -10,5 +10,6 @@ namespace TrainingMasterWebAPI.Models.DTO
         public int TPID { get; set; }
         public string name { get; set; }
         public int? trainer_TRID { get; set; }
+        public short difficulty { get; set; }
     }
 }

@@ -30,26 +30,29 @@ namespace TrainingMasterWebAPI.Models.EF
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
-        public virtual DbSet<customer> customer { get; set; }
         public virtual DbSet<exercise> exercise { get; set; }
         public virtual DbSet<foodProgramDate> foodProgramDate { get; set; }
         public virtual DbSet<goals> goals { get; set; }
         public virtual DbSet<measurementCM> measurementCM { get; set; }
         public virtual DbSet<measureMM> measureMM { get; set; }
         public virtual DbSet<paymentMethod> paymentMethod { get; set; }
-        public virtual DbSet<product> product { get; set; }
         public virtual DbSet<progressImage> progressImage { get; set; }
         public virtual DbSet<trainingProgramDate> trainingProgramDate { get; set; }
         public virtual DbSet<trainingSale> trainingSale { get; set; }
-        public virtual DbSet<trainingSaleProduct> trainingSaleProduct { get; set; }
         public virtual DbSet<zipcodes> zipcodes { get; set; }
         public virtual DbSet<foodItem> foodItem { get; set; }
         public virtual DbSet<trainingProgramTraining> trainingProgramTraining { get; set; }
         public virtual DbSet<training> training { get; set; }
         public virtual DbSet<foodPortion> foodPortion { get; set; }
         public virtual DbSet<foodProgramPortion> foodProgramPortion { get; set; }
-        public virtual DbSet<trainingProgram> trainingProgram { get; set; }
         public virtual DbSet<foodProgram> foodProgram { get; set; }
         public virtual DbSet<trainer> trainer { get; set; }
+<<<<<<< HEAD
+=======
+        public virtual DbSet<product> product { get; set; }
+        public virtual DbSet<trainingSaleProduct> trainingSaleProduct { get; set; }
+        public virtual DbSet<customer> customer { get; set; }
+        public virtual DbSet<trainingProgram> trainingProgram { get; set; }
+>>>>>>> 14c73910b6ae2ddd7a1faea3070b64e784f9531e
     }
 }

@@ -11,5 +11,6 @@ namespace TrainingMasterWebAPI.Models.DTO
         public int duration { get; set; }
         public int trainingSale_TSID { get; set; }
         public int product_PID { get; set; }
+        public DateTime endDate { get; set; }
     }
 }
