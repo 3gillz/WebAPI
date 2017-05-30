@@ -113,62 +113,7 @@ namespace TrainingMasterWebAPI.Queries.Schedules
                       }).SingleOrDefault();
             return ex;
         }
-        public class TrainingSchedule
-        {
-            public List<TD> list { get; set; }
-            public TrainingSchedule()
-            {
-                
-            }
-            public TrainingSchedule(List<TD> list)
-            {
-                this.list = list;
-            }
-        }
-        public class Exercise
-        {
-            public string name { get; set; }
-            public string description { get; set; }
-            public string link { get; set; }
-            public string type { get; set; }
-            public Exercise() { }
-            public Exercise(string name, string description,string link, string type) {
-                this.name = name;
-                this.type = type;
-                this.link = link;
-                this.description = description;
-            }
-        }
-        public class Training
-        {
-            public Exercise exercise { get; set; }
-            public string reps { get; set; }
-            public string sets { get; set; }
-            public string durationMin { get; set; }
-            public string restBetween { get; set; }
-            public Training() { }
-            public Training(Exercise exercise, string reps, string sets,string durationMin, string restBetween)
-            {
-                this.exercise = exercise;
-                this.reps = reps;
-                this.sets = sets;
-                this.durationMin = durationMin;
-                this.restBetween = restBetween;
-            }
-        } 
-        public class TD
-        {
-            public List<Training> training { get; set; }
-            public string day { get; set; }
-            public string time { get; set; }
-            public string duration { get; set; }
-            public TD() { }
-            public TD(List<Training> training, string day, string time) {
-                this.training = training;
-                this.day = day;
-                this.time = time;
-            }
-        }
+      
         public Schedule getScheduleForTrainee(string UserID)
         {
             Schedule schedule = new Schedule();
@@ -292,6 +237,64 @@ namespace TrainingMasterWebAPI.Queries.Schedules
         public Meal(string time, FoodItemDTO food)
         {
             this.food=food;
+        }
+    }
+    public class TrainingSchedule
+    {
+        public List<TD> list { get; set; }
+        public TrainingSchedule()
+        {
+
+        }
+        public TrainingSchedule(List<TD> list)
+        {
+            this.list = list;
+        }
+    }
+    public class Exercise
+    {
+        public string name { get; set; }
+        public string description { get; set; }
+        public string link { get; set; }
+        public string type { get; set; }
+        public Exercise() { }
+        public Exercise(string name, string description, string link, string type)
+        {
+            this.name = name;
+            this.type = type;
+            this.link = link;
+            this.description = description;
+        }
+    }
+    public class Training
+    {
+        public Exercise exercise { get; set; }
+        public string reps { get; set; }
+        public string sets { get; set; }
+        public string durationMin { get; set; }
+        public string restBetween { get; set; }
+        public Training() { }
+        public Training(Exercise exercise, string reps, string sets, string durationMin, string restBetween)
+        {
+            this.exercise = exercise;
+            this.reps = reps;
+            this.sets = sets;
+            this.durationMin = durationMin;
+            this.restBetween = restBetween;
+        }
+    }
+    public class TD
+    {
+        public List<Training> training { get; set; }
+        public string day { get; set; }
+        public string time { get; set; }
+        public string duration { get; set; }
+        public TD() { }
+        public TD(List<Training> training, string day, string time)
+        {
+            this.training = training;
+            this.day = day;
+            this.time = time;
         }
     }
 }
