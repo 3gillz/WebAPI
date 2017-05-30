@@ -65,7 +65,8 @@ namespace TrainingMasterWebAPI.Queries
                          gender = x.gender,
                          address = x.address,
                          location = x.location,
-                         hidden = x.hidden
+                         hidden = x.hidden,
+                         profileImagePath = x.profileImagePath
                      }).SingleOrDefault();
             return t;
         }

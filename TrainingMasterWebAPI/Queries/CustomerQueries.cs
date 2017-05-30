@@ -69,6 +69,35 @@ namespace TrainingMasterWebAPI.Queries
             return customers;
         }
 
+        public IEnumerable<CustomerDTO> GetAllCustomersByTRID(string userId)
+        {
+            var trainer = (from x in db.trainer
+                           where x.ID == userId
+                           select x).FirstOrDefault();
+            var customers = (from x in db.customer
+                             where x.trainer_TRID == trainer.TRID
+                             select new CustomerDTO
+                             {
+                                 CID = x.CID,
+                                 name = x.name,
+                                 email = x.email,
+                                 phone = x.phone,
+                                 gender = x.gender,
+                                 kennitala = x.kennitala,
+                                 address = x.address,
+                                 country = x.country,
+                                 foodPref = x.foodPref,
+                                 injury = x.injury,
+                                 allergy = x.allergy,
+                                 zipcodes_ZIP = x.zipcodes_ZIP,
+                                 profileImagePath = x.profileImagePath,
+                                 height = x.height,
+                                 trainer_TRID = x.trainer_TRID,
+                                 hidden = x.hidden
+                             });
+            return customers;
+        }
+
         public bool UpdateCustomer(CustomerDTO customer)
         {
             try

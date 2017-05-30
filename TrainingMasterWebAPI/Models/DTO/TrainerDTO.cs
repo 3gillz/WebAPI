@@ -17,5 +17,6 @@ namespace TrainingMasterWebAPI.Models.DTO
         public string address { get; set; }
         public string location { get; set; }
         public bool? hidden { get; set; }
+        public string profileImagePath { get; set; }
     }
 }

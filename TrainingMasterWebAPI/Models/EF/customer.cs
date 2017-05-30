@@ -44,10 +44,10 @@ namespace TrainingMasterWebAPI.Models.EF
         public int height { get; set; }
         public Nullable<int> trainer_TRID { get; set; }
         public Nullable<bool> hidden { get; set; }
+        public short jobDifficulty { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
-        public virtual trainer trainer { get; set; }
         public virtual zipcodes zipcodes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<foodProgramDate> foodProgramDate { get; set; }
@@ -63,5 +63,6 @@ namespace TrainingMasterWebAPI.Models.EF
         public virtual ICollection<trainingProgramDate> trainingProgramDate { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<trainingSale> trainingSale { get; set; }
+        public virtual trainer trainer { get; set; }
     }
 }

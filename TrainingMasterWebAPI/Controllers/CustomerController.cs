@@ -43,6 +43,15 @@ namespace TrainingMasterWebAPI.Controllers
             return cq.GetAllCustomers();
         }
 
+        [HttpGet]
+        [Authorize(Roles = "trainer")]
+        [Route("GetAllCustomersByTRID")]
+        public IEnumerable<CustomerDTO> GetAllCustomersByTRID()
+        {
+            var userID = User.Identity.GetUserId();
+            return cq.GetAllCustomersByTRID(userID);
+        }
+
         [HttpPost]
         [Route("AddCustomer")]
         public bool AddCustomer(CustomerDTO customer)
