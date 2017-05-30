@@ -390,6 +390,7 @@
     <Compile Include="Queries\FoodProgramQueries.cs" />
     <Compile Include="Queries\ProductQueries.cs" />
     <Compile Include="Queries\ProgressImageQueries.cs" />
+    <Compile Include="Queries\Schedules\DayTraining.cs" />
     <Compile Include="Queries\Schedules\ScheduleQueries.cs" />
     <Compile Include="Queries\TrainerQueries.cs" />
     <Compile Include="Queries\TrainingProductSaleQueries.cs" />
