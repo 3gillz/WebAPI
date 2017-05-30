@@ -26,14 +26,13 @@ namespace TrainingMasterWebAPI.Queries
                          kennitala = x.kennitala,
                          gender = x.gender,
                          address = x.address,
-                         profileImagePath = x.profileImagePath,
                          location = x.location,
                          hidden = x.hidden
                      });
             return t;
         }
 
-        public TrainerDTO GetTrainerByTRID(int id)
+        public TrainerDTO GetTrainerById(int id)
         {
             var t = (from x in db.trainer
                      where x.TRID == id
@@ -46,27 +45,6 @@ namespace TrainingMasterWebAPI.Queries
                          kennitala = x.kennitala,
                          gender = x.gender,
                          address = x.address,
-                         profileImagePath = x.profileImagePath,
-                         location = x.location,
-                         hidden = x.hidden
-                     }).SingleOrDefault();
-            return t;
-        }
-
-        public TrainerDTO GetTrainerById(string id)
-        {
-            var t = (from x in db.trainer
-                     where x.ID == id
-                     select new TrainerDTO
-                     {
-                         TRID = x.TRID,
-                         name = x.name,
-                         email = x.email,
-                         phone = x.phone,
-                         kennitala = x.kennitala,
-                         gender = x.gender,
-                         address = x.address,
-                         profileImagePath = x.profileImagePath,
                          location = x.location,
                          hidden = x.hidden
                      }).SingleOrDefault();
@@ -106,7 +84,6 @@ namespace TrainingMasterWebAPI.Queries
                     kennitala = Trainer.kennitala,
                     gender = Trainer.gender,
                     address = Trainer.address,
-                    profileImagePath =Trainer.profileImagePath,
                     location = Trainer.location,
                     hidden = Trainer.hidden
                 };
@@ -135,7 +112,6 @@ namespace TrainingMasterWebAPI.Queries
                 t.kennitala = Trainer.kennitala;
                 t.gender = Trainer.gender;
                 t.address = Trainer.address;
-                t.profileImagePath = Trainer.profileImagePath;
                 t.location = Trainer.location;
                 t.hidden = Trainer.hidden;
 

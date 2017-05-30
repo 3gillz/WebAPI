@@ -28,17 +28,9 @@ namespace TrainingMasterWebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
-        public TrainerDTO GetTrainerByTRID(int id)
+        [Route("GetById")]
+        public TrainerDTO GetTrainerById(int id)
         {
-            return tq.GetTrainerByTRID(id);
-        }
-
-        [HttpGet]
-        [Route("GetCurrentTrainer")]
-        public TrainerDTO GetCurrentTrainer(string id)
-        {
-            var user = User.Identity.GetUserId();
             return tq.GetTrainerById(id);
         }
 

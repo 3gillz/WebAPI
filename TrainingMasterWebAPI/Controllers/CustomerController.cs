@@ -28,8 +28,8 @@ namespace TrainingMasterWebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("GetCurrentCustomer")]
-        public CustomerDTO GetCurrentCustomer()
+        [Route("GetCurrentUser")]
+        public CustomerDTO GetCurrentUser()
         {
             var user = User.Identity.GetUserId();
             return cq.GetCustomerById(user);

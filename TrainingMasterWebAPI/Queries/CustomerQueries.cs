@@ -39,8 +39,7 @@ namespace TrainingMasterWebAPI.Queries
                                 profileImagePath = x.profileImagePath,
                                 height = x.height,
                                 trainer_TRID = x.trainer_TRID,
-                                hidden = x.hidden,
-                                jobDifficulty = x.jobDifficulty
+                                hidden = x.hidden
                             }).SingleOrDefault();
             return customer;
         }
@@ -65,8 +64,7 @@ namespace TrainingMasterWebAPI.Queries
                                  profileImagePath = x.profileImagePath,
                                  height = x.height,
                                  trainer_TRID = x.trainer_TRID,
-                                 hidden = x.hidden,
-                                 jobDifficulty = x.jobDifficulty
+                                 hidden = x.hidden
                              });
             return customers;
         }
@@ -123,7 +121,6 @@ namespace TrainingMasterWebAPI.Queries
                 c.height = customer.height;
                 c.trainer_TRID = customer.trainer_TRID;
                 c.hidden = customer.hidden;
-                c.jobDifficulty = customer.jobDifficulty;
 
                 db.SaveChanges();
                 return true;
@@ -155,8 +152,7 @@ namespace TrainingMasterWebAPI.Queries
                     profileImagePath = Customer.profileImagePath,
                     height = Customer.height,
                     trainer_TRID = Customer.trainer_TRID,
-                    hidden = Customer.hidden,
-                    jobDifficulty = Customer.jobDifficulty
+                    hidden = Customer.hidden
                 };
 
                 db.customer.Add(c);

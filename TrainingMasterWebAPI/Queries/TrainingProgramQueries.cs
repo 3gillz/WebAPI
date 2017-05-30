@@ -23,8 +23,7 @@ namespace TrainingMasterWebAPI.Queries
                       {
                           TPID = x.TPID,
                           name = x.name,
-                          trainer_TRID = x.trainer_TRID,
-                          difficulty = x.difficulty
+                          trainer_TRID = x.trainer_TRID
                       });
             return tp;
         }
@@ -41,8 +40,7 @@ namespace TrainingMasterWebAPI.Queries
                       {
                           TPID = x.TPID,
                           name = x.name,
-                          trainer_TRID = x.trainer_TRID,
-                          difficulty = x.difficulty
+                          trainer_TRID = x.trainer_TRID
                       });
             return tp;
         }
@@ -54,8 +52,7 @@ namespace TrainingMasterWebAPI.Queries
                       {
                           TPID = x.TPID,
                           name = x.name,
-                          trainer_TRID = x.trainer_TRID,
-                          difficulty = x.difficulty
+                          trainer_TRID = x.trainer_TRID
                       });
             return tp;
         }
@@ -68,8 +65,7 @@ namespace TrainingMasterWebAPI.Queries
                 {
                     TPID = x.TPID,
                     name = x.name,
-                    trainer_TRID = x.trainer_TRID,
-                    difficulty = x.difficulty
+                    trainer_TRID = x.trainer_TRID
                 };
 
                 db.trainingProgram.Add(tp);
@@ -93,7 +89,6 @@ namespace TrainingMasterWebAPI.Queries
                 tp.TPID = x.TPID;
                 tp.name = x.name;
                 tp.trainer_TRID = x.trainer_TRID;
-                tp.difficulty = x.difficulty;
 
                 db.SaveChanges();
                 return true;

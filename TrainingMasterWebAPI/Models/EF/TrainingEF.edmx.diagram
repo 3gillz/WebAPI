@@ -10,19 +10,21 @@
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="31.5" />
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="16" />
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.AspNetUsers" Width="1.5" PointX="3" PointY="22.875" />
+        <EntityTypeShape EntityType="TrainingMasterDatabaseModel.customer" Width="1.5" PointX="6" PointY="24.125" />
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.exercise" Width="1.5" PointX="3" PointY="46.5" />
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.foodProgramDate" Width="1.5" PointX="10.75" PointY="26.625" />
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.goals" Width="1.5" PointX="8.25" PointY="37.75" />
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.measurementCM" Width="1.5" PointX="8.25" PointY="26.75" />
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.measureMM" Width="1.5" PointX="8.25" PointY="42.25" />
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.paymentMethod" Width="1.5" PointX="8" PointY="17.875" />
+        <EntityTypeShape EntityType="TrainingMasterDatabaseModel.product" Width="1.5" PointX="3" PointY="43" />
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.progressImage" Width="1.5" PointX="8.25" PointY="46.875" />
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.trainingProgramDate" Width="1.5" PointX="10.75" PointY="30.125" />
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.trainingSale" Width="1.5" PointX="10.25" PointY="22.375" />
+        <EntityTypeShape EntityType="TrainingMasterDatabaseModel.trainingSaleProduct" Width="1.5" PointX="12.5" PointY="33.875" />
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.zipcodes" Width="1.5" PointX="3.75" PointY="28.5" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
-<<<<<<< HEAD
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__AspNetUse__custo__0E6E26BF" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__customer__zipcod__0C85DE4D" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__foodProgr__custo__0A9D95DB" />
@@ -35,9 +37,6 @@
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__trainingS__payme__49C3F6B7" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__trainingS__produ__70DDC3D8" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__trainingS__train__71D1E811" />
-=======
-        <AssociationConnector Association="TrainingMasterDatabaseModel.FK__trainingS__payme__49C3F6B7" />
->>>>>>> 14c73910b6ae2ddd7a1faea3070b64e784f9531e
         <AssociationConnector Association="TrainingMasterDatabaseModel.AspNetUserRoles" />
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.foodItem" Width="1.5" PointX="3" PointY="17.25" />
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.trainingProgramTraining" Width="1.5" PointX="10.75" PointY="40.625" />
@@ -48,18 +47,14 @@
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.foodProgramPortion" Width="2.25" PointX="7.5" PointY="21" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__foodPorti__foodI__2FCF1A8A" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__foodProgr__foodP__2CF2ADDF" />
-<<<<<<< HEAD
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.trainingProgram" Width="1.5" PointX="3" PointY="14.125" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__trainingP__train__2A164134" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__trainingP__train__6EF57B66" />
-=======
->>>>>>> 14c73910b6ae2ddd7a1faea3070b64e784f9531e
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.foodProgram" Width="1.5" PointX="3" PointY="31.125" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__foodProgr__foodP__2DE6D218" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__foodProgr__foodP__628FA481" />
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.trainer" Width="1.5" PointX="0.75" PointY="29.25" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__AspNetUse__train__18EBB532" />
-<<<<<<< HEAD
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__customer__traine__123EB7A3" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__exercise__traine__17036CC0" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__foodItem__traine__245D67DE" />
@@ -67,32 +62,6 @@
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__product__trainer__1332DBDC" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__trainingP__train__31B762FC" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__trainingS__train__14270015" />
-=======
-        <AssociationConnector Association="TrainingMasterDatabaseModel.FK__exercise__traine__17036CC0" />
-        <AssociationConnector Association="TrainingMasterDatabaseModel.FK__foodItem__traine__245D67DE" />
-        <AssociationConnector Association="TrainingMasterDatabaseModel.FK__foodProgr__train__30C33EC3" />
-        <AssociationConnector Association="TrainingMasterDatabaseModel.FK__trainingS__train__14270015" />
-        <EntityTypeShape EntityType="TrainingMasterDatabaseModel.product" Width="1.5" PointX="3" PointY="34.25" />
-        <AssociationConnector Association="TrainingMasterDatabaseModel.FK__product__trainer__1332DBDC" />
-        <EntityTypeShape EntityType="TrainingMasterDatabaseModel.trainingSaleProduct" Width="1.5" PointX="13.5" PointY="28.5" />
-        <AssociationConnector Association="TrainingMasterDatabaseModel.FK__trainingS__produ__70DDC3D8" />
-        <AssociationConnector Association="TrainingMasterDatabaseModel.FK__trainingS__train__71D1E811" />
-        <EntityTypeShape EntityType="TrainingMasterDatabaseModel.customer" Width="1.5" PointX="6" PointY="24" />
-        <EntityTypeShape EntityType="TrainingMasterDatabaseModel.trainingProgram" Width="1.5" PointX="3" PointY="38.5" />
-        <AssociationConnector Association="TrainingMasterDatabaseModel.FK__AspNetUse__custo__0E6E26BF" />
-        <AssociationConnector Association="TrainingMasterDatabaseModel.FK__customer__traine__123EB7A3" />
-        <AssociationConnector Association="TrainingMasterDatabaseModel.FK__customer__zipcod__0C85DE4D" />
-        <AssociationConnector Association="TrainingMasterDatabaseModel.FK__foodProgr__custo__0A9D95DB" />
-        <AssociationConnector Association="TrainingMasterDatabaseModel.FK__goals__customer___05D8E0BE" />
-        <AssociationConnector Association="TrainingMasterDatabaseModel.FK__measureme__custo__07C12930" />
-        <AssociationConnector Association="TrainingMasterDatabaseModel.FK__measureMM__custo__08B54D69" />
-        <AssociationConnector Association="TrainingMasterDatabaseModel.FK__progressI__custo__09A971A2" />
-        <AssociationConnector Association="TrainingMasterDatabaseModel.FK__trainingP__custo__0B91BA14" />
-        <AssociationConnector Association="TrainingMasterDatabaseModel.FK__trainingS__custo__06CD04F7" />
-        <AssociationConnector Association="TrainingMasterDatabaseModel.FK__trainingP__train__31B762FC" />
-        <AssociationConnector Association="TrainingMasterDatabaseModel.FK__trainingP__train__2A164134" />
-        <AssociationConnector Association="TrainingMasterDatabaseModel.FK__trainingP__train__6EF57B66" />
->>>>>>> 14c73910b6ae2ddd7a1faea3070b64e784f9531e
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

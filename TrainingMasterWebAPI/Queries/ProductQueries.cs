@@ -30,8 +30,7 @@ namespace TrainingMasterWebAPI.Queries
                                 durationInDays = x.durationInDays,
                                 description = x.description,
                                 trainer_TRID = x.trainer_TRID,
-                                hidden = x.hidden,
-                                price = x.price
+                                hidden = x.hidden
                             });
             return products;
         }

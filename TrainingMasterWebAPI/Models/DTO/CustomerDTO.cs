@@ -24,6 +24,5 @@ namespace TrainingMasterWebAPI.Models.DTO
         public int height { get; set; }
         public int? trainer_TRID { get; set; }
         public bool? hidden { get; set; }
-        public short jobDifficulty { get; set; }
     }
 }
