@@ -61,10 +61,18 @@ namespace TrainingMasterWebAPI.Controllers
 
         [HttpPut]
         [Route("UpdateCustomer")]
-        public bool UpdateCustomer(CustomerDTO customer)
+        public CustomerDTO UpdateCustomer(CustomerDTO customer)
         {
-            return cq.UpdateCustomer(customer);
+            var userId = User.Identity.GetUserId();
+            return cq.UpdateCustomer(userId, customer);
         }
 
+        [HttpPut]
+        [Route("UpdateProfileImage")]
+        public string UpdateProfileImage(CustomerDTO customer)
+        {
+            var userId = User.Identity.GetUserId();
+            return cq.UpdateProfileImage(userId, customer);
+        }
     }
 }
