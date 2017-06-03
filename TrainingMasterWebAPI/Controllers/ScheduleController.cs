@@ -19,12 +19,14 @@ namespace TrainingMasterWebAPI.Controllers
             sq = new ScheduleQueries();
         }
          [Route("")]
+         [HttpGet]
          public Schedule getSchedule()
         {
             var user = User.Identity.GetUserId();
             return sq.getScheduleForTrainee(user);
         }
-        [Route("{Days}")]
+        [Route("Training")]
+        [HttpPost]
         public TrainingSchedule getTrainingProgram(int[] days)
         {
             var user = User.Identity.GetUserId();
