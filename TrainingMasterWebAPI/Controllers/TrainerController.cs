@@ -42,6 +42,15 @@ namespace TrainingMasterWebAPI.Controllers
             return tq.GetTrainerById(id);
         }
 
+        [HttpGet]
+        [Route("GetCurrentTrainer")]
+        public TrainerDTO GetCurrentTrainer()
+        {
+            var user = User.Identity.GetUserId();
+            return tq.GetCurrentTrainer(user);
+        }
+
+
         [HttpPut]
         [Route("Add")]
         public bool AddTrainer(TrainerDTO Trainer)

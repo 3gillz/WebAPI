@@ -26,10 +26,10 @@ namespace TrainingMasterWebAPI.Models.EF
         public System.DateTime date { get; set; }
         public Nullable<int> paymentMethod_PMID { get; set; }
     
+        public virtual customer customer { get; set; }
         public virtual paymentMethod paymentMethod { get; set; }
-        public virtual trainer trainer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<trainingSaleProduct> trainingSaleProduct { get; set; }
-        public virtual customer customer { get; set; }
+        public virtual trainer trainer { get; set; }
     }
 }

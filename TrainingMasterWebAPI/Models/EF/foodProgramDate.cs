@@ -19,7 +19,7 @@ namespace TrainingMasterWebAPI.Models.EF
         public Nullable<int> foodProgram_FPMID { get; set; }
         public System.DateTime date { get; set; }
     
-        public virtual foodProgram foodProgram { get; set; }
         public virtual customer customer { get; set; }
+        public virtual foodProgram foodProgram { get; set; }
     }
 }

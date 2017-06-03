@@ -73,6 +73,26 @@ namespace TrainingMasterWebAPI.Queries
             return t;
         }
 
+        public TrainerDTO GetCurrentTrainer(string id)
+        {
+            var t = (from x in db.trainer
+                     where x.ID == id
+                     select new TrainerDTO
+                     {
+                         TRID = x.TRID,
+                         name = x.name,
+                         email = x.email,
+                         phone = x.phone,
+                         kennitala = x.kennitala,
+                         gender = x.gender,
+                         address = x.address,
+                         location = x.location,
+                         hidden = x.hidden,
+                         profileImagePath = x.profileImagePath
+                     }).SingleOrDefault();
+            return t;
+        }
+
         public bool AddTrainer(TrainerDTO Trainer)
         {
             try

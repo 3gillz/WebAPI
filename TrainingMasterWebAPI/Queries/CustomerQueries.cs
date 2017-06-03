@@ -71,13 +71,40 @@ namespace TrainingMasterWebAPI.Queries
             return customers;
         }
 
-        public bool UpdateCustomer(CustomerDTO customer)
+        public IEnumerable<CustomerDTO> GetAllCustomersByTRID(string userId)
         {
-            try
-            {
-                var c = (from x in db.customer
-                         where customer.CID == x.CID
-                         select x).SingleOrDefault();
+            var trainer = (from x in db.trainer
+                           where x.ID == userId
+                           select x).FirstOrDefault();
+            var customers = (from x in db.customer
+                             where x.trainer_TRID == trainer.TRID
+                             select new CustomerDTO
+                             {
+                                 CID = x.CID,
+                                 name = x.name,
+                                 email = x.email,
+                                 phone = x.phone,
+                                 gender = x.gender,
+                                 kennitala = x.kennitala,
+                                 address = x.address,
+                                 country = x.country,
+                                 foodPref = x.foodPref,
+                                 injury = x.injury,
+                                 allergy = x.allergy,
+                                 zipcodes_ZIP = x.zipcodes_ZIP,
+                                 profileImagePath = x.profileImagePath,
+                                 height = x.height,
+                                 trainer_TRID = x.trainer_TRID,
+                                 hidden = x.hidden
+                             });
+            return customers;
+        }
+
+        public CustomerDTO UpdateCustomer(string userId, CustomerDTO customer)
+        {
+            var c = (from x in db.customer
+                     where x.ID == userId
+                     select x).FirstOrDefault();
 
                 c.name = customer.name;
                 c.email = customer.email;
@@ -90,19 +117,27 @@ namespace TrainingMasterWebAPI.Queries
                 c.injury = customer.injury;
                 c.allergy = customer.allergy;
                 c.zipcodes_ZIP = customer.zipcodes_ZIP;
-                c.profileImagePath = customer.profileImagePath;
                 c.height = customer.height;
-                c.trainer_TRID = customer.trainer_TRID;
-                c.hidden = customer.hidden;
                 c.jobDifficulty = customer.jobDifficulty;
+            //unaffected by customer update
+                customer.profileImagePath = c.profileImagePath;
+                customer.trainer_TRID = c.trainer_TRID;
+                customer.hidden = c.hidden;
+                customer.CID = c.CID;
 
-                db.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            db.SaveChanges();
+            return customer;
+
+        }
+
+        public string UpdateProfileImage(string userId, CustomerDTO Customer)
+        {
+            var c = (from x in db.customer
+                     where x.ID == userId
+                     select x).FirstOrDefault();
+            c.profileImagePath = Customer.profileImagePath;
+            db.SaveChanges();
+            return c.profileImagePath;
         }
 
         public bool AddCustomer(CustomerDTO Customer)
