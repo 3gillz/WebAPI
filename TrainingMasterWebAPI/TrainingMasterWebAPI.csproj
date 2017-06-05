@@ -242,6 +242,7 @@
     <Compile Include="Controllers\FoodPortionController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProgressImageController.cs" />
+    <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\TrainerController.cs" />
     <Compile Include="Controllers\TrainingController.cs" />
     <Compile Include="Controllers\TrainingProductSaleController.cs" />
@@ -389,6 +390,8 @@
     <Compile Include="Queries\FoodProgramQueries.cs" />
     <Compile Include="Queries\ProductQueries.cs" />
     <Compile Include="Queries\ProgressImageQueries.cs" />
+    <Compile Include="Queries\Schedules\DayTraining.cs" />
+    <Compile Include="Queries\Schedules\ScheduleQueries.cs" />
     <Compile Include="Queries\TrainerQueries.cs" />
     <Compile Include="Queries\TrainingProductSaleQueries.cs" />
     <Compile Include="Queries\TrainingProgramDateQueries.cs" />
