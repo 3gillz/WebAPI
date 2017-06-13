@@ -12,5 +12,7 @@ namespace TrainingMasterWebAPI.Models.DTO
         public string description { get; set; }
         public string link { get; set; }
         public string type { get; set; }
+        public int? trainer_TRID { get; set; }
+        public string madeBy { get; set; }
     }
 }
