@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNet.Identity;
+using System.Collections.Generic;
 using System.Web.Http;
 using TrainingMasterWebAPI.Models.DTO;
 using TrainingMasterWebAPI.Queries;
@@ -10,6 +11,13 @@ namespace TrainingMasterWebAPI.Controllers
     public class TrainingController : ApiController
     {
         readonly private TrainingQueries tq;
+
+        private string userId;
+        protected string UserId
+        {
+            get { return userId = User.Identity.GetUserId(); }
+            set { userId = value; }
+        }
 
         public TrainingController()
         {
@@ -31,10 +39,17 @@ namespace TrainingMasterWebAPI.Controllers
         }
 
         [HttpPost]
-        [Route("Add")]
-        public bool AddTraining(TrainingDTO t)
+        [Route("Add/{TPID}")]
+        public bool AddTrainings([FromBody] string trainings, int TPID)
         {
-            return tq.AddTraining(t);
+            return tq.AddTrainings(UserId, trainings, TPID);
+        }
+
+        [HttpGet]
+        [Route("Get/{TPID}")]
+        public IEnumerable<TrainingDTO>  GetTrainings(int TPID)
+        {
+            return tq.GetTrainings(TPID, UserId);
         }
 
         [HttpPut]

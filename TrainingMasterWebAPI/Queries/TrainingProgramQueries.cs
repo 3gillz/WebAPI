@@ -15,21 +15,24 @@ namespace TrainingMasterWebAPI.Queries
             db = new TMEntities();
         }
 
-        public IEnumerable<TrainingProgramDTO> GetTrainingProgramByTPID(int TPID)
+        public TrainingProgramDTO GetTrainingProgramByTPID(int TPID, string userId)
         {
+            var trainer = (from x in db.trainer
+                           where x.ID == userId
+                           select x).FirstOrDefault();
             var tp = (from x in db.trainingProgram
-                      where x.TPID == TPID
+                      where x.TPID == TPID && x.trainer_TRID == trainer.TRID
                       select new TrainingProgramDTO
                       {
                           TPID = x.TPID,
                           name = x.name,
                           trainer_TRID = x.trainer_TRID,
                           difficulty = x.difficulty
-                      });
+                      }).FirstOrDefault();
             return tp;
         }
 
-        public IEnumerable<TrainingProgramDTO> GetTrainingProgramByTRID(string userId)
+        public IEnumerable<TrainingProgramDTO> GetTrainingProgramsByTRID(string userId)
         {
             var trainer = (from x in db.trainer
                            where x.ID == userId
@@ -60,26 +63,21 @@ namespace TrainingMasterWebAPI.Queries
             return tp;
         }
 
-        public bool AddTrainingProgram(TrainingProgramDTO x)
+        public int AddTrainingProgram(string UserId, TrainingProgramDTO trainingProgram)
         {
-            try
+            var trainer = (from x in db.trainer
+                           where x.ID == UserId
+                           select x).FirstOrDefault();
+            var tp = new trainingProgram
             {
-                var tp = new trainingProgram
-                {
-                    TPID = x.TPID,
-                    name = x.name,
-                    trainer_TRID = x.trainer_TRID,
-                    difficulty = x.difficulty
-                };
+                name = trainingProgram.name,
+                trainer_TRID = trainer.TRID,
+                difficulty = trainingProgram.difficulty
+            };
 
-                db.trainingProgram.Add(tp);
-                db.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            db.trainingProgram.Add(tp);
+            db.SaveChanges();
+            return tp.TPID;
         }
 
         public bool UpdateTrainingProgram(TrainingProgramDTO x)
@@ -104,4 +102,5 @@ namespace TrainingMasterWebAPI.Queries
             }
         }
     }
+
 }

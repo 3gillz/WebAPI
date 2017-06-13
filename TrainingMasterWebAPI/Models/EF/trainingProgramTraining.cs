@@ -16,10 +16,9 @@ namespace TrainingMasterWebAPI.Models.EF
     {
         public int trainingProgram_TPID { get; set; }
         public int training_TID { get; set; }
-        public short weekday { get; set; }
-        public short timeOfDay { get; set; }
+        public Nullable<short> x { get; set; }
     
-        public virtual training training { get; set; }
         public virtual trainingProgram trainingProgram { get; set; }
+        public virtual training training { get; set; }
     }
 }

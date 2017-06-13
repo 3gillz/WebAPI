@@ -38,7 +38,7 @@ namespace TrainingMasterWebAPI.Queries.Schedules
                     
                     TrainingDTO training = GetTraining(trainingDay[j].training_TID);
                     Training t = new Training();
-                    td.time = trainingDay[j].timeOfDay.ToString();
+                    //td.time = trainingDay[j].timeOfDay.ToString();
                     t.durationMin = training.durationMin.ToString();
                     t.reps = training.numberOfReps.ToString();
                     t.sets = training.numberOfReps.ToString();
@@ -75,10 +75,10 @@ namespace TrainingMasterWebAPI.Queries.Schedules
         public TrainingProgramTrainingDTO[] GetTrainingDay(int id, int weekday)
         {
             var day = (from x in db.trainingProgramTraining
-                       where x.trainingProgram_TPID == id && weekday == x.weekday
+                       where x.trainingProgram_TPID == id //&& weekday == x.weekday
                        select new TrainingProgramTrainingDTO
                        {
-                          timeOfDay = x.timeOfDay,
+                          //timeOfDay = x.timeOfDay,
                           training_TID = x.training_TID
                        });
             return day.ToArray();

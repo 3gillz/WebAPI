@@ -11,27 +11,31 @@ namespace TrainingMasterWebAPI.Controllers
     public class TrainingProgramController : ApiController
     {
         readonly private TrainingProgramQueries tpq;
+        private string userId;
+        protected string UserId
+        {
+            get { return userId = User.Identity.GetUserId(); }
+            set { userId = value; }
+        }
 
         public TrainingProgramController()
         {
             tpq = new TrainingProgramQueries();
         }
 
+
         [HttpGet]
         [Route("{tpid}")]
-        public IEnumerable<TrainingProgramDTO> GetTrainingProgramByTPID(int tpid)
+        public TrainingProgramDTO GetTrainingProgramByTPID(int tpid)
         {
-            return tpq.GetTrainingProgramByTPID(tpid);
+            return tpq.GetTrainingProgramByTPID(tpid, UserId);
         }
 
         [HttpGet]
-        [Route("{UserId}")]
-        public IEnumerable<TrainingProgramDTO> GetTrainingProgramByTRID()
+        [Route("GetByTRID")]
+        public IEnumerable<TrainingProgramDTO> GetTrainingProgramsByTRID()
         {
-            var UserId = User.Identity.GetUserId();
-            return tpq.GetTrainingProgramByTRID(UserId);
-
-
+            return tpq.GetTrainingProgramsByTRID(UserId);
         }
 
         [HttpGet]
@@ -43,9 +47,10 @@ namespace TrainingMasterWebAPI.Controllers
 
         [HttpPost]
         [Route("Add")]
-        public bool AddTrainingProgram(TrainingProgramDTO TP)
+        public int AddTrainingProgram(TrainingProgramDTO TP)
         {
-            return tpq.AddTrainingProgram(TP);
+            var UserId = User.Identity.GetUserId();
+            return tpq.AddTrainingProgram(UserId, TP);
         }
 
         [HttpPut]

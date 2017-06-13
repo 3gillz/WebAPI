@@ -23,9 +23,18 @@ namespace TrainingMasterWebAPI.Models.EF
         public int TID { get; set; }
         public Nullable<int> numberOfSets { get; set; }
         public Nullable<int> numberOfReps { get; set; }
-        public Nullable<int> exercise_EID { get; set; }
+        public int exercise_EID { get; set; }
         public Nullable<int> durationMin { get; set; }
         public Nullable<int> restBetweenMin { get; set; }
+        public bool sunday { get; set; }
+        public bool monday { get; set; }
+        public bool tuesday { get; set; }
+        public bool wednesday { get; set; }
+        public bool thursday { get; set; }
+        public bool friday { get; set; }
+        public bool saturday { get; set; }
+        public string timeOfDay { get; set; }
+        public string className { get; set; }
     
         public virtual exercise exercise { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

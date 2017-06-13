@@ -23,9 +23,7 @@ namespace TrainingMasterWebAPI.Queries
                       select new TrainingProgramTrainingDTO
                       {
                           trainingProgram_TPID = x.trainingProgram_TPID,
-                          training_TID = x.training_TID,
-                          weekDay = x.weekday,
-                          timeOfDay = x.timeOfDay
+                          training_TID = x.training_TID
                       });
             return tpt;
         }
@@ -37,9 +35,7 @@ namespace TrainingMasterWebAPI.Queries
                 var tpt = new trainingProgramTraining
                 {
                     trainingProgram_TPID = x.trainingProgram_TPID,
-                    training_TID = x.training_TID,
-                    weekday = x.weekDay,
-                    timeOfDay = x.timeOfDay
+                    training_TID = x.training_TID
                 };
 
                 db.trainingProgramTraining.Add(tpt);
