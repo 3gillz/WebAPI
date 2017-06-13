@@ -140,10 +140,13 @@ namespace TrainingMasterWebAPI.Queries
             return c.profileImagePath;
         }
 
-        public bool AddCustomer(CustomerDTO Customer)
+        public bool AddCustomer(CustomerDTO Customer, string userId)
         {
             try
             {
+                var trainer = (from x in db.trainer
+                               where x.ID == userId
+                               select x).FirstOrDefault();
                 var c = new customer
                 {
                     CID = Customer.CID,
@@ -160,7 +163,7 @@ namespace TrainingMasterWebAPI.Queries
                     zipcodes_ZIP = Customer.zipcodes_ZIP,
                     profileImagePath = Customer.profileImagePath,
                     height = Customer.height,
-                    trainer_TRID = Customer.trainer_TRID,
+                    trainer_TRID = trainer.TRID,
                     hidden = Customer.hidden,
                     jobDifficulty = Customer.jobDifficulty
                 };

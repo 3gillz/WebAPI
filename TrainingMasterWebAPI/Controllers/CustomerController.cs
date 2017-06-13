@@ -56,7 +56,8 @@ namespace TrainingMasterWebAPI.Controllers
         [Route("AddCustomer")]
         public bool AddCustomer(CustomerDTO customer)
         {
-            return cq.AddCustomer(customer);
+            var userId = User.Identity.GetUserId();
+            return cq.AddCustomer(customer, userId);
         }
 
         [HttpPut]
