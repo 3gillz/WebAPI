@@ -52,6 +52,26 @@ namespace TrainingMasterWebAPI.Queries
                      }).SingleOrDefault();
             return t;
         }
+        
+        public TrainerDTO GetTrainerCardByTRID(int id)
+        {
+            var t = (from x in db.trainer
+                     where x.TRID == id
+                     select new TrainerDTO
+                     {
+                         TRID = x.TRID,
+                         name = x.name,
+                         email = x.email,
+                         phone = null,
+                         kennitala = null,
+                         gender = x.gender,
+                         address = null,
+                         profileImagePath = x.profileImagePath,
+                         location = x.location,
+                         hidden = null
+                     }).SingleOrDefault();
+            return t;
+        }
 
         public TrainerDTO GetTrainerById(string id)
         {
@@ -91,6 +111,40 @@ namespace TrainingMasterWebAPI.Queries
                          profileImagePath = x.profileImagePath
                      }).SingleOrDefault();
             return t;
+        }
+
+        public bool RegisterTrainer(TrainerDTO Trainer)
+        {
+            AspNetUsers user = db.AspNetUsers.FirstOrDefault(x => x.Id == Trainer.ID);
+            trainer tr = db.trainer.FirstOrDefault(x => x.ID == Trainer.ID);
+            if(user == null || tr != null) 
+            {
+                return false;
+            }
+            try
+            {
+                var t = new trainer
+                {
+                    TRID = Trainer.TRID,
+                    ID = Trainer.ID,
+                    name = Trainer.name,
+                    email = Trainer.email,
+                    phone = Trainer.phone,
+                    kennitala = Trainer.kennitala,
+                    gender = Trainer.gender,
+                    address = Trainer.address,
+                    location = Trainer.location,
+                    profileImagePath = "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png",
+                    hidden = false
+                };
+                db.trainer.Add(t);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public bool AddTrainer(TrainerDTO Trainer)

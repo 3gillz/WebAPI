@@ -19,17 +19,13 @@ namespace TrainingMasterWebAPI.Queries
 
         public bool AddTrainings(string userId, string trainings, int TPID)
         {
-            var trainer = (from x in db.trainer
-                           where x.ID == userId
-                           select x).FirstOrDefault();
-            var trainingProgram = (from x in db.trainingProgram
-                                   where x.TPID == TPID
-                                   select x).FirstOrDefault();
-            if(trainer.TRID != trainingProgram.trainer_TRID)
+            trainer trainer = db.trainer.FirstOrDefault(x => x.ID == userId);
+            trainingProgram trainingProgram = db.trainingProgram.FirstOrDefault(x => x.TPID == TPID);
+            if (trainer.TRID != trainingProgram.trainer_TRID)
             {
                 return false;
             }
-            try
+            else try
             {
                 List<int> TIDList = new List<int>();
                 var trainingArray = JsonConvert.DeserializeObject<List<TrainingDTO>>(trainings);
@@ -58,12 +54,7 @@ namespace TrainingMasterWebAPI.Queries
                 }
                 foreach(int x in TIDList)
                 {
-                    var tpt = new trainingProgramTraining
-                    {
-                        trainingProgram_TPID = TPID,
-                        training_TID = x
-                    };
-                    db.trainingProgramTraining.Add(tpt);
+                    db.trainingProgramTraining.Add(new trainingProgramTraining { trainingProgram_TPID = TPID, training_TID = x });
                 }
                 db.SaveChanges();
                 return true;
@@ -76,14 +67,12 @@ namespace TrainingMasterWebAPI.Queries
 
         public IEnumerable<TrainingDTO> GetTrainings(int TPID, string userId)
         {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            trainer trainer = db.trainer.FirstOrDefault(x => x.ID == userId);
+            IEnumerable<trainingProgramTraining> tp = db.trainingProgramTraining.Where(x => x.trainingProgram_TPID == TPID && x.trainingProgram.trainer_TRID == trainer.TRID);
             List<TrainingDTO> trainingList = new List<TrainingDTO>();
-            var trainer = (from x in db.trainer
-                           where x.ID == userId
-                           select x).FirstOrDefault();
-            var tp = (from x in db.trainingProgramTraining
-                      where x.trainingProgram_TPID == TPID && x.trainingProgram.trainer_TRID == trainer.TRID
-                      select x);
-            foreach(trainingProgramTraining x in tp)
+
+            foreach (trainingProgramTraining x in tp)
             {
                 var training = (from t in db.training
                                 where t.TID == x.training_TID
@@ -109,6 +98,8 @@ namespace TrainingMasterWebAPI.Queries
                 training.name = name;
                 trainingList.Add(training);
             }
+            watch.Stop();
+            System.Diagnostics.Debug.WriteLine(watch.ElapsedMilliseconds);
             return trainingList;
         }
 

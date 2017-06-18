@@ -52,6 +52,14 @@ namespace TrainingMasterWebAPI.Controllers
             return cq.GetAllCustomersByTRID(userID);
         }
 
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("Register")]
+        public bool RegisterCustomer(CustomerDTO customer)
+        {
+            return cq.RegisterCustomer(customer);
+        }
+
         [HttpPost]
         [Route("AddCustomer")]
         public bool AddCustomer(CustomerDTO customer)

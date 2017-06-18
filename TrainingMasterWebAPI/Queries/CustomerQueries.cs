@@ -140,6 +140,41 @@ namespace TrainingMasterWebAPI.Queries
             return c.profileImagePath;
         }
 
+        public bool RegisterCustomer(CustomerDTO Customer)
+        {
+            try
+            {
+                var c = new customer
+                {
+                    CID = Customer.CID,
+                    ID = Customer.ID,
+                    name = Customer.name,
+                    email = Customer.email,
+                    phone = Customer.phone,
+                    gender = Customer.gender,
+                    kennitala = Customer.kennitala,
+                    address = Customer.address,
+                    foodPref = Customer.foodPref,
+                    injury = Customer.injury,
+                    allergy = Customer.allergy,
+                    zipcodes_ZIP = Customer.zipcodes_ZIP,
+                    profileImagePath = "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png",
+                    height = Customer.height,
+                    trainer_TRID = Customer.trainer_TRID,
+                    hidden = false,
+                    jobDifficulty = Customer.jobDifficulty
+                };
+
+                db.customer.Add(c);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         public bool AddCustomer(CustomerDTO Customer, string userId)
         {
             try
