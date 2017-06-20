@@ -10,5 +10,6 @@ namespace TrainingMasterWebAPI.Models.DTO
         public int PIID { get; set; }
         public DateTime date { get; set; }
         public int? customer_CID { get; set; }
+        public byte[] image { get; set; }
     }
 }

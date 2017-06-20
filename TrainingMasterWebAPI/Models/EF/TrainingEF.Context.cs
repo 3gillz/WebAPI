@@ -42,7 +42,6 @@ namespace TrainingMasterWebAPI.Models.EF
         public virtual DbSet<measureMM> measureMM { get; set; }
         public virtual DbSet<paymentMethod> paymentMethod { get; set; }
         public virtual DbSet<product> product { get; set; }
-        public virtual DbSet<progressImage> progressImage { get; set; }
         public virtual DbSet<trainer> trainer { get; set; }
         public virtual DbSet<trainingProgram> trainingProgram { get; set; }
         public virtual DbSet<trainingProgramDate> trainingProgramDate { get; set; }
@@ -51,5 +50,6 @@ namespace TrainingMasterWebAPI.Models.EF
         public virtual DbSet<trainingSaleProduct> trainingSaleProduct { get; set; }
         public virtual DbSet<zipcodes> zipcodes { get; set; }
         public virtual DbSet<training> training { get; set; }
+        public virtual DbSet<progressImage> progressImage { get; set; }
     }
 }

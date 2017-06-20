@@ -232,6 +232,7 @@
           <Property Name="PIID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="date" Type="datetime" Nullable="false" />
           <Property Name="customer_CID" Type="int" />
+          <Property Name="image" Type="varbinary(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="trainer">
           <Key>
@@ -247,7 +248,7 @@
           <Property Name="address" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="location" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="hidden" Type="bit" />
-          <Property Name="profileImagePath" Type="varchar(max)" />
+          <Property Name="profileImagePath" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="training">
           <Key>
@@ -895,7 +896,6 @@
           <EntitySet Name="measureMM" EntityType="TrainingMasterDatabaseModel.measureMM" />
           <EntitySet Name="paymentMethod" EntityType="TrainingMasterDatabaseModel.paymentMethod" />
           <EntitySet Name="product" EntityType="TrainingMasterDatabaseModel.product" />
-          <EntitySet Name="progressImage" EntityType="TrainingMasterDatabaseModel.progressImage" />
           <EntitySet Name="trainer" EntityType="TrainingMasterDatabaseModel.trainer" />
           <EntitySet Name="trainingProgram" EntityType="TrainingMasterDatabaseModel.trainingProgram" />
           <EntitySet Name="trainingProgramDate" EntityType="TrainingMasterDatabaseModel.trainingProgramDate" />
@@ -942,10 +942,6 @@
           <AssociationSet Name="FK__measureMM__custo__08B54D69" Association="TrainingMasterDatabaseModel.FK__measureMM__custo__08B54D69">
             <End Role="customer" EntitySet="customer" />
             <End Role="measureMM" EntitySet="measureMM" />
-          </AssociationSet>
-          <AssociationSet Name="FK__progressI__custo__09A971A2" Association="TrainingMasterDatabaseModel.FK__progressI__custo__09A971A2">
-            <End Role="customer" EntitySet="customer" />
-            <End Role="progressImage" EntitySet="progressImage" />
           </AssociationSet>
           <AssociationSet Name="FK__trainingP__custo__0B91BA14" Association="TrainingMasterDatabaseModel.FK__trainingP__custo__0B91BA14">
             <End Role="customer" EntitySet="customer" />
@@ -1027,6 +1023,11 @@
           <AssociationSet Name="FK__trainingP__train__29221CFB" Association="TrainingMasterDatabaseModel.FK__trainingP__train__29221CFB">
             <End Role="training" EntitySet="training" />
             <End Role="trainingProgramTraining" EntitySet="trainingProgramTraining" />
+          </AssociationSet>
+          <EntitySet Name="progressImage" EntityType="TrainingMasterDatabaseModel.progressImage" />
+          <AssociationSet Name="FK__progressI__custo__09A971A2" Association="TrainingMasterDatabaseModel.FK__progressI__custo__09A971A2">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="progressImage" EntitySet="progressImage" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
@@ -1122,9 +1123,9 @@
           <NavigationProperty Name="goals" Relationship="TrainingMasterDatabaseModel.FK__goals__customer___05D8E0BE" FromRole="customer" ToRole="goals" />
           <NavigationProperty Name="measurementCM" Relationship="TrainingMasterDatabaseModel.FK__measureme__custo__07C12930" FromRole="customer" ToRole="measurementCM" />
           <NavigationProperty Name="measureMM" Relationship="TrainingMasterDatabaseModel.FK__measureMM__custo__08B54D69" FromRole="customer" ToRole="measureMM" />
-          <NavigationProperty Name="progressImage" Relationship="TrainingMasterDatabaseModel.FK__progressI__custo__09A971A2" FromRole="customer" ToRole="progressImage" />
           <NavigationProperty Name="trainingProgramDate" Relationship="TrainingMasterDatabaseModel.FK__trainingP__custo__0B91BA14" FromRole="customer" ToRole="trainingProgramDate" />
           <NavigationProperty Name="trainingSale" Relationship="TrainingMasterDatabaseModel.FK__trainingS__custo__06CD04F7" FromRole="customer" ToRole="trainingSale" />
+          <NavigationProperty Name="progressImage" Relationship="TrainingMasterDatabaseModel.FK__progressI__custo__09A971A2" FromRole="customer" ToRole="progressImage" />
         </EntityType>
         <EntityType Name="exercise">
           <Key>
@@ -1278,15 +1279,6 @@
           <NavigationProperty Name="trainer" Relationship="TrainingMasterDatabaseModel.FK__product__trainer__1332DBDC" FromRole="product" ToRole="trainer" />
           <NavigationProperty Name="trainingSaleProduct" Relationship="TrainingMasterDatabaseModel.FK__trainingS__produ__70DDC3D8" FromRole="product" ToRole="trainingSaleProduct" />
         </EntityType>
-        <EntityType Name="progressImage">
-          <Key>
-            <PropertyRef Name="PIID" />
-          </Key>
-          <Property Name="PIID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="customer_CID" Type="Int32" />
-          <NavigationProperty Name="customer" Relationship="TrainingMasterDatabaseModel.FK__progressI__custo__09A971A2" FromRole="progressImage" ToRole="customer" />
-        </EntityType>
         <EntityType Name="trainer">
           <Key>
             <PropertyRef Name="TRID" />
@@ -1301,7 +1293,7 @@
           <Property Name="address" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="location" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="hidden" Type="Boolean" />
-          <Property Name="profileImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="profileImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="AspNetUsers" Relationship="TrainingMasterDatabaseModel.FK__AspNetUse__train__18EBB532" FromRole="trainer" ToRole="AspNetUsers" />
           <NavigationProperty Name="customer" Relationship="TrainingMasterDatabaseModel.FK__customer__traine__123EB7A3" FromRole="trainer" ToRole="customer" />
           <NavigationProperty Name="exercise" Relationship="TrainingMasterDatabaseModel.FK__exercise__traine__17036CC0" FromRole="trainer" ToRole="exercise" />
@@ -1500,18 +1492,6 @@
               <PropertyRef Name="CID" />
             </Principal>
             <Dependent Role="measureMM">
-              <PropertyRef Name="customer_CID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__progressI__custo__09A971A2">
-          <End Type="TrainingMasterDatabaseModel.customer" Role="customer" Multiplicity="0..1" />
-          <End Type="TrainingMasterDatabaseModel.progressImage" Role="progressImage" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="customer">
-              <PropertyRef Name="CID" />
-            </Principal>
-            <Dependent Role="progressImage">
               <PropertyRef Name="customer_CID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1770,6 +1750,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="progressImage">
+          <Key>
+            <PropertyRef Name="PIID" />
+          </Key>
+          <Property Name="PIID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="customer_CID" Type="Int32" />
+          <Property Name="image" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="customer" Relationship="TrainingMasterDatabaseModel.FK__progressI__custo__09A971A2" FromRole="progressImage" ToRole="customer" />
+        </EntityType>
+        <Association Name="FK__progressI__custo__09A971A2">
+          <End Type="TrainingMasterDatabaseModel.customer" Role="customer" Multiplicity="0..1" />
+          <End Type="TrainingMasterDatabaseModel.progressImage" Role="progressImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="CID" />
+            </Principal>
+            <Dependent Role="progressImage">
+              <PropertyRef Name="customer_CID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2001,15 +2003,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="progressImage">
-            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.progressImage">
-              <MappingFragment StoreEntitySet="progressImage">
-                <ScalarProperty Name="customer_CID" ColumnName="customer_CID" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="PIID" ColumnName="PIID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="trainer">
             <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.trainer">
               <MappingFragment StoreEntitySet="trainer">
@@ -2112,6 +2105,16 @@
                 <ScalarProperty Name="numberOfReps" ColumnName="numberOfReps" />
                 <ScalarProperty Name="numberOfSets" ColumnName="numberOfSets" />
                 <ScalarProperty Name="TID" ColumnName="TID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="progressImage">
+            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.progressImage">
+              <MappingFragment StoreEntitySet="progressImage">
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="customer_CID" ColumnName="customer_CID" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="PIID" ColumnName="PIID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

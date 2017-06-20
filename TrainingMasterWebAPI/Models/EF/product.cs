@@ -28,8 +28,8 @@ namespace TrainingMasterWebAPI.Models.EF
         public Nullable<bool> hidden { get; set; }
         public int price { get; set; }
     
+        public virtual trainer trainer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<trainingSaleProduct> trainingSaleProduct { get; set; }
-        public virtual trainer trainer { get; set; }
     }
 }
