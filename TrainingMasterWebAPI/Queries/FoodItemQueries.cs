@@ -94,6 +94,42 @@ namespace TrainingMasterWebAPI.Queries
             }
         }
 
+        public bool TrainerAddFoodItem(string userId, FoodItemDTO foodItem)
+        {
+            var trainer = (from x in db.trainer
+                           where x.ID == userId
+                           select x).FirstOrDefault();
+            try
+            {
+                var f = new foodItem
+                {
+                    name = foodItem.name,
+                    category = foodItem.category,
+                    kcal = foodItem.kcal,
+                    fat = foodItem.fat,
+                    saturatedFat = foodItem.saturatedFat,
+                    unsaturatedFat = foodItem.unsaturatedFat,
+                    colestrol = foodItem.colestrol,
+                    carbohydrate = foodItem.carbohydrate,
+                    addedSugar = foodItem.addedSugar,
+                    fiber = foodItem.fiber,
+                    water = foodItem.water,
+                    protein = foodItem.protein,
+                    suppliment = foodItem.suppliment,
+                    trainer_TRID = trainer.TRID
+                };
+
+                db.foodItem.Add(f);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+        }
+
         public bool UpdateFoodItem(FoodItemDTO fooditem)
         {
             try
