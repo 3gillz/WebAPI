@@ -15,6 +15,12 @@ namespace TrainingMasterWebAPI.Controllers
     public class TrainingProgramDateController : ApiController
     {
         readonly private TrainingProgramDateQueries tpdq;
+        private string userId;
+        protected string UserId
+        {
+            get { return userId = User.Identity.GetUserId(); }
+            set { userId = value; }
+        }
         public TrainingProgramDateController()
         {
             tpdq = new TrainingProgramDateQueries();
@@ -35,7 +41,6 @@ namespace TrainingMasterWebAPI.Controllers
         [Route("GetAllByTRID")]
         public IEnumerable<TrainingProgramDateDTO> GetByTRID(int id)
         {
-            var UserId = User.Identity.GetUserId();
             return tpdq.GetAllByTRID(UserId);
         }
         [HttpGet]
@@ -44,6 +49,13 @@ namespace TrainingMasterWebAPI.Controllers
         {
             var UserId = User.Identity.GetUserId();
             return tpdq.GetSingleByTRID(UserId);
+        }
+
+        [HttpGet]
+        [Route("GetCurrentTrainingProgram")]
+        public TrainingProgramDTO GetTrainingProgramByCID()
+        {
+            return tpdq.GetCurrentTrainingProgram(UserId);
         }
     }
 }
