@@ -65,42 +65,58 @@ namespace TrainingMasterWebAPI.Queries
             }
         }
 
-        public IEnumerable<TrainingDTO> GetTrainings(int TPID, string userId)
+        public IEnumerable<TrainingDTO> GetTrainings(int TPID, string userId, bool trainer)
         {
-            var watch = System.Diagnostics.Stopwatch.StartNew();
-            trainer trainer = db.trainer.FirstOrDefault(x => x.ID == userId);
-            IEnumerable<trainingProgramTraining> tp = db.trainingProgramTraining.Where(x => x.trainingProgram_TPID == TPID && x.trainingProgram.trainer_TRID == trainer.TRID);
+            IEnumerable<trainingProgramTraining> tp = null;
+            if (trainer)
+            {
+                trainer tr = db.trainer.FirstOrDefault(x => x.ID == userId);
+                tp = db.trainingProgramTraining.Where(x => x.trainingProgram_TPID == TPID && x.trainingProgram.trainer_TRID == tr.TRID);
+            }
+            else
+            {
+                customer c = db.customer.FirstOrDefault(x => x.ID == userId);
+                trainingProgramDate tpd = db.trainingProgramDate.OrderByDescending(x => x.date).FirstOrDefault(x => x.customer_CID == c.CID);
+                if (tpd != null)
+                {
+                    tp = db.trainingProgramTraining.Where(x => x.trainingProgram_TPID == TPID && tpd.trainingProgram_TPID == TPID);
+                }
+            }
+
             List<TrainingDTO> trainingList = new List<TrainingDTO>();
 
-            foreach (trainingProgramTraining x in tp)
+            if(tp != null)
             {
-                var training = (from t in db.training
-                                where t.TID == x.training_TID
-                                select new TrainingDTO
-                                {
-                                    TID = t.TID,
-                                    className = t.className,
-                                    numberOfSets = t.numberOfSets,
-                                    numberOfReps = t.numberOfReps,
-                                    exercise_EID = t.exercise_EID,
-                                    durationMin = t.durationMin, 
-                                    restBetweenMin = t.restBetweenMin,
-                                    sunday = t.sunday,
-                                    monday = t.monday,
-                                    tuesday = t.tuesday,
-                                    wednesday = t.wednesday,
-                                    thursday = t.thursday,
-                                    friday = t.friday,
-                                    saturday = t.saturday,
-                                    timeOfDay = t.timeOfDay
-                                }).FirstOrDefault();
-                var name = GetExerciseName(training.exercise_EID);
-                training.name = name;
-                trainingList.Add(training);
+                foreach (trainingProgramTraining x in tp)
+                {
+                    var training = (from t in db.training
+                                    where t.TID == x.training_TID
+                                    select new TrainingDTO
+                                    {
+                                        TID = t.TID,
+                                        className = t.className,
+                                        numberOfSets = t.numberOfSets,
+                                        numberOfReps = t.numberOfReps,
+                                        exercise_EID = t.exercise_EID,
+                                        durationMin = t.durationMin, 
+                                        restBetweenMin = t.restBetweenMin,
+                                        sunday = t.sunday,
+                                        monday = t.monday,
+                                        tuesday = t.tuesday,
+                                        wednesday = t.wednesday,
+                                        thursday = t.thursday,
+                                        friday = t.friday,
+                                        saturday = t.saturday,
+                                        timeOfDay = t.timeOfDay
+                                    }).FirstOrDefault();
+                    var name = GetExerciseName(training.exercise_EID);
+                    training.name = name;
+                    trainingList.Add(training);
+                }
             }
-            watch.Stop();
-            System.Diagnostics.Debug.WriteLine(watch.ElapsedMilliseconds);
+            
             return trainingList;
+            
         }
 
         public string GetExerciseName(int EID)
