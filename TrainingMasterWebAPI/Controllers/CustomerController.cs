@@ -22,9 +22,10 @@ namespace TrainingMasterWebAPI.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public CustomerDTO GetCustomer(string id)
+        public CustomerDTO GetCustomer(int id)
         {
-            return cq.GetCustomerById(id);
+            var userID = User.Identity.GetUserId();
+            return cq.GetCustomerByCID(id, userID);
         }
 
         [HttpGet]

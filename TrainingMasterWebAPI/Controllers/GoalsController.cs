@@ -41,10 +41,10 @@ namespace TrainingMasterWebAPI.Controllers
             return gq.GetAllGoalsByCID(UserId);
         }
         [HttpGet]
-        [Route("GetSingleByCID")]
-        public GoalsDTO GetCurrentGoalByCID()
+        [Route("{id}")]
+        public GoalsDTO GetCurrentGoalByCID(int id)
         {
-            return gq.GetCurrentGoalByCID(UserId);
+            return gq.GetCurrentGoalByCID(id);
         }
 
         [HttpGet]
