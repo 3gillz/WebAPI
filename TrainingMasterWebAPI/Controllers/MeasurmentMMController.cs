@@ -41,14 +41,14 @@ namespace TrainingMasterWebAPI.Controllers
             return mmmq.GetMeasurmentMMById(id);
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("Add")]
         public bool AddMeasurmentMM(MeasurmentMMDTO MeasurmentMM)
         {
             return mmmq.AddMeasurmentMM(MeasurmentMM);
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("Update")]
         public bool UpdateMeasurmentMM(MeasurmentMMDTO MeasurmentMM)
         {
