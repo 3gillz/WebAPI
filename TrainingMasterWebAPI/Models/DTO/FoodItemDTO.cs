@@ -9,6 +9,7 @@ namespace TrainingMasterWebAPI.Models.DTO
     {
         public int FIID { get; set; }
         public string name { get; set; }
+        public string category { get; set; }
         public decimal kcal { get; set; }
         public decimal fat { get; set; }
         public decimal saturatedFat { get; set; }

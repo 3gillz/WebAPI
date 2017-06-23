@@ -22,9 +22,10 @@ namespace TrainingMasterWebAPI.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public CustomerDTO GetCustomer(string id)
+        public CustomerDTO GetCustomer(int id)
         {
-            return cq.GetCustomerById(id);
+            var userID = User.Identity.GetUserId();
+            return cq.GetCustomerByCID(id, userID);
         }
 
         [HttpGet]
@@ -50,6 +51,14 @@ namespace TrainingMasterWebAPI.Controllers
         {
             var userID = User.Identity.GetUserId();
             return cq.GetAllCustomersByTRID(userID);
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("Register")]
+        public bool RegisterCustomer(CustomerDTO customer)
+        {
+            return cq.RegisterCustomer(customer);
         }
 
         [HttpPost]

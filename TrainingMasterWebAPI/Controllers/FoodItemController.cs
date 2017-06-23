@@ -38,6 +38,14 @@ namespace TrainingMasterWebAPI.Controllers
             return fiq.AddFoodItem(fooditem);
         }
 
+        [HttpPost]
+        [Route("TrainerAdd")]
+        public bool TrainerAddExercise(FoodItemDTO foodItem)
+        {
+            var userId = User.Identity.GetUserId();
+            return fiq.TrainerAddFoodItem(userId, foodItem);
+        }
+
         [HttpPut]
         [Route("Update")]
         public bool UpdateFoodItem(FoodItemDTO fooditem)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using TrainingMasterWebAPI.Models.DTO;
 using TrainingMasterWebAPI.Models.EF;
@@ -45,36 +46,54 @@ namespace TrainingMasterWebAPI.Queries
             var customer = (from x in db.customer
                             where x.ID == userId
                             select x).FirstOrDefault();
-
-            var img = (from x in db.progressImage
-                       where x.customer_CID == customer.CID
-                       select new ProgressImageDTO
-                       {
-                           PIID = x.PIID,
-                           date = x.date,
-                           customer_CID = x.customer_CID
-                       });
-            return img;
+            try
+            {
+                var img = (from x in db.progressImage
+                           where x.customer_CID == customer.CID
+                           select new ProgressImageDTO
+                           {
+                               PIID = x.PIID,
+                               date = x.date,
+                               image = x.image,
+                               customer_CID = x.customer_CID
+                           });
+                return img;
+            }
+            catch(Exception)
+            {
+                throw;
+            }
         }
 
-        public bool AddProgressImage(ProgressImageDTO x)
+        public ProgressImageDTO AddProgressImage(string UserId, string imageBase64)
         {
             try
             {
-                var img = new progressImage
+                imageBase64 = imageBase64.Replace(' ', '+');
+                byte[] imageBytes = Convert.FromBase64String(imageBase64);
+
+                customer c = db.customer.FirstOrDefault(x => x.ID == UserId);
+
+                progressImage pI = new progressImage
                 {
-                    PIID = x.PIID,
-                    date = x.date,
-                    customer_CID = x.customer_CID
+                    date = DateTime.Now,
+                    image = imageBytes,
+                    customer_CID = c.CID
                 };
 
-                db.progressImage.Add(img);
+                db.progressImage.Add(pI);
                 db.SaveChanges();
-                return true;
+                return new ProgressImageDTO
+                {
+                    date = pI.date,
+                    image = pI.image,
+                    customer_CID = pI.customer_CID,
+                    PIID = pI.PIID
+                };
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
         }
 

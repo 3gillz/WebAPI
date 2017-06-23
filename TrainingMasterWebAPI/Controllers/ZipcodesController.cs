@@ -20,6 +20,7 @@ namespace TrainingMasterWebAPI.Controllers
             zcq = new ZipcodesQueries();
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [Route("GetAll")]
         public IEnumerable<ZipcodesDTO> GetAllZipcodes()

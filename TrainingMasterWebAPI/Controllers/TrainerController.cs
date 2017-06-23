@@ -34,6 +34,21 @@ namespace TrainingMasterWebAPI.Controllers
             return tq.GetTrainerByTRID(id);
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("card/{id}")]
+        public TrainerDTO GetTrainerCardByTRID(int id)
+        {
+            return tq.GetTrainerCardByTRID(id);
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("Register")]
+        public bool RegisterTrainer(TrainerDTO Trainer)
+        {
+            return tq.RegisterTrainer(Trainer);
+        }
+
         [HttpGet]
         [Route("GetCurrentTrainer")]
         public TrainerDTO GetCurrentTrainer(string id)

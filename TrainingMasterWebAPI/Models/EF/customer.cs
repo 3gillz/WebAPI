@@ -22,9 +22,9 @@ namespace TrainingMasterWebAPI.Models.EF
             this.goals = new HashSet<goals>();
             this.measurementCM = new HashSet<measurementCM>();
             this.measureMM = new HashSet<measureMM>();
-            this.progressImage = new HashSet<progressImage>();
             this.trainingProgramDate = new HashSet<trainingProgramDate>();
             this.trainingSale = new HashSet<trainingSale>();
+            this.progressImage = new HashSet<progressImage>();
         }
     
         public int CID { get; set; }
@@ -48,6 +48,7 @@ namespace TrainingMasterWebAPI.Models.EF
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
+        public virtual trainer trainer { get; set; }
         public virtual zipcodes zipcodes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<foodProgramDate> foodProgramDate { get; set; }
@@ -58,11 +59,10 @@ namespace TrainingMasterWebAPI.Models.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<measureMM> measureMM { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<progressImage> progressImage { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<trainingProgramDate> trainingProgramDate { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<trainingSale> trainingSale { get; set; }
-        public virtual trainer trainer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<progressImage> progressImage { get; set; }
     }
 }

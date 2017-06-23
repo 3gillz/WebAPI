@@ -45,6 +45,37 @@ namespace TrainingMasterWebAPI.Queries
             return customer;
         }
 
+        public CustomerDTO GetCustomerByCID(int CID, string userID)
+        {
+            var trainer = (from x in db.trainer
+                           where x.ID == userID
+                           select x).FirstOrDefault();
+
+            var customer = (from x in db.customer
+                            where x.CID == CID && x.trainer_TRID == trainer.TRID
+                            select new CustomerDTO
+                            {
+                                CID = x.CID,
+                                name = x.name,
+                                email = x.email,
+                                phone = x.phone,
+                                gender = x.gender,
+                                kennitala = x.kennitala,
+                                address = x.address,
+                                country = x.country,
+                                foodPref = x.foodPref,
+                                injury = x.injury,
+                                allergy = x.allergy,
+                                zipcodes_ZIP = x.zipcodes_ZIP,
+                                profileImagePath = x.profileImagePath,
+                                height = x.height,
+                                trainer_TRID = x.trainer_TRID,
+                                hidden = x.hidden,
+                                jobDifficulty = x.jobDifficulty
+                            }).SingleOrDefault();
+            return customer;
+        }
+
         public IEnumerable<CustomerDTO> GetAllCustomers()
         {
             var customers = (from x in db.customer
@@ -138,6 +169,41 @@ namespace TrainingMasterWebAPI.Queries
             c.profileImagePath = Customer.profileImagePath;
             db.SaveChanges();
             return c.profileImagePath;
+        }
+
+        public bool RegisterCustomer(CustomerDTO Customer)
+        {
+            try
+            {
+                var c = new customer
+                {
+                    CID = Customer.CID,
+                    ID = Customer.ID,
+                    name = Customer.name,
+                    email = Customer.email,
+                    phone = Customer.phone,
+                    gender = Customer.gender,
+                    kennitala = Customer.kennitala,
+                    address = Customer.address,
+                    foodPref = Customer.foodPref,
+                    injury = Customer.injury,
+                    allergy = Customer.allergy,
+                    zipcodes_ZIP = Customer.zipcodes_ZIP,
+                    profileImagePath = "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png",
+                    height = Customer.height,
+                    trainer_TRID = Customer.trainer_TRID,
+                    hidden = false,
+                    jobDifficulty = Customer.jobDifficulty
+                };
+
+                db.customer.Add(c);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public bool AddCustomer(CustomerDTO Customer, string userId)

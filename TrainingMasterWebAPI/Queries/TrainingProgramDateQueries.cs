@@ -78,5 +78,24 @@ namespace TrainingMasterWebAPI.Queries
             return trainingDate;
         }
 
+        public TrainingProgramDTO GetCurrentTrainingProgram(string UserId)
+        {
+            trainingProgram p = new trainingProgram();
+            customer c = db.customer.FirstOrDefault(x => x.ID == UserId);
+            var currentTp = db.trainingProgramDate.OrderByDescending(x => x.date).FirstOrDefault(x => x.customer_CID == c.CID);
+            if (currentTp != null)
+            {
+                p = db.trainingProgram.FirstOrDefault(x => x.TPID == currentTp.trainingProgram_TPID);
+            }
+
+            var tp = new TrainingProgramDTO
+            {
+                TPID = p.TPID,
+                name = p.name,
+            };
+            return tp;
+        }
+
+
     }
 }

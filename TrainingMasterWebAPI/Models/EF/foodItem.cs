@@ -22,6 +22,7 @@ namespace TrainingMasterWebAPI.Models.EF
     
         public int FIID { get; set; }
         public string name { get; set; }
+        public string category { get; set; }
         public decimal kcal { get; set; }
         public decimal fat { get; set; }
         public decimal saturatedFat { get; set; }
@@ -34,10 +35,9 @@ namespace TrainingMasterWebAPI.Models.EF
         public decimal protein { get; set; }
         public Nullable<bool> suppliment { get; set; }
         public Nullable<int> trainer_TRID { get; set; }
-        public string category { get; set; }
     
+        public virtual trainer trainer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<foodPortion> foodPortion { get; set; }
-        public virtual trainer trainer { get; set; }
     }
 }

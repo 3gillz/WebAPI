@@ -26,10 +26,10 @@ namespace TrainingMasterWebAPI.Models.EF
         public string name { get; set; }
         public short difficulty { get; set; }
     
+        public virtual trainer trainer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<trainingProgramTraining> trainingProgramTraining { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<trainingProgramDate> trainingProgramDate { get; set; }
-        public virtual trainer trainer { get; set; }
     }
 }

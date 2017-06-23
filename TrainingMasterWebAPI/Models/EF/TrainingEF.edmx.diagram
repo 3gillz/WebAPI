@@ -22,7 +22,6 @@
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.measureMM" Width="1.5" PointX="5.25" PointY="42.5" />
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.paymentMethod" Width="1.5" PointX="6" PointY="35.625" />
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.product" Width="1.5" PointX="3" PointY="54.625" />
-        <EntityTypeShape EntityType="TrainingMasterDatabaseModel.progressImage" Width="1.5" PointX="5.25" PointY="55.125" />
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.trainer" Width="1.5" PointX="0.75" PointY="25.25" />
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.trainingProgram" Width="1.5" PointX="3" PointY="26.125" />
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.trainingProgramDate" Width="1.5" PointX="8.25" PointY="30.875" />
@@ -40,7 +39,6 @@
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__goals__customer___05D8E0BE" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__measureme__custo__07C12930" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__measureMM__custo__08B54D69" />
-        <AssociationConnector Association="TrainingMasterDatabaseModel.FK__progressI__custo__09A971A2" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__trainingP__custo__0B91BA14" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__trainingS__custo__06CD04F7" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__exercise__traine__17036CC0" />
@@ -62,6 +60,8 @@
         <EntityTypeShape EntityType="TrainingMasterDatabaseModel.training" Width="1.5" PointX="5.25" PointY="49.625" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__training__exerci__40F9A68C" />
         <AssociationConnector Association="TrainingMasterDatabaseModel.FK__trainingP__train__29221CFB" />
+        <EntityTypeShape EntityType="TrainingMasterDatabaseModel.progressImage" Width="1.5" PointX="5.25" PointY="12.625" />
+        <AssociationConnector Association="TrainingMasterDatabaseModel.FK__progressI__custo__09A971A2" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

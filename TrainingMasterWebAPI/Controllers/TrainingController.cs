@@ -49,7 +49,8 @@ namespace TrainingMasterWebAPI.Controllers
         [Route("Get/{TPID}")]
         public IEnumerable<TrainingDTO>  GetTrainings(int TPID)
         {
-            return tq.GetTrainings(TPID, UserId);
+            bool trainer = User.IsInRole("trainer");
+            return tq.GetTrainings(TPID, UserId, trainer);
         }
 
         [HttpPut]

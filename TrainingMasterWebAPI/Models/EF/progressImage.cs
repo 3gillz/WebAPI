@@ -17,6 +17,7 @@ namespace TrainingMasterWebAPI.Models.EF
         public int PIID { get; set; }
         public System.DateTime date { get; set; }
         public Nullable<int> customer_CID { get; set; }
+        public byte[] image { get; set; }
     
         public virtual customer customer { get; set; }
     }

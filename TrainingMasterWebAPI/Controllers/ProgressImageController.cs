@@ -46,9 +46,9 @@ namespace TrainingMasterWebAPI.Controllers
 
         [HttpPost]
         [Route("Add")]
-        public bool AddProgressImage(ProgressImageDTO PGI)
+        public ProgressImageDTO AddProgressImage([FromBody] string imageBase64)
         {
-            return piq.AddProgressImage(PGI);
+            return piq.AddProgressImage(UserId, imageBase64);
         }
 
         [HttpPut]

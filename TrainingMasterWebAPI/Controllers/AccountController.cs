@@ -364,13 +364,18 @@ namespace TrainingMasterWebAPI.Controllers
             var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, Address = model.Address };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-
+            
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
             }
 
-            return Ok();
+            if (model.Role != "admin" || model.Role != "superadmin")
+            {
+                await UserManager.AddToRoleAsync(user.Id, model.Role);
+            }
+
+            return Ok(user.Id);
         }
 
         // POST api/Account/RegisterExternal
