@@ -30,10 +30,17 @@ namespace TrainingMasterWebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("GetAllByCID")]
-        public IEnumerable<ProgressImageDTO> GetProgressImagesByCID()
+        [Route("GetAllByCurrentUser")]
+        public IEnumerable<ProgressImageDTO> GetProgressImagesByCurrentUser()
         {
-            return piq.GetAllProgressImagesByCID(UserId);
+            return piq.GetAllProgressImagesByCurrentUser(UserId);
+        }
+
+        [HttpGet]
+        [Route("GetAllByCID/{CID}")]
+        public IEnumerable<ProgressImageDTO> GetProgressImagesByCID(int CID)
+        {
+            return piq.GetAllProgressImagesByCID(CID);
         }
 
 

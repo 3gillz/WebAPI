@@ -41,7 +41,7 @@ namespace TrainingMasterWebAPI.Queries
             return img;
         }
 
-        public IEnumerable<ProgressImageDTO> GetAllProgressImagesByCID(string userId)
+        public IEnumerable<ProgressImageDTO> GetAllProgressImagesByCurrentUser(string userId)
         {
             var customer = (from x in db.customer
                             where x.ID == userId
@@ -60,6 +60,27 @@ namespace TrainingMasterWebAPI.Queries
                 return img;
             }
             catch(Exception)
+            {
+                throw;
+            }
+        }
+
+        public IEnumerable<ProgressImageDTO> GetAllProgressImagesByCID(int CID)
+        {
+            try
+            {
+                var img = (from x in db.progressImage
+                           where x.customer_CID == CID
+                           select new ProgressImageDTO
+                           {
+                               PIID = x.PIID,
+                               date = x.date,
+                               image = x.image,
+                               customer_CID = x.customer_CID
+                           });
+                return img;
+            }
+            catch (Exception)
             {
                 throw;
             }
