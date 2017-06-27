@@ -52,14 +52,10 @@ namespace TrainingMasterWebAPI.Queries
             return g;
         }
 
-        public GoalsDTO GetCurrentGoalByCID(string UserId)
+        public GoalsDTO GetCurrentGoalByCID(int CID)
         {
-            var customer = (from x in db.customer
-                            where x.ID == UserId
-                            select x).FirstOrDefault();
-
-            var g = (from x in db.goals.OrderBy(x => x.startDate)
-                     where x.customer_CID == customer.CID
+            var g = (from x in db.goals.OrderByDescending(x => x.startDate)
+                     where x.customer_CID == CID
                      select new GoalsDTO
                      {
                          GID = x.GID,
@@ -70,7 +66,7 @@ namespace TrainingMasterWebAPI.Queries
                          diameter = x.diameter,
                          startDate = x.startDate,
                          dueDate = x.dueDate
-                     }).SingleOrDefault();
+                     }).FirstOrDefault();
             return g;
         }
 

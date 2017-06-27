@@ -41,14 +41,14 @@ namespace TrainingMasterWebAPI.Controllers
             return mmmq.GetMeasurmentMMById(id);
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("Add")]
         public bool AddMeasurmentMM(MeasurmentMMDTO MeasurmentMM)
         {
             return mmmq.AddMeasurmentMM(MeasurmentMM);
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("Update")]
         public bool UpdateMeasurmentMM(MeasurmentMMDTO MeasurmentMM)
         {
@@ -56,10 +56,10 @@ namespace TrainingMasterWebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("GetAllByCID")]
-        public IEnumerable<MeasurmentMMDTO> GetAllMeasurementMMByCID()
+        [Route("GetAllByCID/{CID}")]
+        public IEnumerable<MeasurmentMMDTO> GetAllMeasurementMMByCID(int CID)
         {
-            return mmmq.GetAllMeasurementMMByCID(UserId);
+            return mmmq.GetAllMeasurementMMByCID(CID);
         }
 
         [HttpGet]

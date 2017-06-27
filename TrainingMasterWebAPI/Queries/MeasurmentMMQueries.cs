@@ -85,8 +85,10 @@ namespace TrainingMasterWebAPI.Queries
                             where x.CID == MeasureMM.customer_CID
                             select x).SingleOrDefault();
 
+            var customerHeight = customer.height;
+
             var age = ageFromKt(customer.kennitala);
-            var heightf = customer.height / 100;
+            var heightf = (decimal)customerHeight / 100;
 
             if (MeasureMM.chest == 0 || MeasureMM.chest == null) //Four Point Measurment
             {
@@ -121,7 +123,7 @@ namespace TrainingMasterWebAPI.Queries
             {
                 MMMID = MeasureMM.MMMID,
                 customer_CID = MeasureMM.customer_CID,
-                date = MeasureMM.date,
+                date = DateTime.Now,
                 chest = MeasureMM.chest,
                 abdominal = MeasureMM.abdominal,
                 thigh = MeasureMM.thigh,
@@ -173,14 +175,10 @@ namespace TrainingMasterWebAPI.Queries
             }
         }
 
-        public IEnumerable<MeasurmentMMDTO> GetAllMeasurementMMByCID(string UserId)
+        public IEnumerable<MeasurmentMMDTO> GetAllMeasurementMMByCID(int CID)
         {
-            var customer = (from x in db.customer
-                            where x.ID == UserId
-                            select x).FirstOrDefault();
-
             var m = (from x in db.measureMM
-                     where x.customer_CID == customer.CID
+                     where x.customer_CID == CID
                      select new MeasurmentMMDTO
                      {
 

@@ -45,6 +45,37 @@ namespace TrainingMasterWebAPI.Queries
             return customer;
         }
 
+        public CustomerDTO GetCustomerByCID(int CID, string userID)
+        {
+            var trainer = (from x in db.trainer
+                           where x.ID == userID
+                           select x).FirstOrDefault();
+
+            var customer = (from x in db.customer
+                            where x.CID == CID && x.trainer_TRID == trainer.TRID
+                            select new CustomerDTO
+                            {
+                                CID = x.CID,
+                                name = x.name,
+                                email = x.email,
+                                phone = x.phone,
+                                gender = x.gender,
+                                kennitala = x.kennitala,
+                                address = x.address,
+                                country = x.country,
+                                foodPref = x.foodPref,
+                                injury = x.injury,
+                                allergy = x.allergy,
+                                zipcodes_ZIP = x.zipcodes_ZIP,
+                                profileImagePath = x.profileImagePath,
+                                height = x.height,
+                                trainer_TRID = x.trainer_TRID,
+                                hidden = x.hidden,
+                                jobDifficulty = x.jobDifficulty
+                            }).SingleOrDefault();
+            return customer;
+        }
+
         public IEnumerable<CustomerDTO> GetAllCustomers()
         {
             var customers = (from x in db.customer
