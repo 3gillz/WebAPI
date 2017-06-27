@@ -64,7 +64,7 @@ namespace TrainingMasterWebAPI.Controllers
 
         [HttpGet]
         [Route("GetCurrentByCID")]
-        public FoodProgramDateDTO GetCurrentFoodProgramDateByCID()
+        public FoodProgramDTO GetCurrentFoodProgramDateByCID()
         {
             return fpdq.GetCurrentFoodProgramDateByCID(UserId);
         }

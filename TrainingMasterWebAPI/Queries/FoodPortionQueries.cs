@@ -110,27 +110,27 @@ namespace TrainingMasterWebAPI.Queries
 
         public IEnumerable<FoodPortionDTO> GetFoodPortions(int FPMID, string userId, bool trainer)
         {
-            IEnumerable<foodProgramPortion> tp = null;
+            IEnumerable<foodProgramPortion> fp = null;
             if (trainer)
             {
                 trainer tr = db.trainer.FirstOrDefault(x => x.ID == userId);
-                tp = db.foodProgramPortion.Where(x => x.foodProgram_FPMID == FPMID && x.foodProgram.trainer_TRID == tr.TRID);
+                fp = db.foodProgramPortion.Where(x => x.foodProgram_FPMID == FPMID && x.foodProgram.trainer_TRID == tr.TRID);
             }
             else
             {
                 customer c = db.customer.FirstOrDefault(x => x.ID == userId);
-                foodProgramDate tpd = db.foodProgramDate.OrderByDescending(x => x.date).FirstOrDefault(x => x.customer_CID == c.CID);
-                if (tpd != null)
+                foodProgramDate fpd = db.foodProgramDate.OrderByDescending(x => x.date).FirstOrDefault(x => x.customer_CID == c.CID);
+                if (fpd != null)
                 {
-                    tp = db.foodProgramPortion.Where(x => x.foodProgram_FPMID == FPMID && tpd.foodProgram_FPMID == FPMID);
+                    fp = db.foodProgramPortion.Where(x => x.foodProgram_FPMID == FPMID && fpd.foodProgram_FPMID == FPMID);
                 }
             }
 
             List<FoodPortionDTO> trainingList = new List<FoodPortionDTO>();
 
-            if (tp != null)
+            if (fp != null)
             {
-                foreach (foodProgramPortion x in tp)
+                foreach (foodProgramPortion x in fp)
                 {
                     var portion = (from p in db.foodPortion
                                     where p.FPID == x.foodPortion_FPID

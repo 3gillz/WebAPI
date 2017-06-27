@@ -103,24 +103,25 @@ namespace TrainingMasterWebAPI.Queries
             return fpd;
         }
 
-        public FoodProgramDateDTO GetCurrentFoodProgramDateByCID(string UserId)
+        public FoodProgramDTO GetCurrentFoodProgramDateByCID(string UserId)
         {
-            var customer = (from x in db.customer
-                            where x.ID == UserId
-                            select x).FirstOrDefault();
+            foodProgram f = new foodProgram();
+            customer c = db.customer.FirstOrDefault(x => x.ID == UserId);
+            var currentFp = db.foodProgramDate.OrderByDescending(x => x.date).FirstOrDefault(x => x.customer_CID == c.CID);
 
-            var fpd = (from x in db.foodProgramDate.OrderBy(x => x.date)
-                       where x.customer_CID == customer.CID
-                       select new FoodProgramDateDTO
-                       {
-                           FPDID = x.FPDID,
-                           customer_CID = x.customer_CID,
-                           foodProgram_FPMID = x.foodProgram_FPMID,
-                           date = x.date
-                       }).FirstOrDefault();
-            return fpd;
+            if (currentFp != null)
+            {
+                f = db.foodProgram.FirstOrDefault(x => x.FPMID == currentFp.foodProgram_FPMID);
+            }
+            var fp = new FoodProgramDTO
+            {
+                FPMID = f.FPMID,
+                name = f.name,
+                
+            };
+
+            return fp;
         }
-
 
     }
 }
