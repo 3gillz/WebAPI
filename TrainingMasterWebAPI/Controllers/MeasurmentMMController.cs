@@ -56,10 +56,10 @@ namespace TrainingMasterWebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("GetAllByCID")]
-        public IEnumerable<MeasurmentMMDTO> GetAllMeasurementMMByCID()
+        [Route("GetAllByCID/{CID}")]
+        public IEnumerable<MeasurmentMMDTO> GetAllMeasurementMMByCID(int CID)
         {
-            return mmmq.GetAllMeasurementMMByCID(UserId);
+            return mmmq.GetAllMeasurementMMByCID(CID);
         }
 
         [HttpGet]

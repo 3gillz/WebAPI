@@ -173,14 +173,10 @@ namespace TrainingMasterWebAPI.Queries
             }
         }
 
-        public IEnumerable<MeasurmentMMDTO> GetAllMeasurementMMByCID(string UserId)
+        public IEnumerable<MeasurmentMMDTO> GetAllMeasurementMMByCID(int CID)
         {
-            var customer = (from x in db.customer
-                            where x.ID == UserId
-                            select x).FirstOrDefault();
-
             var m = (from x in db.measureMM
-                     where x.customer_CID == customer.CID
+                     where x.customer_CID == CID
                      select new MeasurmentMMDTO
                      {
 
