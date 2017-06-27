@@ -19,7 +19,7 @@ namespace TrainingMasterWebAPI.Models.EF
         public short weekday { get; set; }
         public short timeOfDay { get; set; }
     
-        public virtual foodPortion foodPortion { get; set; }
         public virtual foodProgram foodProgram { get; set; }
+        public virtual foodPortion foodPortion { get; set; }
     }
 }

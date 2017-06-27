@@ -130,6 +130,15 @@
           <Property Name="FPID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="quantity" Type="int" Nullable="false" />
           <Property Name="foodItem_FIID" Type="int" Nullable="false" />
+          <Property Name="sunday" Type="bit" Nullable="false" />
+          <Property Name="monday" Type="bit" Nullable="false" />
+          <Property Name="tuesday" Type="bit" Nullable="false" />
+          <Property Name="wednesday" Type="bit" Nullable="false" />
+          <Property Name="thursday" Type="bit" Nullable="false" />
+          <Property Name="friday" Type="bit" Nullable="false" />
+          <Property Name="saturday" Type="bit" Nullable="false" />
+          <Property Name="timeOfDay" Type="nchar" MaxLength="10" />
+          <Property Name="className" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="foodProgram">
           <Key>
@@ -887,7 +896,6 @@
           <EntitySet Name="customer" EntityType="TrainingMasterDatabaseModel.customer" />
           <EntitySet Name="exercise" EntityType="TrainingMasterDatabaseModel.exercise" />
           <EntitySet Name="foodItem" EntityType="TrainingMasterDatabaseModel.foodItem" />
-          <EntitySet Name="foodPortion" EntityType="TrainingMasterDatabaseModel.foodPortion" />
           <EntitySet Name="foodProgram" EntityType="TrainingMasterDatabaseModel.foodProgram" />
           <EntitySet Name="foodProgramDate" EntityType="TrainingMasterDatabaseModel.foodProgramDate" />
           <EntitySet Name="foodProgramPortion" EntityType="TrainingMasterDatabaseModel.foodProgramPortion" />
@@ -959,14 +967,6 @@
             <End Role="trainer" EntitySet="trainer" />
             <End Role="foodItem" EntitySet="foodItem" />
           </AssociationSet>
-          <AssociationSet Name="FK__foodPorti__foodI__2FCF1A8A" Association="TrainingMasterDatabaseModel.FK__foodPorti__foodI__2FCF1A8A">
-            <End Role="foodItem" EntitySet="foodItem" />
-            <End Role="foodPortion" EntitySet="foodPortion" />
-          </AssociationSet>
-          <AssociationSet Name="FK__foodProgr__foodP__2CF2ADDF" Association="TrainingMasterDatabaseModel.FK__foodProgr__foodP__2CF2ADDF">
-            <End Role="foodPortion" EntitySet="foodPortion" />
-            <End Role="foodProgramPortion" EntitySet="foodProgramPortion" />
-          </AssociationSet>
           <AssociationSet Name="FK__foodProgr__foodP__2DE6D218" Association="TrainingMasterDatabaseModel.FK__foodProgr__foodP__2DE6D218">
             <End Role="foodProgram" EntitySet="foodProgram" />
             <End Role="foodProgramPortion" EntitySet="foodProgramPortion" />
@@ -1028,6 +1028,15 @@
           <AssociationSet Name="FK__progressI__custo__09A971A2" Association="TrainingMasterDatabaseModel.FK__progressI__custo__09A971A2">
             <End Role="customer" EntitySet="customer" />
             <End Role="progressImage" EntitySet="progressImage" />
+          </AssociationSet>
+          <EntitySet Name="foodPortion" EntityType="TrainingMasterDatabaseModel.foodPortion" />
+          <AssociationSet Name="FK__foodPorti__foodI__2FCF1A8A" Association="TrainingMasterDatabaseModel.FK__foodPorti__foodI__2FCF1A8A">
+            <End Role="foodItem" EntitySet="foodItem" />
+            <End Role="foodPortion" EntitySet="foodPortion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__foodProgr__foodP__2CF2ADDF" Association="TrainingMasterDatabaseModel.FK__foodProgr__foodP__2CF2ADDF">
+            <End Role="foodPortion" EntitySet="foodPortion" />
+            <End Role="foodProgramPortion" EntitySet="foodProgramPortion" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
@@ -1162,16 +1171,6 @@
           <NavigationProperty Name="trainer" Relationship="TrainingMasterDatabaseModel.FK__foodItem__traine__245D67DE" FromRole="foodItem" ToRole="trainer" />
           <NavigationProperty Name="foodPortion" Relationship="TrainingMasterDatabaseModel.FK__foodPorti__foodI__2FCF1A8A" FromRole="foodItem" ToRole="foodPortion" />
         </EntityType>
-        <EntityType Name="foodPortion">
-          <Key>
-            <PropertyRef Name="FPID" />
-          </Key>
-          <Property Name="FPID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="quantity" Type="Int32" Nullable="false" />
-          <Property Name="foodItem_FIID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="foodItem" Relationship="TrainingMasterDatabaseModel.FK__foodPorti__foodI__2FCF1A8A" FromRole="foodPortion" ToRole="foodItem" />
-          <NavigationProperty Name="foodProgramPortion" Relationship="TrainingMasterDatabaseModel.FK__foodProgr__foodP__2CF2ADDF" FromRole="foodPortion" ToRole="foodProgramPortion" />
-        </EntityType>
         <EntityType Name="foodProgram">
           <Key>
             <PropertyRef Name="FPMID" />
@@ -1203,8 +1202,8 @@
           <Property Name="foodPortion_FPID" Type="Int32" Nullable="false" />
           <Property Name="weekday" Type="Int16" Nullable="false" />
           <Property Name="timeOfDay" Type="Int16" Nullable="false" />
-          <NavigationProperty Name="foodPortion" Relationship="TrainingMasterDatabaseModel.FK__foodProgr__foodP__2CF2ADDF" FromRole="foodProgramPortion" ToRole="foodPortion" />
           <NavigationProperty Name="foodProgram" Relationship="TrainingMasterDatabaseModel.FK__foodProgr__foodP__2DE6D218" FromRole="foodProgramPortion" ToRole="foodProgram" />
+          <NavigationProperty Name="foodPortion" Relationship="TrainingMasterDatabaseModel.FK__foodProgr__foodP__2CF2ADDF" FromRole="foodProgramPortion" ToRole="foodPortion" />
         </EntityType>
         <EntityType Name="goals">
           <Key>
@@ -1544,30 +1543,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__foodPorti__foodI__2FCF1A8A">
-          <End Type="TrainingMasterDatabaseModel.foodItem" Role="foodItem" Multiplicity="1" />
-          <End Type="TrainingMasterDatabaseModel.foodPortion" Role="foodPortion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="foodItem">
-              <PropertyRef Name="FIID" />
-            </Principal>
-            <Dependent Role="foodPortion">
-              <PropertyRef Name="foodItem_FIID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__foodProgr__foodP__2CF2ADDF">
-          <End Type="TrainingMasterDatabaseModel.foodPortion" Role="foodPortion" Multiplicity="1" />
-          <End Type="TrainingMasterDatabaseModel.foodProgramPortion" Role="foodProgramPortion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="foodPortion">
-              <PropertyRef Name="FPID" />
-            </Principal>
-            <Dependent Role="foodProgramPortion">
-              <PropertyRef Name="foodPortion_FPID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__foodProgr__foodP__2DE6D218">
           <End Type="TrainingMasterDatabaseModel.foodProgram" Role="foodProgram" Multiplicity="1" />
           <End Type="TrainingMasterDatabaseModel.foodProgramPortion" Role="foodProgramPortion" Multiplicity="*" />
@@ -1772,6 +1747,49 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="foodPortion">
+          <Key>
+            <PropertyRef Name="FPID" />
+          </Key>
+          <Property Name="FPID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="foodItem_FIID" Type="Int32" Nullable="false" />
+          <Property Name="sunday" Type="Boolean" Nullable="false" />
+          <Property Name="monday" Type="Boolean" Nullable="false" />
+          <Property Name="tuesday" Type="Boolean" Nullable="false" />
+          <Property Name="wednesday" Type="Boolean" Nullable="false" />
+          <Property Name="thursday" Type="Boolean" Nullable="false" />
+          <Property Name="friday" Type="Boolean" Nullable="false" />
+          <Property Name="saturday" Type="Boolean" Nullable="false" />
+          <Property Name="timeOfDay" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="className" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="foodItem" Relationship="TrainingMasterDatabaseModel.FK__foodPorti__foodI__2FCF1A8A" FromRole="foodPortion" ToRole="foodItem" />
+          <NavigationProperty Name="foodProgramPortion" Relationship="TrainingMasterDatabaseModel.FK__foodProgr__foodP__2CF2ADDF" FromRole="foodPortion" ToRole="foodProgramPortion" />
+        </EntityType>
+        <Association Name="FK__foodPorti__foodI__2FCF1A8A">
+          <End Type="TrainingMasterDatabaseModel.foodItem" Role="foodItem" Multiplicity="1" />
+          <End Type="TrainingMasterDatabaseModel.foodPortion" Role="foodPortion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="foodItem">
+              <PropertyRef Name="FIID" />
+            </Principal>
+            <Dependent Role="foodPortion">
+              <PropertyRef Name="foodItem_FIID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__foodProgr__foodP__2CF2ADDF">
+          <End Type="TrainingMasterDatabaseModel.foodPortion" Role="foodPortion" Multiplicity="1" />
+          <End Type="TrainingMasterDatabaseModel.foodProgramPortion" Role="foodProgramPortion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="foodPortion">
+              <PropertyRef Name="FPID" />
+            </Principal>
+            <Dependent Role="foodProgramPortion">
+              <PropertyRef Name="foodPortion_FPID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1890,15 +1908,6 @@
                 <ScalarProperty Name="category" ColumnName="category" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="FIID" ColumnName="FIID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="foodPortion">
-            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.foodPortion">
-              <MappingFragment StoreEntitySet="foodPortion">
-                <ScalarProperty Name="foodItem_FIID" ColumnName="foodItem_FIID" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="FPID" ColumnName="FPID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2115,6 +2124,24 @@
                 <ScalarProperty Name="customer_CID" ColumnName="customer_CID" />
                 <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="PIID" ColumnName="PIID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="foodPortion">
+            <EntityTypeMapping TypeName="TrainingMasterDatabaseModel.foodPortion">
+              <MappingFragment StoreEntitySet="foodPortion">
+                <ScalarProperty Name="className" ColumnName="className" />
+                <ScalarProperty Name="timeOfDay" ColumnName="timeOfDay" />
+                <ScalarProperty Name="saturday" ColumnName="saturday" />
+                <ScalarProperty Name="friday" ColumnName="friday" />
+                <ScalarProperty Name="thursday" ColumnName="thursday" />
+                <ScalarProperty Name="wednesday" ColumnName="wednesday" />
+                <ScalarProperty Name="tuesday" ColumnName="tuesday" />
+                <ScalarProperty Name="monday" ColumnName="monday" />
+                <ScalarProperty Name="sunday" ColumnName="sunday" />
+                <ScalarProperty Name="foodItem_FIID" ColumnName="foodItem_FIID" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="FPID" ColumnName="FPID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

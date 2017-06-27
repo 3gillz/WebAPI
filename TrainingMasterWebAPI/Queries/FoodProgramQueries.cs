@@ -40,24 +40,19 @@ namespace TrainingMasterWebAPI.Queries
             return f;
         }
 
-        public bool AddFoodProgram(FoodProgramDTO FoodProgram)
+        public int AddFoodProgram(string name, string userId)
         {
-            try
+            trainer t = db.trainer.FirstOrDefault(x => x.ID == userId);
+
+            var f = new foodProgram
             {
-                var f = new foodProgram
-                {
-                    FPMID = FoodProgram.FPMID,
-                    name = FoodProgram.name,
-                    trainer_TRID = FoodProgram.trainer_TRID
-                };
-                db.foodProgram.Add(f);
-                db.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+                name = name,
+                trainer_TRID = t.TRID
+            };
+            db.foodProgram.Add(f);
+            db.SaveChanges();
+
+            return f.FPMID;
         }
 
         public bool UpdateFoodProgram(FoodProgramDTO FoodProgram)

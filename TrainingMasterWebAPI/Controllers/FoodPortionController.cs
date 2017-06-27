@@ -1,8 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using TrainingMasterWebAPI.Models.DTO;
 using TrainingMasterWebAPI.Queries;
@@ -15,9 +12,31 @@ namespace TrainingMasterWebAPI.Controllers
     {
         readonly private FoodPortionQueries fpq;
 
+        private string userId;
+        protected string UserId
+        {
+            get { return userId = User.Identity.GetUserId(); }
+            set { userId = value; }
+        }
+
         public FoodPortionController()
         {
             fpq = new FoodPortionQueries();
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("test")]
+        public string Test()
+        {
+            return "Testing works";
+        }
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("test2")]
+        public string Test2(string input)
+        {
+            return "Testing works";
         }
 
         [HttpGet]
@@ -27,12 +46,19 @@ namespace TrainingMasterWebAPI.Controllers
             return fpq.GetFoodPortionByID(id);
         }
 
-        [HttpPut]
-        [Route("Add")]
-        public bool AddFoodPortion(FoodPortionDTO FoodPortion)
+        [HttpGet]
+        [Route("Get/{TPMID}")]
+        public IEnumerable<FoodPortionDTO> AddFoodPortion(int TPMID)
         {
-            return fpq.AddFoodPortion(FoodPortion);
+            var t = true;
+            return fpq.GetFoodPortions(TPMID, UserId, t);
         }
 
+        [HttpPost]
+        [Route("Get/{TPID}")]
+        public bool AddFoodPortion([FromBody] string portions, int TPID)
+        {
+            return fpq.AddFoodPortion(UserId, portions, TPID);
+        }
     }
 }

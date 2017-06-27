@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using System.Web.Http;
 using TrainingMasterWebAPI.Models.DTO;
 using TrainingMasterWebAPI.Queries;
 
@@ -11,7 +8,7 @@ namespace TrainingMasterWebAPI.Controllers
 {
     [Authorize]
     [RoutePrefix("api/FoodProgram")]
-    public class FoodProgramController : Controller
+    public class FoodProgramController : ApiController
     {
         readonly private FoodProgramQueries fpq;
         private string userId;
@@ -39,11 +36,11 @@ namespace TrainingMasterWebAPI.Controllers
             return fpq.GetFoodProgramById(id);
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("Add")]
-        public bool AddFoodProgram(FoodProgramDTO FoodProgram)
+        public int AddFoodProgram(FoodProgramDTO FoodProgram)
         {
-            return fpq.AddFoodProgram(FoodProgram);
+            return fpq.AddFoodProgram(FoodProgram.name, UserId);
         }
 
         [HttpPost]
