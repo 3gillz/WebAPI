@@ -48,14 +48,14 @@ namespace TrainingMasterWebAPI.Controllers
 
         [HttpGet]
         [Route("Get/{TPMID}")]
-        public IEnumerable<FoodPortionDTO> AddFoodPortion(int TPMID)
+        public IEnumerable<FoodPortionDTO> GetFoodPortion(int TPMID)
         {
             bool trainer = User.IsInRole("trainer");
             return fpq.GetFoodPortions(TPMID, UserId, trainer);
         }
 
         [HttpPost]
-        [Route("Get/{TPID}")]
+        [Route("Add/{TPID}")]
         public bool AddFoodPortion([FromBody] string portions, int TPID)
         {
             return fpq.AddFoodPortion(UserId, portions, TPID);
