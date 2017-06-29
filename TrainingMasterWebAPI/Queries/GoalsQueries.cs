@@ -88,10 +88,9 @@ namespace TrainingMasterWebAPI.Queries
             return g;
         }
 
-        public bool AddGoal(GoalsDTO Goals)
+        public GoalsDTO AddGoal(GoalsDTO Goals)
         {
-            try
-            {
+
                 var g = new goals
                 {
                     GID = Goals.GID,
@@ -105,12 +104,8 @@ namespace TrainingMasterWebAPI.Queries
                 };
                 db.goals.Add(g);
                 db.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+                return Goals;
+            
         }
 
         public bool UpdateGoal(GoalsDTO Goals)
