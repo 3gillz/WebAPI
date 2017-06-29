@@ -46,14 +46,14 @@ namespace TrainingMasterWebAPI.Queries
         {
             try
             {
-                var f = new foodProgramDate
+                DateTime d = DateTime.Now;
+                var g = new foodProgramDate
                 {
-                    FPDID = FoodProgramDate.FPDID,
                     customer_CID = FoodProgramDate.customer_CID,
                     foodProgram_FPMID = FoodProgramDate.foodProgram_FPMID,
-                    date = FoodProgramDate.date
+                    date = d
                 };
-                db.foodProgramDate.Add(f);
+                db.foodProgramDate.Add(g);
                 db.SaveChanges();
                 return true;
             }
@@ -103,7 +103,24 @@ namespace TrainingMasterWebAPI.Queries
             return fpd;
         }
 
-        public FoodProgramDTO GetCurrentFoodProgramDateByCID(string UserId)
+        public FoodProgramDTO GetCurrentFoodProgramDateByCID(int CID)
+        {
+            foodProgram f = new foodProgram();
+            var currentFp = db.foodProgramDate.OrderByDescending(x => x.date).FirstOrDefault(x => x.customer_CID == CID);
+
+            if (currentFp != null)
+            {
+                f = db.foodProgram.FirstOrDefault(x => x.FPMID == currentFp.foodProgram_FPMID);
+            }
+            var fp = new FoodProgramDTO
+            {
+                FPMID = f.FPMID,
+                name = f.name         
+            };
+
+            return fp;
+        }
+        public FoodProgramDTO GetCurrentFoodProgramDateByUserID(string UserId)
         {
             foodProgram f = new foodProgram();
             customer c = db.customer.FirstOrDefault(x => x.ID == UserId);
@@ -117,11 +134,12 @@ namespace TrainingMasterWebAPI.Queries
             {
                 FPMID = f.FPMID,
                 name = f.name,
-                
+
             };
 
             return fp;
         }
+
 
     }
 }

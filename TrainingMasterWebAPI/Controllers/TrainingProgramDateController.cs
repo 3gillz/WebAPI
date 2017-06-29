@@ -37,6 +37,14 @@ namespace TrainingMasterWebAPI.Controllers
         {
             return tpdq.GetSingleById(id);
         }
+
+        [HttpPost]
+        [Route("Add")]
+        public bool Add(TrainingProgramDateDTO TrainingProgramDate)
+        {
+            return tpdq.AddTrainingProgramDate(TrainingProgramDate);
+        }
+
         [HttpGet]
         [Route("GetAllByTRID")]
         public IEnumerable<TrainingProgramDateDTO> GetByTRID(int id)
@@ -53,9 +61,16 @@ namespace TrainingMasterWebAPI.Controllers
 
         [HttpGet]
         [Route("GetCurrentTrainingProgram")]
-        public TrainingProgramDTO GetTrainingProgramByCID()
+        public TrainingProgramDTO GetTrainingProgramByUserId()
         {
             return tpdq.GetCurrentTrainingProgram(UserId);
+        }
+
+        [HttpGet]
+        [Route("GetCurrentByCID/{id}")]
+        public TrainingProgramDTO GetTrainingProgramByCid(int id)
+        {
+            return tpdq.GetCurrentTrainingProgramByCid(id);
         }
     }
 }

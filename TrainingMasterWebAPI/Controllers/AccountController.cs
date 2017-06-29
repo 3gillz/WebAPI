@@ -374,6 +374,11 @@ namespace TrainingMasterWebAPI.Controllers
             {
                 await UserManager.AddToRoleAsync(user.Id, model.Role);
             }
+            if (model.Role == "admin" || model.Role == "superadmin")
+            {
+                return GetErrorResult(result);
+            }
+
 
             return Ok(user.Id);
         }

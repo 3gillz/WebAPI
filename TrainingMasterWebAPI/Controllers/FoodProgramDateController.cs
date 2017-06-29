@@ -41,7 +41,7 @@ namespace TrainingMasterWebAPI.Controllers
             return fpdq.GetFoodProgramDateById(id);
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("Add")]
         public bool AddFoodProgramDate(FoodProgramDateDTO FoodProgramDate)
         {
@@ -63,10 +63,17 @@ namespace TrainingMasterWebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("GetCurrentByCID")]
-        public FoodProgramDTO GetCurrentFoodProgramDateByCID()
+        [Route("GetCurrentByUserId")]
+        public FoodProgramDTO GetCurrentFoodProgramDateByUserID()
         {
-            return fpdq.GetCurrentFoodProgramDateByCID(UserId);
+            return fpdq.GetCurrentFoodProgramDateByUserID(UserId);
+        }
+
+        [HttpGet]
+        [Route("GetCurrentByCID/{id}")]
+        public FoodProgramDTO GetCurrentFoodProgramDateByCID(int id)
+        {
+            return fpdq.GetCurrentFoodProgramDateByCID(id);
         }
     }
 }

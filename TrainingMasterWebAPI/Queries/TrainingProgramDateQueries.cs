@@ -77,12 +77,50 @@ namespace TrainingMasterWebAPI.Queries
                                 }).FirstOrDefault();
             return trainingDate;
         }
-
+        
         public TrainingProgramDTO GetCurrentTrainingProgram(string UserId)
         {
             trainingProgram p = new trainingProgram();
             customer c = db.customer.FirstOrDefault(x => x.ID == UserId);
             var currentTp = db.trainingProgramDate.OrderByDescending(x => x.date).FirstOrDefault(x => x.customer_CID == c.CID);
+            if (currentTp != null)
+            {
+                p = db.trainingProgram.FirstOrDefault(x => x.TPID == currentTp.trainingProgram_TPID);
+            }
+
+            var tp = new TrainingProgramDTO
+            {
+                TPID = p.TPID,
+                name = p.name,
+            };
+            return tp;
+        }
+
+        public bool AddTrainingProgramDate(TrainingProgramDateDTO TrainingProgramDate)
+        {
+            try
+            {
+                DateTime d = DateTime.Now;
+                var g = new trainingProgramDate
+                {
+                    customer_CID = TrainingProgramDate.customer_CID,
+                    trainingProgram_TPID = TrainingProgramDate.trainingProgram_TPID,
+                    date = d
+                };
+                db.trainingProgramDate.Add(g);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public TrainingProgramDTO GetCurrentTrainingProgramByCid(int id)
+        {
+            trainingProgram p = new trainingProgram();
+            var currentTp = db.trainingProgramDate.OrderByDescending(x => x.date).FirstOrDefault(x => x.customer_CID == id);
             if (currentTp != null)
             {
                 p = db.trainingProgram.FirstOrDefault(x => x.TPID == currentTp.trainingProgram_TPID);
