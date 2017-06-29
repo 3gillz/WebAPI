@@ -56,7 +56,7 @@ namespace TrainingMasterWebAPI.Controllers
 
         [HttpPost]
         [Route("Add")]
-        public bool Add(GoalsDTO Goals)
+        public GoalsDTO Add(GoalsDTO Goals)
         {
             return gq.AddGoal(Goals);
         }
